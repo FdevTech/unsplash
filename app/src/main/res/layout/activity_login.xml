@@ -4,55 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authenticationModule.LoginActivity">
+    tools:context=".authenticationModule.LoginActivity"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp">
+
+    <ImageView
+        android:id="@+id/ImageBrand"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/unsplash_image"
+        app:layout_constraintBottom_toTopOf="@+id/Guideline2"
+        app:layout_constraintEnd_toEndOf="@+id/Guideline4"
+        app:layout_constraintStart_toStartOf="@+id/Guideline3"
+        app:layout_constraintTop_toTopOf="@+id/Guideline1"
+        app:layout_constraintVertical_chainStyle="spread" />
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-        android:layout_width="wrap_content"
+        android:id="@+id/materialTextViewTitle"
+        style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
         android:text="Login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/materialTextViewSubTitle"
+        app:layout_constraintEnd_toStartOf="@+id/Guideline4"
+        app:layout_constraintStart_toStartOf="@+id/Guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/ImageBrand" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/materialTextViewSubTitle"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="to be able to like make collections and intecract with users"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/materialTextViewTitle" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:hint="wite your email here"
-        app:layout_constraintBottom_toTopOf="@+id/materialButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
+        android:hint="E-mail"
+        app:layout_editor_absoluteY="250dp"
+        app:startIconDrawable="@drawable/ic_baseline_mail"
+        tools:layout_editor_absoluteY="554dp"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextViewSubTitle"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log In"
-        android:maxLength="25"
+        android:text="login"
+        app:icon="@drawable/avd_anim"
+        app:iconPadding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672" />
+        app:layout_constraintEnd_toStartOf="@+id/Guideline4"
+        app:layout_constraintStart_toStartOf="@+id/Guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout" />
 
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 </androidx.constraintlayout.widget.ConstraintLayout>
