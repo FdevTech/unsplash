@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="@+id/Guideline4"
         app:layout_constraintStart_toStartOf="@+id/Guideline3"
         app:layout_constraintTop_toTopOf="@+id/Guideline1"
-        app:layout_constraintVertical_chainStyle="spread" />
+         />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -27,6 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Login"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/materialTextViewSubTitle"
         app:layout_constraintEnd_toStartOf="@+id/Guideline4"
@@ -39,29 +40,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        app:layout_goneMarginTop="10dp"
         android:text="to be able to like make collections and intecract with users"
-        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextViewTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout"
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-mail"
+        app:counterEnabled="true"
+        app:counterMaxLength="25"
+        app:errorEnabled="true"
+        app:startIconContentDescription="mail icon"
         app:layout_editor_absoluteY="250dp"
         app:startIconDrawable="@drawable/ic_baseline_mail"
+        app:endIconMode="clear_text"
         tools:layout_editor_absoluteY="554dp"
         app:layout_constraintTop_toBottomOf="@+id/materialTextViewSubTitle"
-        app:layout_constraintBottom_toTopOf="@+id/materialButton">
+        app:layout_constraintBottom_toTopOf="@+id/materialButton"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -76,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Guideline4"
         app:layout_constraintStart_toStartOf="@+id/Guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
 
     <androidx.constraintlayout.widget.Guideline
