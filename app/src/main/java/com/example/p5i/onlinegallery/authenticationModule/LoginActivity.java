@@ -2,22 +2,22 @@ package com.example.p5i.onlinegallery.authenticationModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.p5i.onlinegallery.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private MaterialButton materialButton;
+    //private FloatingActionButton materialButton;
+    private ExtendedFloatingActionButton materialButton;
     private AnimatedVectorDrawable animatedVectorDrawable;
-    private TextInputLayout textInputLayout;
+    private TextInputLayout emailTextInputLayout,passwordTextInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +25,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         materialButton=findViewById(R.id.materialButton);
         animatedVectorDrawable=(AnimatedVectorDrawable) materialButton.getIcon();
-        textInputLayout=findViewById(R.id.textInputLayout);
-
+        emailTextInputLayout =findViewById(R.id.emailTextInputLayout);
+        passwordTextInputLayout=findViewById(R.id.passwordTextInputLayout);
         materialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 animatedVectorDrawable.start();
                 materialButton.setText("next");
-                textInputLayout.setError("someting wen wrrong");
+                materialButton.shrink();
+                emailTextInputLayout.setError("someting went wrrong");
+                passwordTextInputLayout.setError("someting went wrrong");
             }
         });
     }

@@ -42,14 +42,14 @@
         android:gravity="center"
         app:layout_goneMarginTop="10dp"
         android:text="to be able to like make collections and intecract with users"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/emailTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextViewTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/emailTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-mail"
@@ -57,16 +57,13 @@
         app:counterMaxLength="25"
         app:errorEnabled="true"
         app:startIconContentDescription="mail icon"
-        app:layout_editor_absoluteY="250dp"
         app:startIconDrawable="@drawable/ic_baseline_mail"
         app:endIconMode="clear_text"
-        tools:layout_editor_absoluteY="554dp"
         app:layout_constraintTop_toBottomOf="@+id/materialTextViewSubTitle"
-        app:layout_constraintBottom_toTopOf="@+id/materialButton"
+        app:layout_constraintBottom_toTopOf="@+id/passwordTextInputLayout"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         >
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
             android:layout_width="match_parent"
@@ -75,10 +72,29 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:endIconMode="password_toggle"
+        android:hint="password"
+        app:errorEnabled="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_baseline_lock"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textWebPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/materialButton"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="login"
@@ -87,7 +103,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Guideline4"
         app:layout_constraintStart_toStartOf="@+id/Guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout" />
 
 
     <androidx.constraintlayout.widget.Guideline
