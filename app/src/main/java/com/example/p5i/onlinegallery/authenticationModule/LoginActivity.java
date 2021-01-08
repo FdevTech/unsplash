@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 animatedVectorDrawable.start();
-                materialButton.setText("next");
                 materialButton.shrink();
                 emailTextInputLayout.setError("someting went wrrong");
                 passwordTextInputLayout.setError("someting went wrrong");
