@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.authenticationModule;
+package com.example.p5i.onlinegallery.authenticationModule.authorizationData;
 
 public class AutorizationResponsePJO
 {

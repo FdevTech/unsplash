@@ -16,13 +16,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.p5i.onlinegallery.R;
-import com.google.android.material.button.MaterialButton;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationInterface;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationResponsePJO;
+import com.example.p5i.onlinegallery.databinding.ActivityLoginBinding;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
+    private LoginViewModel mLoginViewModel;
+    private ActivityLoginBinding mActivityLoginBinding;
     //private FloatingActionButton materialButton;
     private ExtendedFloatingActionButton materialButton;
     private AnimatedVectorDrawable animatedVectorDrawable;
@@ -33,25 +36,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private AutorizationInterface mAutorizationInterface;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        mActivityLoginBinding=ActivityLoginBinding.inflate(getLayoutInflater());
+        mLoginViewModel=new LoginViewModel(this);
+        mActivityLoginBinding.setLoginBinding(mLoginViewModel);
+        setContentView(mActivityLoginBinding.getRoot());
         materialButton=findViewById(R.id.materialButton);
         animatedVectorDrawable=(AnimatedVectorDrawable) materialButton.getIcon();
         emailTextInputLayout =findViewById(R.id.emailTextInputLayout);
         passwordTextInputLayout=findViewById(R.id.passwordTextInputLayout);
 
-        retrofit=new Retrofit.Builder()
-                   .baseUrl("https://unsplash.com")
-                   .addConverterFactory(GsonConverterFactory.create())
-                   .build();
-
-        mAutorizationInterface=retrofit.create(AutorizationInterface.class);
-
-        intent=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                materialButton.setOnClickListener(new View.OnClickListener() {
+                /*materialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -61,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
               //  emailTextInputLayout.setError("someting went wrrong");
                // passwordTextInputLayout.setError("someting went wrrong");
             }
-        });
+        });*/
     }
 
     @Override
@@ -77,18 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         if(mUri!=null)
         {
             Toast.makeText(this,"we got it "+ mUri.getQueryParameter("code"),Toast.LENGTH_LONG).show();
-            mAutorizationInterface.getAccessTocken("CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ","yUWMA9JU_1ZuLmwRbnkwDSx1cI3TKktQTK8x2eAC-dk",
-                    "curta://callback",mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {
-                @Override
-                public void onResponse(Call<AutorizationResponsePJO> call, Response<AutorizationResponsePJO> response) {
-                    Log.d(TAG, "onResponse: "+response.body().getAccess_token());
-                }
+            mLoginViewModel.getTheTocken(mUri);
 
-                @Override
-                public void onFailure(Call<AutorizationResponsePJO> call, Throwable t) {
-
-                }
-            });
         }
 
     }
