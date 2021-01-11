@@ -106,13 +106,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="login"
-        app:icon="@drawable/avd_anim"
         app:iconPadding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Guideline4"
         app:layout_constraintStart_toStartOf="@+id/Guideline3"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
-         android:onClick="@{loginBinding::loginOnClick}"/>
+        app:icon="@{loginBinding.icon}"
+        android:onClick="@{loginBinding::loginOnClick}"
+        android:extend="@{loginBinding.extend}"/>
 
 
     <androidx.constraintlayout.widget.Guideline

@@ -2,15 +2,24 @@ package com.example.p5i.onlinegallery.authenticationModule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.example.p5i.onlinegallery.R;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationInterface;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationResponsePJO;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.FabAnimationModel;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,42 +32,71 @@ public class LoginViewModel extends BaseObservable
     private static final String TAG = "LoginViewModel";
     private Context context;
     private Intent intent;
-    String url="https://unsplash.com/oauth/authorize?client_id=CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ&redirect_uri=curta://callback&response_type=code" +
-            "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
-    private Retrofit retrofit;
-    private AutorizationInterface mAutorizationInterface;
     private boolean extend=true;
-
+    private LoginModel mLoginModel;
+    private static FabAnimationModel mFabAnimationModel;
     public LoginViewModel(Context context)
     {
         this.context=context;
-        retrofit=new Retrofit.Builder()
-                .baseUrl("https://unsplash.com")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        mAutorizationInterface=retrofit.create(AutorizationInterface.class);
-        intent=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-
+        mLoginModel=new LoginModel();
+        intent=new Intent(Intent.ACTION_VIEW, Uri.parse(mLoginModel.getUrl()));
+        mFabAnimationModel=new FabAnimationModel(context);
+        obserLogingIn();
     }
     public void loginOnClick(View view)
     {
-        Log.d(TAG, "loginOnClick: ");
-        context.startActivity(intent);
+        if(extend)
+        {
+            context.startActivity(intent);
+        }
+         else
+        {
+
+        }
+    }
+    private void obserLogingIn()
+    {
+        mLoginModel.getIsLogedIn().observe((LifecycleOwner) context, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean)
+                {
+                    setExtend(false);
+                }
+            }
+        });
     }
     public void getTheTocken(Uri mUri)
     {
-        mAutorizationInterface.getAccessTocken("CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ","yUWMA9JU_1ZuLmwRbnkwDSx1cI3TKktQTK8x2eAC-dk",
-                "curta://callback",mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {
-            @Override
-            public void onResponse(Call<AutorizationResponsePJO> call, Response<AutorizationResponsePJO> response) {
-                Log.d(TAG, "onResponse: "+response.body().getAccess_token());
-            }
+        mLoginModel.getTheTocken(mUri);
 
-            @Override
-            public void onFailure(Call<AutorizationResponsePJO> call, Throwable t) {
+    }
+   @BindingAdapter("android:extend")
+   public static void setExtend(ExtendedFloatingActionButton fab,boolean extend)
+   {
+       if(extend)
+       {
+           fab.extend();
+       }
+       else
+       {
+           fab.shrink();
+           mFabAnimationModel.animateIconInFab();
+       }
+   }
+    @Bindable
+    public boolean isExtend() {
+        return extend;
 
-            }
-        });
+    }
+
+    private void setExtend(boolean extend) {
+        this.extend = extend;
+        notifyChange();
+    }
+
+    @Bindable
+    public Drawable getIcon() {
+        return mFabAnimationModel.getIcon();
     }
 }
