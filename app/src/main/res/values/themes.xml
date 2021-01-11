@@ -12,14 +12,18 @@
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
-        <item name="extendedFloatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.App.ExtendedFloatingActionButton</item>
+        <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
 
     </style>
-    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+    <style name="Widget.App.ExtendedFloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+    </style>
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
     </style>
     <style name="ThemeOverlay.App.FloatingActionButton" parent="">
-        <item name="colorSecondary">@color/primaryLightColor</item>
+        <item name="colorSecondary">@color/primaryDarkColor</item>
         <item name="colorOnSecondary">@color/onPrimaryColor</item>
         <item name="colorOnSurface">@color/primaryDarkColor</item>
     </style>

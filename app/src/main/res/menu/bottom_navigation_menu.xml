@@ -3,6 +3,7 @@
 <item
     android:id="@+id/topics"
     android:title="topics"
+    android:iconTint="#FFF"
     android:icon="@drawable/ic_baseline_topic"/>
     <item
         android:id="@+id/collections"

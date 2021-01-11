@@ -15,7 +15,9 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.example.p5i.onlinegallery.MainActivity;
 import com.example.p5i.onlinegallery.R;
+import com.example.p5i.onlinegallery.Util.ActivtyTransitionModel;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationInterface;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationResponsePJO;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.FabAnimationModel;
@@ -31,27 +33,27 @@ public class LoginViewModel extends BaseObservable
 {
     private static final String TAG = "LoginViewModel";
     private Context context;
-    private Intent intent;
     private boolean extend=true;
     private LoginModel mLoginModel;
     private static FabAnimationModel mFabAnimationModel;
+    private ActivtyTransitionModel mActivtyTransitionModel;
     public LoginViewModel(Context context)
     {
         this.context=context;
         mLoginModel=new LoginModel();
-        intent=new Intent(Intent.ACTION_VIEW, Uri.parse(mLoginModel.getUrl()));
         mFabAnimationModel=new FabAnimationModel(context);
+        mActivtyTransitionModel=new ActivtyTransitionModel(context);
         obserLogingIn();
     }
     public void loginOnClick(View view)
     {
         if(extend)
         {
-            context.startActivity(intent);
+            mActivtyTransitionModel.startringBrowserToGetAutheticate(mLoginModel.getUrl());
         }
          else
         {
-
+             mActivtyTransitionModel.startActivity(new MainActivity());
         }
     }
     private void obserLogingIn()
