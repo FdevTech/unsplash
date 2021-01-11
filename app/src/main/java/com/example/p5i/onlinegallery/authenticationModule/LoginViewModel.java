@@ -1,11 +1,8 @@
 package com.example.p5i.onlinegallery.authenticationModule;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 
 import androidx.databinding.BaseObservable;
@@ -13,21 +10,10 @@ import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.example.p5i.onlinegallery.MainActivity;
-import com.example.p5i.onlinegallery.R;
 import com.example.p5i.onlinegallery.Util.ActivtyTransitionModel;
-import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationInterface;
-import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationResponsePJO;
-import com.example.p5i.onlinegallery.authenticationModule.authorizationData.FabAnimationModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginViewModel extends BaseObservable
 {
@@ -37,13 +23,21 @@ public class LoginViewModel extends BaseObservable
     private LoginModel mLoginModel;
     private static FabAnimationModel mFabAnimationModel;
     private ActivtyTransitionModel mActivtyTransitionModel;
+    private boolean enabled;
+
     public LoginViewModel(Context context)
     {
         this.context=context;
         mLoginModel=new LoginModel();
         mFabAnimationModel=new FabAnimationModel(context);
         mActivtyTransitionModel=new ActivtyTransitionModel(context);
-        obserLogingIn();
+
+        mFabAnimationModel.enbaleFab(false);
+        mFabAnimationModel.extendedFab(true);
+        observeLogingIn();
+        observeFabEnabledState();
+        observeFabExtendedState();
+
     }
     public void loginOnClick(View view)
     {
@@ -56,15 +50,34 @@ public class LoginViewModel extends BaseObservable
              mActivtyTransitionModel.startActivity(new MainActivity());
         }
     }
-    private void obserLogingIn()
+    private void observeLogingIn()
     {
         mLoginModel.getIsLogedIn().observe((LifecycleOwner) context, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean)
                 {
-                    setExtend(false);
+                    mFabAnimationModel.extendedFab(!aBoolean);
                 }
+            }
+        });
+    }
+    private void observeFabEnabledState()
+    {
+        mFabAnimationModel.getFabEnabledStateLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                setEnabled(aBoolean);
+            }
+        });
+    }
+
+    public void observeFabExtendedState()
+    {
+        mFabAnimationModel.getFabExtendStateLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                setExtend(aBoolean);
             }
         });
     }
@@ -101,4 +114,16 @@ public class LoginViewModel extends BaseObservable
     public Drawable getIcon() {
         return mFabAnimationModel.getIcon();
     }
+
+    @Bindable
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        notifyChange();
+    }
+
+
 }
