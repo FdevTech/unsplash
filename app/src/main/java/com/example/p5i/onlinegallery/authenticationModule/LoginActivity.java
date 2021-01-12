@@ -1,5 +1,6 @@
 package com.example.p5i.onlinegallery.authenticationModule;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,7 +12,10 @@ import android.content.Intent;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -54,5 +58,19 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+       // Log.d(TAG, "onKeyUp: "+keyCode);
+        switch (keyCode)
+        {
+            case KeyEvent.KEYCODE_ENTER:
+                mLoginViewModel.validate();
+                return true;
+
+        }
+        return super.onKeyUp(keyCode, event);
+        
     }
 }

@@ -61,9 +61,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-mail"
-        app:counterEnabled="true"
-        app:counterMaxLength="25"
-        app:errorEnabled="true"
         app:startIconContentDescription="mail icon"
         app:startIconDrawable="@drawable/ic_baseline_mail"
         app:endIconMode="clear_text"
@@ -71,12 +68,16 @@
         app:layout_constraintBottom_toTopOf="@+id/passwordTextInputLayout"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:errorEnabled="@{loginBinding.checkForErrorEnabled}"
+        android:errorEmptyMessageEmail="@{loginBinding.emtyEmailField}"
+        android:errorNoValidMessageEmail="@{loginBinding.valideEmail}"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:text="@={loginBinding.email}"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,19 +86,24 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         app:endIconMode="password_toggle"
         android:hint="password"
-        app:errorEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:counterMaxLength="25"
         app:startIconDrawable="@drawable/ic_baseline_lock"
         app:layout_constraintBottom_toTopOf="@+id/materialButton"
         app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:errorEnabled="@{loginBinding.checkForErrorEnabled}"
+        android:errorEmptyMessagePassword="@{loginBinding.emptyPasswordField}"
+        android:errorNoValidMessagePassword="@{loginBinding.validPassWord}"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textWebPassword"/>
+            android:inputType="textWebPassword"
+            android:text="@={loginBinding.passaword}"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
