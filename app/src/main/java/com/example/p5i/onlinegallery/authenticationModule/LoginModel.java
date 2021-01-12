@@ -1,10 +1,12 @@
 package com.example.p5i.onlinegallery.authenticationModule;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationInterface;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationResponsePJO;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,10 +22,13 @@ public class LoginModel
     private Retrofit retrofit;
     private AutorizationInterface mAutorizationInterface;
     private MutableLiveData<Boolean> isLogedIn;
+    private LoginStateModel mLoginStateModel;
+
     private String url="https://unsplash.com/oauth/authorize?client_id=CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ&redirect_uri=curta://callback&response_type=code" +
             "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
-    public LoginModel()
+    public LoginModel(Context context)
     {
+        mLoginStateModel=new LoginStateModel(context);
         isLogedIn=new MutableLiveData<>();
         isLogedIn.setValue(false);
         retrofit=new Retrofit.Builder()
@@ -42,6 +47,7 @@ public class LoginModel
                 Log.d(TAG, "onResponse: "+response.body().getAccess_token());
                 if(response.body()!=null)
                 {
+                    mLoginStateModel.saveTocken(response.body().getAccess_token());
                  isLogedIn.setValue(true);
                 }
             }

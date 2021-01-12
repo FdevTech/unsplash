@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.p5i.onlinegallery.MainActivity;
 import com.example.p5i.onlinegallery.Util.ActivtyTransitionModel;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -25,6 +26,7 @@ public class LoginViewModel extends BaseObservable
     private LoginModel mLoginModel;
     private static FabAnimationModel mFabAnimationModel;
     private ActivtyTransitionModel mActivtyTransitionModel;
+    private LoginStateModel mLoginStateModel;
     private boolean enabled;
     private String email,passaword;
     private ValidatorModel mValidatorModel;
@@ -32,20 +34,33 @@ public class LoginViewModel extends BaseObservable
     private static boolean emtyEmailField,emptyPasswordField,valideEmail=true,validPassWord=true;
     public LoginViewModel(Context context)
     {
+        Log.d(TAG, "LoginViewModel: ");;
         this.context=context;
-        mLoginModel=new LoginModel();
+        mLoginModel=new LoginModel(context);
         mFabAnimationModel=new FabAnimationModel(context);
         mActivtyTransitionModel=new ActivtyTransitionModel(context);
         mValidatorModel=new ValidatorModel();
 
-        mFabAnimationModel.enbaleFab(false);
-        mFabAnimationModel.extendedFab(true);
-        setCheckForErrorEnabled(false);
-        Log.d(TAG, "LoginViewModel: "+checkForErrorEnabled);
+        initState();
+       
         observeLogingIn();
         observeFabEnabledState();
         observeFabExtendedState();
 
+    }
+    private void initState()
+    {
+        Log.d(TAG, "initState: ");
+        mLoginStateModel=new LoginStateModel(context);
+        mFabAnimationModel.enbaleFab(mLoginStateModel.retriveFabState());
+
+        if(!mLoginStateModel.retriveTockenl().isEmpty())
+        {
+            mFabAnimationModel.extendedFab(false);
+        }
+        setCheckForErrorEnabled(false);
+        setEmail(mLoginStateModel.retriveEmail());
+        setPassaword(mLoginStateModel.retrivePassword());
     }
     public void loginOnClick(View view)
     {
@@ -112,7 +127,6 @@ public class LoginViewModel extends BaseObservable
                 if(validate)
                 {
                     mFabAnimationModel.enbaleFab(validate);
-                    Log.d(TAG, "onChanged:validate "+validate);
                     setCheckForErrorEnabled(!validate);
                 }
             }
@@ -174,7 +188,7 @@ public class LoginViewModel extends BaseObservable
     @BindingAdapter("android:errorEmptyMessageEmail")
     public static void setErrorMessageEmptyForEmail(TextInputLayout mTextInputLayout,boolean empty)
     {
-        Log.d(TAG, "setErrorMessageEmptyForEmail: "+empty);
+       
 
         if(empty)
         {
@@ -244,6 +258,7 @@ public class LoginViewModel extends BaseObservable
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         notifyChange();
+        mLoginStateModel.saveFabState(enabled);
     }
 
     @Bindable
@@ -254,6 +269,7 @@ public class LoginViewModel extends BaseObservable
     public void setEmail(String email) {
         this.email = email;
         notifyChange();
+        mLoginStateModel.saveEmail(email);
     }
 
     @Bindable
@@ -264,6 +280,7 @@ public class LoginViewModel extends BaseObservable
     public void setPassaword(String passaword) {
         this.passaword = passaword;
         notifyChange();
+        mLoginStateModel.savePassword(passaword);
     }
 
     @Bindable
@@ -314,6 +331,6 @@ public class LoginViewModel extends BaseObservable
     public void setCheckForErrorEnabled(Boolean checkForErrorEnabled) {
         this.checkForErrorEnabled = checkForErrorEnabled;
         notifyChange();
-        Log.d(TAG, "setCheckForErrorEnabled: "+checkForErrorEnabled);;
+        
     }
 }

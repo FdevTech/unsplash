@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 public class ValidatorModel
 {
     //TODO I should persiste Data
-    
+
     private static final String TAG = "ValidatorModel";
     Pattern emailPattern,passworPattern;
     MutableLiveData<Boolean> emailFieldEmptyMutableLiveData,emailValidMutableLiveData,passwordFieldEmpty, passwordFieldTooWeek,
