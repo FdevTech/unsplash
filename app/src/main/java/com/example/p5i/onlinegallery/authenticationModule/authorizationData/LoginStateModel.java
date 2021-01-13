@@ -11,7 +11,7 @@ public class LoginStateModel
     private SharedPreferences loginPref;
     private SharedPreferences.Editor editor;
     private String defaultValueString="";
-    private boolean defaultValueBoolean=false;
+
     public LoginStateModel(Context context) {
         this.context = context;
         loginPref=context.getSharedPreferences(this.getClass().getName(),Context.MODE_PRIVATE);
@@ -48,14 +48,6 @@ public class LoginStateModel
         Log.d(TAG, "retriveTockenl: "+loginPref.getString("Tocken",defaultValueString));
         return loginPref.getString("Tocken",defaultValueString) ;
     }
-    public void saveFabState(boolean FabState)
-    {
-        editor.putBoolean("FabState",FabState);
-        editor.apply();
-    }
-    public boolean retriveFabState()
-    {
-        return loginPref.getBoolean("FabState",defaultValueBoolean) ;
-    }
+
 
 }

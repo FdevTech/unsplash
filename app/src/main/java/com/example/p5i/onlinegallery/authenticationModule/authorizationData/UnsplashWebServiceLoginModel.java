@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.authenticationModule;
+package com.example.p5i.onlinegallery.authenticationModule.authorizationData;
 
 import android.content.Context;
 import android.net.Uri;
@@ -16,7 +16,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginModel
+public class UnsplashWebServiceLoginModel
 {
     private static final String TAG = "LoginModel";
     private Retrofit retrofit;
@@ -26,7 +26,7 @@ public class LoginModel
 
     private String url="https://unsplash.com/oauth/authorize?client_id=CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ&redirect_uri=curta://callback&response_type=code" +
             "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
-    public LoginModel(Context context)
+    public UnsplashWebServiceLoginModel(Context context)
     {
         mLoginStateModel=new LoginStateModel(context);
         isLogedIn=new MutableLiveData<>();
@@ -44,11 +44,15 @@ public class LoginModel
                 "curta://callback",mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {
             @Override
             public void onResponse(Call<AutorizationResponsePJO> call, Response<AutorizationResponsePJO> response) {
-                Log.d(TAG, "onResponse: "+response.body().getAccess_token());
                 if(response.body()!=null)
                 {
                     mLoginStateModel.saveTocken(response.body().getAccess_token());
-                 isLogedIn.setValue(true);
+                     isLogedIn.setValue(true);
+                }
+                else
+                {
+                    Log.d(TAG, "onResponse: "+response.body());
+                    Log.d(TAG, "onResponse: "+response.code());
                 }
             }
 

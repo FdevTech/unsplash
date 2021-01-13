@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public class ValidatorModel
 {
-    //TODO I should persiste Data
+    //TODO I should add FirebaseAuth
 
     private static final String TAG = "ValidatorModel";
     Pattern emailPattern,passworPattern;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.databinding.BaseObservable;
@@ -14,6 +15,8 @@ import androidx.lifecycle.Observer;
 
 import com.example.p5i.onlinegallery.MainActivity;
 import com.example.p5i.onlinegallery.Util.ActivtyTransitionModel;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AuthenticationRepository;
+import com.example.p5i.onlinegallery.authenticationModule.authorizationData.UnsplashWebServiceLoginModel;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,69 +25,53 @@ public class LoginViewModel extends BaseObservable
 {
     private static final String TAG = "LoginViewModel";
     private Context context;
-    private boolean extend=true;
-    private LoginModel mLoginModel;
+
+    private static final int noAccountValue  = 0,signedOutValue=1,signedInValue=2;
+    private int userLoggedIncheckobserver=noAccountValue;
+
+
+
     private static FabAnimationModel mFabAnimationModel;
     private ActivtyTransitionModel mActivtyTransitionModel;
-    private LoginStateModel mLoginStateModel;
-    private boolean enabled;
-    private String email,passaword;
+    private AuthenticationRepository mAuthenticationRepository;
     private ValidatorModel mValidatorModel;
+
+    private String email,passaword;
+    private boolean extend,enabled;
     private Boolean checkForErrorEnabled;
+
     private static boolean emtyEmailField,emptyPasswordField,valideEmail=true,validPassWord=true;
+
+
+
+    private Pair<Boolean,Boolean> fabState;
+
     public LoginViewModel(Context context)
     {
         Log.d(TAG, "LoginViewModel: ");;
         this.context=context;
-        mLoginModel=new LoginModel(context);
         mFabAnimationModel=new FabAnimationModel(context);
         mActivtyTransitionModel=new ActivtyTransitionModel(context);
         mValidatorModel=new ValidatorModel();
 
+        mAuthenticationRepository=new AuthenticationRepository(context);
+
         initState();
-       
-        observeLogingIn();
-        observeFabEnabledState();
-        observeFabExtendedState();
+        
+
+
 
     }
     private void initState()
     {
-        Log.d(TAG, "initState: ");
-        mLoginStateModel=new LoginStateModel(context);
-        mFabAnimationModel.enbaleFab(mLoginStateModel.retriveFabState());
 
-        if(!mLoginStateModel.retriveTockenl().isEmpty())
-        {
-            mFabAnimationModel.extendedFab(false);
-        }
-        setCheckForErrorEnabled(false);
-        setEmail(mLoginStateModel.retriveEmail());
-        setPassaword(mLoginStateModel.retrivePassword());
+        observeFab();
+        obsrveAutheticationState();
+        setEmail(mAuthenticationRepository.getEmail());
+        setPassaword(mAuthenticationRepository.getPassword());
     }
-    public void loginOnClick(View view)
-    {
-        if(extend)
-        {
-            mActivtyTransitionModel.startringBrowserToGetAutheticate(mLoginModel.getUrl());
-        }
-         else
-        {
-             mActivtyTransitionModel.startActivity(new MainActivity());
-        }
-    }
-    private void observeLogingIn()
-    {
-        mLoginModel.getIsLogedIn().observe((LifecycleOwner) context, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if(aBoolean)
-                {
-                    mFabAnimationModel.extendedFab(!aBoolean);
-                }
-            }
-        });
-    }
+
+
     private void observeEmailField()
     {
 
@@ -121,53 +108,90 @@ public class LoginViewModel extends BaseObservable
 
     private void observeValidation()
     {
+        Log.d(TAG, "observeValidation: ");
         mValidatorModel.getEverythingIsValidatedLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean validate) {
                 if(validate)
                 {
                     mFabAnimationModel.enbaleFab(validate);
-                    setCheckForErrorEnabled(!validate);
+
                 }
             }
         });
     }
 
+
+    private void observeFab()
+    {
+        observeFabEnbaled();
+        observeFabExtend();
+    }
+
+    private void observeFabEnbaled()
+    {
+        mFabAnimationModel.getFabEnabledStateLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.d(TAG, "onChanged: getFabEnabledStateLiveData() "+aBoolean);
+                setEnabled(aBoolean);
+            }
+        });
+    }
+    private void observeFabExtend()
+    {
+        mFabAnimationModel.getFabExtendStateLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.d(TAG, "onChanged:getFabExtendStateLiveData() "+aBoolean);
+                setExtend(aBoolean);
+            }
+        });
+    }
+
+  private void obsrveAutheticationState()
+  {
+      mAuthenticationRepository.getUserLoggedIncheckobserver().observe((LifecycleOwner) context, new Observer<Integer>() {
+          @Override
+          public void onChanged(Integer stattus) {
+              userLoggedIncheckobserver=stattus;
+              Log.d(TAG, "onChanged:getUserLoggedIncheckobserver() "+stattus);
+              if(userLoggedIncheckobserver==signedOutValue)
+              {
+                  mFabAnimationModel.enbaleFab(true);
+                  mFabAnimationModel.extendedFab(true);
+              }
+              if(userLoggedIncheckobserver==signedInValue)
+              {
+                  mFabAnimationModel.enbaleFab(true);
+                  mFabAnimationModel.extendedFab(false);              }
+          }
+      });
+  }
     public void validate()
     {
         mValidatorModel.validate(email,passaword);
         observeEmailField();
         observerPassWordField();
         observeValidation();
-        setCheckForErrorEnabled(true);
-    }
-    private void observeFabEnabledState()
-    {
-        mFabAnimationModel.getFabEnabledStateLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                setEnabled(aBoolean);
-            }
-        });
+
     }
 
-    public void observeFabExtendedState()
-    {
-        mFabAnimationModel.getFabExtendStateLiveData().observe((LifecycleOwner) context, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                setExtend(aBoolean);
-            }
-        });
-    }
+
+
+
+
     public void getTheTocken(Uri mUri)
     {
-        mLoginModel.getTheTocken(mUri);
+
+
+        mAuthenticationRepository.creatingUser(mUri,email,passaword);
 
     }
    @BindingAdapter("android:extend")
-   public static void setExtend(ExtendedFloatingActionButton fab,boolean extend)
+   public static void setExtendFab(ExtendedFloatingActionButton fab,boolean extend)
    {
+
        if(extend)
        {
            fab.extend();
@@ -178,6 +202,24 @@ public class LoginViewModel extends BaseObservable
            mFabAnimationModel.animateIconInFab();
        }
    }
+    public void loginOnClick(View view)
+    {
+        Log.d(TAG, "loginOnClick: "+userLoggedIncheckobserver);
+
+        if(userLoggedIncheckobserver==noAccountValue)
+        {
+            mActivtyTransitionModel.startringBrowserToGetAutheticate(mAuthenticationRepository.getUrl());
+
+        }
+        else if(userLoggedIncheckobserver==signedOutValue)
+        {
+            mAuthenticationRepository.signInInToTheApp(email,passaword);
+        }
+        else if(userLoggedIncheckobserver==signedInValue)
+        {
+            mActivtyTransitionModel.startActivity(new MainActivity());
+        }
+    }
     @Bindable
     public boolean isExtend() {
         return extend;
@@ -255,11 +297,14 @@ public class LoginViewModel extends BaseObservable
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(boolean enabled)
+    {
+        Log.d(TAG, "setEnabled: "+enabled);
         this.enabled = enabled;
         notifyChange();
-        mLoginStateModel.saveFabState(enabled);
+
     }
+
 
     @Bindable
     public String getEmail() {
@@ -267,9 +312,11 @@ public class LoginViewModel extends BaseObservable
     }
 
     public void setEmail(String email) {
+
         this.email = email;
         notifyChange();
-        mLoginStateModel.saveEmail(email);
+        mAuthenticationRepository.setEmail(email);
+
     }
 
     @Bindable
@@ -280,7 +327,8 @@ public class LoginViewModel extends BaseObservable
     public void setPassaword(String passaword) {
         this.passaword = passaword;
         notifyChange();
-        mLoginStateModel.savePassword(passaword);
+        mAuthenticationRepository.setPassword(passaword);
+
     }
 
     @Bindable
