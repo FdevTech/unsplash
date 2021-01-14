@@ -16,8 +16,7 @@ import androidx.lifecycle.Observer;
 import com.example.p5i.onlinegallery.MainActivity;
 import com.example.p5i.onlinegallery.Util.ActivtyTransitionModel;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AuthenticationRepository;
-import com.example.p5i.onlinegallery.authenticationModule.authorizationData.UnsplashWebServiceLoginModel;
-import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel;
+import com.example.p5i.onlinegallery.authenticationModule.fabView.FabAnimationModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -222,6 +221,7 @@ public class LoginViewModel extends BaseObservable
         else if(userLoggedIncheckobserver==signedInValue)
         {
             mActivtyTransitionModel.startActivity(new MainActivity());
+            mActivtyTransitionModel.startActivity(new MainActivity());
         }
     }
     @Bindable
@@ -380,5 +380,5 @@ public class LoginViewModel extends BaseObservable
         notifyChange();
     }
 
-  
+
 }

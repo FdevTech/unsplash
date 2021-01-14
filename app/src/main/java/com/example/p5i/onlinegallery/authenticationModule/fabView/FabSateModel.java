@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.authenticationModule;
+package com.example.p5i.onlinegallery.authenticationModule.fabView;
 
 import android.content.Context;
 import android.content.SharedPreferences;

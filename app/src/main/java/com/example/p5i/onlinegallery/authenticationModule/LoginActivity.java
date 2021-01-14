@@ -14,9 +14,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.Explode;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.example.p5i.onlinegallery.R;
@@ -25,6 +28,7 @@ import com.example.p5i.onlinegallery.authenticationModule.authorizationData.Auto
 import com.example.p5i.onlinegallery.databinding.ActivityLoginBinding;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -32,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding mActivityLoginBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         mActivityLoginBinding=ActivityLoginBinding.inflate(getLayoutInflater());
         mLoginViewModel=new LoginViewModel(this);

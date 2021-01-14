@@ -14,7 +14,6 @@ public class AuthenticationRepository implements AuthenticationRepositioryContra
 {
 
 
-    //TODO I need to fixe the problem of authentication
     
     private static final String TAG = "AuthenticationRepositor";
     private static final int noAccountValue  = 0,signedOutValue=1,signedInValue=2;

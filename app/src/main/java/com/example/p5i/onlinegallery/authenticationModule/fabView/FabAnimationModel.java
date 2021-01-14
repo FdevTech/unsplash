@@ -1,15 +1,12 @@
-package com.example.p5i.onlinegallery.authenticationModule;
+package com.example.p5i.onlinegallery.authenticationModule.fabView;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.BoringLayout;
-import android.util.Log;
 import android.util.Pair;
 
 import com.example.p5i.onlinegallery.R;
+import com.example.p5i.onlinegallery.authenticationModule.fabView.FabSateModel;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -39,7 +36,7 @@ public class FabAnimationModel
 
     public void animateIconInFab()
     {
-        Log.d(TAG, "animateIconInFab: ");
+
         animatedVectorDrawable.start();
 
 
@@ -51,18 +48,14 @@ public class FabAnimationModel
 
    public void enbaleFab(boolean enable)
    {
-       Log.d(TAG, "enbaleFab: "+enable);
+
 
        mFabSateModel.setFabenableddState(enable);
        FabEnabledStateLiveData.setValue(enable);
    }
    public void extendedFab(boolean extend)
    {
-       Log.d(TAG, "extendedFab: "+extend);
        mFabSateModel.setFabExtendState(extend);
-
-       //animatedVectorDrawable.start();
-
        FabExtendStateLiveData.setValue(extend);
    }
     public MutableLiveData<Boolean> getFabEnabledStateLiveData()
