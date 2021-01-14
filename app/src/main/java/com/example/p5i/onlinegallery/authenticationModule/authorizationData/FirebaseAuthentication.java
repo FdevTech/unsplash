@@ -54,11 +54,13 @@ public class FirebaseAuthentication
             @Override
             public void onFailure(@NonNull Exception e) {
                 errorMessageMutableLifeData.setValue(e.getMessage());
+                Log.d(TAG, "onFailure: addOnFailureListener() "+e.getMessage());
             }
         });
     }
     public void signInTheApp(String Email,String Password)
     {
+        Log.d(TAG, "signInTheApp: ");
          mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
              @Override
              public void onComplete(@NonNull Task<AuthResult> task) {
@@ -66,11 +68,12 @@ public class FirebaseAuthentication
                    {
 
                        mFirebaseUser=mFirebaseAuth.getCurrentUser();
-                       Log.d(TAG, "onComplete: "+mFirebaseUser.getEmail());
+                       Log.d(TAG, "onComplete:task.isSuccessful() "+mFirebaseUser.getEmail());
                        checkUserSignedIn.setValue(true);
                    }
                    else
                    {
+                       Log.d(TAG, "onComplete: task.isNotSuccessful()");
                        checkUserSignedIn.setValue(false);
                    }
              }
@@ -78,22 +81,21 @@ public class FirebaseAuthentication
              @Override
              public void onFailure(@NonNull Exception e) {
                  errorMessageMutableLifeData.setValue(e.getMessage());
+                 Log.d(TAG, "onFailure: signInWithEmailAndPassword() "+e.getMessage());
              }
          });
     }
 
-    public boolean isCurrentUserIsSignedIn(String Email)
-    {
-        return mFirebaseAuth.isSignInWithEmailLink(Email);
-    }
-    public String isUserExixt()
+
+    public boolean isUserExixt()
     {
         if(mFirebaseAuth.getCurrentUser()!=null)
         {
-             return mFirebaseAuth.getCurrentUser().getEmail();
+
+             return true;
         }else
         {
-            return "no user exist";
+            return false;
         }
     }
 

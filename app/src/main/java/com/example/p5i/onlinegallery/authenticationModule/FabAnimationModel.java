@@ -34,11 +34,15 @@ public class FabAnimationModel
         mFabSateModel=new FabSateModel(context);
         FabEnabledStateLiveData.setValue(mFabSateModel.retriveFabenableddState());
         FabExtendStateLiveData.setValue(mFabSateModel.retriveFabExtendState());
+
     }
 
     public void animateIconInFab()
     {
+        Log.d(TAG, "animateIconInFab: ");
         animatedVectorDrawable.start();
+
+
     }
     public Drawable getIcon()
     {
@@ -54,7 +58,11 @@ public class FabAnimationModel
    }
    public void extendedFab(boolean extend)
    {
+       Log.d(TAG, "extendedFab: "+extend);
        mFabSateModel.setFabExtendState(extend);
+
+       //animatedVectorDrawable.start();
+
        FabExtendStateLiveData.setValue(extend);
    }
     public MutableLiveData<Boolean> getFabEnabledStateLiveData()

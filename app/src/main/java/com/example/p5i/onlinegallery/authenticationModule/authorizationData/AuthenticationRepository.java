@@ -4,12 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.p5i.onlinegallery.authenticationModule.AuthenticationRepositioryContractor;
+
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-public class AuthenticationRepository
+public class AuthenticationRepository implements AuthenticationRepositioryContractor
 {
+
+
+    //TODO I need to fixe the problem of authentication
+    
     private static final String TAG = "AuthenticationRepositor";
     private static final int noAccountValue  = 0,signedOutValue=1,signedInValue=2;
 
@@ -32,7 +38,7 @@ public class AuthenticationRepository
         email=mLoginStateModel.retriveEmail();
         password=mLoginStateModel.retrivePassword();
         userLoggedIncheckobserver=new MutableLiveData<>();
-        Log.d(TAG, "AuthenticationRepository: "+mFirebaseAuthentication.isCurrentUserIsSignedIn(email));
+        Log.d(TAG, "AuthenticationRepository: "+mFirebaseAuthentication.isUserExixt());
         obserIsUserSinedInInUnsplashService();
         checkIfUserIsSignedIn();
 
@@ -63,14 +69,16 @@ public class AuthenticationRepository
         }
         else
         {
-            Log.d(TAG, "checkIfUserIsSignedIn: "+mFirebaseAuthentication.isCurrentUserIsSignedIn(email));
-            if(!mFirebaseAuthentication.isCurrentUserIsSignedIn(email))
+            Log.d(TAG, "checkIfUserIsSignedIn: "+mFirebaseAuthentication.isUserExixt());
+            if(mFirebaseAuthentication.isUserExixt()==false)
             {
-
+                Log.d(TAG, "checkIfUserIsSignedIn: "+signedOutValue);
                userLoggedIncheckobserver.setValue(signedOutValue);
             }
             else {
                 userLoggedIncheckobserver.setValue(signedInValue);
+                Log.d(TAG, "checkIfUserIsSignedIn: "+signedInValue);
+
             }
 
         }
@@ -103,8 +111,11 @@ public class AuthenticationRepository
         mFirebaseAuthentication.getCheckUserSignedIn().observe((LifecycleOwner) context, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                Log.d(TAG, "onChanged: "+aBoolean);
-                userLoggedIncheckobserver.setValue(signedInValue);
+                Log.d(TAG, "onChanged: getCheckUserSignedIn() "+aBoolean);
+               if(aBoolean)
+               {
+                   userLoggedIncheckobserver.setValue(signedInValue);
+               }
             }
         });
     }

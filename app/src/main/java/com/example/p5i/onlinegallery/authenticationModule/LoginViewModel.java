@@ -42,6 +42,7 @@ public class LoginViewModel extends BaseObservable
 
     private static boolean emtyEmailField,emptyPasswordField,valideEmail=true,validPassWord=true;
 
+    private Drawable icon;
 
 
     private Pair<Boolean,Boolean> fabState;
@@ -126,6 +127,7 @@ public class LoginViewModel extends BaseObservable
     {
         observeFabEnbaled();
         observeFabExtend();
+
     }
 
     private void observeFabEnbaled()
@@ -148,6 +150,8 @@ public class LoginViewModel extends BaseObservable
             }
         });
     }
+
+
 
   private void obsrveAutheticationState()
   {
@@ -292,6 +296,11 @@ public class LoginViewModel extends BaseObservable
         return mFabAnimationModel.getIcon();
     }
 
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+        notifyChange();
+    }
+
     @Bindable
     public boolean isEnabled() {
         return enabled;
@@ -371,14 +380,5 @@ public class LoginViewModel extends BaseObservable
         notifyChange();
     }
 
-    @Bindable
-    public Boolean getCheckForErrorEnabled() {
-        return checkForErrorEnabled;
-    }
-
-    public void setCheckForErrorEnabled(Boolean checkForErrorEnabled) {
-        this.checkForErrorEnabled = checkForErrorEnabled;
-        notifyChange();
-        
-    }
+  
 }
