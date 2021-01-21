@@ -32,4 +32,8 @@ public class ActivtyTransitionModel
         options=ActivityOptions.makeSceneTransitionAnimation((Activity) context,view,view.getTransitionName());
         context.startActivity(intent,options.toBundle());
     }
+    public void startActivityWithCircularReaveaEffect()
+    {
+        
+    }
 }

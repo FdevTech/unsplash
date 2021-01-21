@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.ChangeBounds;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.util.Log;
@@ -36,7 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding mActivityLoginBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setEnterTransition(new ChangeBounds());
+        getWindow().setExitTransition(new ChangeBounds());
         super.onCreate(savedInstanceState);
         mActivityLoginBinding=ActivityLoginBinding.inflate(getLayoutInflater());
         mLoginViewModel=new LoginViewModel(this);

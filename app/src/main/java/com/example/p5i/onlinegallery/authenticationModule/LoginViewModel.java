@@ -1,5 +1,6 @@
 package com.example.p5i.onlinegallery.authenticationModule;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -221,7 +222,8 @@ public class LoginViewModel extends BaseObservable
         else if(userLoggedIncheckobserver==signedInValue)
         {
             mActivtyTransitionModel.startActivity(new MainActivity());
-            mActivtyTransitionModel.startActivity(new MainActivity());
+            //((Activity)context).overridePendingTransition();
+            //mActivtyTransitionModel.startActivity(new MainActivity());
         }
     }
     @Bindable
