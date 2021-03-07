@@ -7,15 +7,21 @@ import android.transition.ChangeBounds
 import android.transition.Explode
 import android.transition.Fade
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.FragmentContainerView
+import com.example.p5i.onlinegallery.collectionsModule.collectionListPackage.CollectionAPI
+import com.example.p5i.onlinegallery.collectionsModule.collectionListPackage.CollectionPOJ
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
@@ -69,5 +75,19 @@ class MainActivity : AppCompatActivity() {
         creatingCollectionContainer.visibility=View.GONE
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CollectionAPI.retrofitService.getCollection("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ").enqueue(object:Callback<List<CollectionPOJ>>{
+            override fun onFailure(call: Call<List<CollectionPOJ>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+
+            override fun onResponse(call: Call<List<CollectionPOJ>>, response: Response<List<CollectionPOJ>>) {
+                Log.d(TAG, "onResponse: ${response.body()?.get(0)?.id}")
+            }
+
+        })
     }
 }

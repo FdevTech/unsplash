@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="thumb_layout_marginBottom">4dp</dimen>
+    <dimen name="thumb_layout_marginTop">4dp</dimen>
+    <dimen name="small_layout_marginBottom">8dp</dimen>
+    <dimen name="small_layout_marginTop">8dp</dimen>
+</resources>
