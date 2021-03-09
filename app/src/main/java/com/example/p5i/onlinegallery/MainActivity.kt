@@ -85,9 +85,10 @@ class MainActivity : AppCompatActivity() {
            try {
               // val value=CollectionAPI.retrofitService.addPhototoaAcoolection("Bearer ${loginCredential.retriveTockenl()}")
               // CollectionAPI.retrofitService.deletePhotoFromaAcoolection("Bearer ${loginCredential.retriveTockenl()}")
-               val value=CollectionAPI.retrofitService.getCollectionPhotos("Bearer ${loginCredential.retriveTockenl()}")
+               val value= network_Profile.ProfileAPI.profile.updateMyInfo("Bearer ${loginCredential.retriveTockenl()}")
+               //val value=CollectionAPI.retrofitService.getCollectionPhotos("Bearer ${loginCredential.retriveTockenl()}")
                Log.d(TAG, "onResume: ${loginCredential.retriveTockenl()}")
-               Log.d(TAG, "onResume: "+value.size)
+               Log.d(TAG, "onResume: "+value.name)
            }catch (t:Throwable)
            {
                Log.d(TAG, "onResume: ${t.message}")
