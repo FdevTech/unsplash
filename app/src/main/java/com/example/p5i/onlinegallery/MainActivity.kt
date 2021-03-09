@@ -3,25 +3,18 @@ package com.example.p5i.onlinegallery
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.ChangeBounds
 import android.transition.Explode
-import android.transition.Fade
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.lifecycleScope
 import com.example.p5i.onlinegallery.collectionsModule.collectionListPackage.CollectionAPI
-import com.example.p5i.onlinegallery.collectionsModule.collectionListPackage.CollectionPOJ
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
-import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
@@ -79,15 +72,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        CollectionAPI.retrofitService.getCollection("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ").enqueue(object:Callback<List<CollectionPOJ>>{
-            override fun onFailure(call: Call<List<CollectionPOJ>>, t: Throwable) {
-                Log.d(TAG, "onFailure: ${t.message}")
-            }
+        lifecycleScope.launch{
+           // val value=CollectionAPI.retrofitService.getCollection("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
 
-            override fun onResponse(call: Call<List<CollectionPOJ>>, response: Response<List<CollectionPOJ>>) {
-                Log.d(TAG, "onResponse: ${response.body()?.get(0)?.id}")
-            }
+            //todo retriving token from shared preference
+            val value=CollectionAPI.retrofitService.getCollectionPhotos("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
+            Log.d(TAG, "onResume: "+value.size)
+        }
 
-        })
     }
 }
