@@ -1,0 +1,29 @@
+package com.example.p5i.onlinegallery.photosModule.datalayer
+
+import com.example.p5i.onlinegallery.Util.POJs.LikeUnlikePOJ
+import com.example.p5i.onlinegallery.Util.POJs.PhotoPOJ
+import com.example.p5i.onlinegallery.Util.retrofit
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+
+
+interface Photos {
+
+    @GET("photos")
+    suspend fun getPhotos(@Header("Authorization")autorization:String):List<PhotoPOJ>
+    @GET("photos/uWFFw7leQNI")
+    suspend fun getPhoto(@Header("Authorization")autorization:String):PhotoPOJ
+
+    @POST("photos/Z1TG5G3TArs/like")
+    suspend fun likePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ
+
+    @POST("photos/Z1TG5G3TArs/like")
+    suspend fun unLikePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ
+
+     object PhotosAPI {
+        val photos:Photos by lazy {
+            retrofit.create(Photos::class.java)
+        }
+    }
+}

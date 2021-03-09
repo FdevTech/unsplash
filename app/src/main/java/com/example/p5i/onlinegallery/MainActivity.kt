@@ -11,7 +11,8 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
-import com.example.p5i.onlinegallery.collectionsModule.collectionListPackage.CollectionAPI
+import com.example.p5i.onlinegallery.collectionsModule.datlayer.CollectionAPI
+import com.example.p5i.onlinegallery.photosModule.datalayer.Photos
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import kotlinx.coroutines.launch
@@ -76,7 +77,9 @@ class MainActivity : AppCompatActivity() {
            // val value=CollectionAPI.retrofitService.getCollection("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
 
             //todo retriving token from shared preference
-            val value=CollectionAPI.retrofitService.getCollectionPhotos("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
+           // val value=CollectionAPI.retrofitService.getCollectionPhotos("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
+            val value= Photos.PhotosAPI.photos.getPhotos("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
+            //val value= Photos.PhotosAPI.photos.likePhoto("Client-ID CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ")
             Log.d(TAG, "onResume: "+value.size)
         }
 

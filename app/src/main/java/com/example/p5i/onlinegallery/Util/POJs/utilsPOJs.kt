@@ -39,7 +39,9 @@ data class PhotoPOJ(val id:String,
                     val links: Links,
                     val likes:Int,
                     val liked_by_user:Boolean,
-                    val user: UserPOJ
+                    val user: UserPOJ,
+                    val views:Int,
+                    val download: Int
 )
 data class UserPOJ (val id:String,
                     val updated_at:String,
@@ -72,3 +74,5 @@ data class CollectionPOJ(val id:String,
                          val cover_photo: PhotoPOJ,
                          val preview_photos: List<PhotoPOJ>
 )
+
+data class LikeUnlikePOJ(val photo:PhotoPOJ )
