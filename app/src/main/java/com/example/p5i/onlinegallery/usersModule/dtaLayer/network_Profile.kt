@@ -6,14 +6,14 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 
-interface Profile
+interface network_Profile
 {
     @GET("/me")
     suspend fun getMyProfile(@Header("Authorization")autorization:String): UserPOJ
 
     object ProfileAPI{
-        val profile:Profile by lazy {
-            retrofit.create(Profile::class.java)
+        val profile:network_Profile by lazy {
+            retrofit.create(network_Profile::class.java)
         }
     }
 }

@@ -38,7 +38,7 @@ public class UnsplashWebServiceLoginModel
 
         mAutorizationInterface=retrofit.create(AutorizationInterface.class);
     }
-    public void   getTheTocken(Uri mUri)
+    public void  getTheTocken(Uri mUri)
     {
         mAutorizationInterface.getAccessTocken("CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ","yUWMA9JU_1ZuLmwRbnkwDSx1cI3TKktQTK8x2eAC-dk",
                 "curta://callback",mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {

@@ -1,12 +1,13 @@
 package com.example.p5i.onlinegallery.collectionsModule.datlayer
 
 import com.example.p5i.onlinegallery.Util.POJs.CollectionPOJ
+import com.example.p5i.onlinegallery.Util.POJs.LikeUnlikePOJ
 import com.example.p5i.onlinegallery.Util.POJs.PhotoPOJ
 import com.example.p5i.onlinegallery.Util.retrofit
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.*
 
 
 interface Collections{
@@ -14,9 +15,23 @@ interface Collections{
     @GET("collections?page=10&per_page=20")
     suspend fun getCollection(@Header("Authorization") authorization:String): List<CollectionPOJ>
 
-    @GET("/collections/2358/photos")
+    @GET("/collections/51171413/photos")
     suspend fun getCollectionPhotos(@Header("Authorization")authorization:String):List<PhotoPOJ>
 
+    @POST("collections/?title=jack&description=it is just a test for a fucking collection&private=true")
+    suspend fun create(@Header("Authorization")authorization:String):CollectionPOJ
+
+    @PUT("collections/36223938/?title=fuck-engineers&description=it is just a test for a fucking collection")
+    suspend fun update(@Header("Authorization")authorization:String):CollectionPOJ
+
+    @DELETE("collections/74616526")
+    suspend fun delete(@Header("Authorization")authorization:String):Response<Unit>
+
+    @POST("collections/51171413/add?photo_id=QBfO2AaQvKE")
+    suspend fun addPhototoaAcoolection(@Header("Authorization")authorization:String): LikeUnlikePOJ
+
+    @DELETE("collections/51171413/remove?photo_id=g2E2NQ5SWSU")
+    suspend fun deletePhotoFromaAcoolection(@Header("Authorization")authorization:String): Response<Unit>
 }
 
 object CollectionAPI{
