@@ -76,3 +76,23 @@ data class CollectionPOJ(val id:String,
 )
 
 data class LikeUnlikePOJ(val photo:PhotoPOJ )
+
+data class TopicsPOJ(
+    val id: String,
+    val slug:String,
+    val title:String,
+    val description:String,
+    val published_at:String,
+    val updated_at:String,
+    val starts_at:String,
+    val ends_at:String,
+    val featured:Boolean,
+    val total_photos:Int,
+    val links:Links,
+    val status:String,
+    val owners:List<UserPOJ>,
+    val cover_photo:PhotoPOJ,
+    val preview_photos:List<PhotoPOJ>
+
+
+)

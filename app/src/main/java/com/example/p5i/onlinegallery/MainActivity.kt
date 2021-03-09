@@ -15,6 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.collectionsModule.datlayer.CollectionAPI
 import com.example.p5i.onlinegallery.photosModule.datalayer.Photos
+import com.example.p5i.onlinegallery.topicModule.networkLayer.TopicsAPI
+import com.example.p5i.onlinegallery.topicModule.networkLayer.network_Topics
 import com.example.p5i.onlinegallery.usersModule.dtaLayer.network_Profile
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.platform.MaterialContainerTransform
@@ -85,10 +87,13 @@ class MainActivity : AppCompatActivity() {
            try {
               // val value=CollectionAPI.retrofitService.addPhototoaAcoolection("Bearer ${loginCredential.retriveTockenl()}")
               // CollectionAPI.retrofitService.deletePhotoFromaAcoolection("Bearer ${loginCredential.retriveTockenl()}")
-               val value= network_Profile.ProfileAPI.profile.updateMyInfo("Bearer ${loginCredential.retriveTockenl()}")
+               //val value= network_Profile.ProfileAPI.profile.updateMyInfo("Bearer ${loginCredential.retriveTockenl()}")
                //val value=CollectionAPI.retrofitService.getCollectionPhotos("Bearer ${loginCredential.retriveTockenl()}")
+
+               //val value= TopicsAPI.topics.getTopics("Bearer ${loginCredential.retriveTockenl()}")
+               val value= TopicsAPI.topics.getPhotosFromTopics("Bearer ${loginCredential.retriveTockenl()}")
                Log.d(TAG, "onResume: ${loginCredential.retriveTockenl()}")
-               Log.d(TAG, "onResume: "+value.name)
+               Log.d(TAG, "onResume: "+value.size)
            }catch (t:Throwable)
            {
                Log.d(TAG, "onResume: ${t.message}")
