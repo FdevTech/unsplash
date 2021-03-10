@@ -1,12 +1,10 @@
-package com.example.p5i.onlinegallery.collectionsModule.datlayer
+package com.example.p5i.onlinegallery.collectionsModule.datlayer.network
 
 import com.example.p5i.onlinegallery.Util.POJs.CollectionPOJ
 import com.example.p5i.onlinegallery.Util.POJs.LikeUnlikePOJ
 import com.example.p5i.onlinegallery.Util.POJs.PhotoPOJ
 import com.example.p5i.onlinegallery.Util.retrofit
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 
@@ -35,7 +33,7 @@ interface Collections{
 }
 
 object CollectionAPI{
-    val retrofitService:Collections by lazy {
+    val retrofitService: Collections by lazy {
         retrofit.create(Collections::class.java)
     }
 }
