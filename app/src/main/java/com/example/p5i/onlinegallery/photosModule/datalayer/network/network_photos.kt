@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.photosModule.datalayer
+package com.example.p5i.onlinegallery.photosModule.datalayer.network
 
 import com.example.p5i.onlinegallery.Util.POJs.LikeUnlikePOJ
 import com.example.p5i.onlinegallery.Util.POJs.PhotoPOJ
@@ -23,7 +23,7 @@ interface Photos {
     suspend fun unLikePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ
 
      object PhotosAPI {
-        val photos:Photos by lazy {
+        val photos: Photos by lazy {
             retrofit.create(Photos::class.java)
         }
     }
