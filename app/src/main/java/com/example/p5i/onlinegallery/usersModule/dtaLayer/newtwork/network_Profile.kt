@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.usersModule.dtaLayer
+package com.example.p5i.onlinegallery.usersModule.dtaLayer.newtwork
 
 import com.example.p5i.onlinegallery.Util.POJs.UserPOJ
 import com.example.p5i.onlinegallery.Util.retrofit
@@ -16,7 +16,7 @@ interface network_Profile
     suspend fun updateMyInfo(@Header("Authorization")autorization:String):UserPOJ
 
     object ProfileAPI{
-        val profile:network_Profile by lazy {
+        val profile: network_Profile by lazy {
             retrofit.create(network_Profile::class.java)
         }
     }
