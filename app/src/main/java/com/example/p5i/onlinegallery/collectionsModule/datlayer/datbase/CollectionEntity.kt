@@ -40,3 +40,5 @@ data class CollectionEntity(
     var preview_photos_third_photo_thumb:String?
 
 )
+
+//TODO converting from network to this class methods

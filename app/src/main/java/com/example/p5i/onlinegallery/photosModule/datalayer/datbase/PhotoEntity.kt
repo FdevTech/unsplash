@@ -24,3 +24,4 @@ data class PhotoEntity(
 
 
 )
+//TODO converting from network to this class methods

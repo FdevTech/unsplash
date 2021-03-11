@@ -23,5 +23,5 @@ data class ProfileEntity (
     var total_photos:Long?,
     var for_hire:Boolean?
 
-){
-}
+)
+//TODO converting from network to this class methods 
