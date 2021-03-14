@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         with(window) {
             requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
              enterTransition= Explode()
-            // set an exit transition
             exitTransition = Explode()
         }
         super.onCreate(savedInstanceState)
@@ -38,64 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view: View? ->
 
-            val transform=MaterialContainerTransform().apply {
-                startView=fab
-                endView=creatingCollectionContainer
-                addTarget(endViewId)
-                scrimColor= Color.TRANSPARENT
-                duration=1500
 
-            }
-            TransitionManager.beginDelayedTransition(creatingCollectionContainer,transform)
-            fab.visibility=View.GONE
-            creatingCollectionContainer.visibility=View.VISIBLE
 
 
         }
 
     }
 
-    override fun onBackPressed() {
-       // super.onBackPressed()
 
-        val transform=MaterialContainerTransform().apply {
-            endView=fab
-            startView=creatingCollectionContainer
-            addTarget(endViewId)
-            scrimColor= Color.TRANSPARENT
-            duration=1500
-        }
-        TransitionManager.beginDelayedTransition(creatingCollectionContainer,transform)
-        fab.visibility=View.VISIBLE
-        creatingCollectionContainer.visibility=View.GONE
-
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        lifecycleScope.launch{
-
-            loginCredential= LoginStateModel(this@MainActivity)
-
-
-           try {
-              // val value=CollectionAPI.retrofitService.addPhototoaAcoolection("Bearer ${loginCredential.retriveTockenl()}")
-              // CollectionAPI.retrofitService.deletePhotoFromaAcoolection("Bearer ${loginCredential.retriveTockenl()}")
-               //val value= network_Profile.ProfileAPI.profile.updateMyInfo("Bearer ${loginCredential.retriveTockenl()}")
-               //val value=CollectionAPI.retrofitService.getCollectionPhotos("Bearer ${loginCredential.retriveTockenl()}")
-
-               //val value= TopicsAPI.topics.getTopics("Bearer ${loginCredential.retriveTockenl()}")
-               val value= TopicsAPI.topics.getPhotosFromTopics("Bearer ${loginCredential.retriveTockenl()}")
-               Log.d(TAG, "onResume: ${loginCredential.retriveTockenl()}")
-               Log.d(TAG, "onResume: "+value.size)
-           }catch (t:Throwable)
-           {
-               Log.d(TAG, "onResume: ${t.message}")
-           }
-
-
-        }
-
-    }
 }
