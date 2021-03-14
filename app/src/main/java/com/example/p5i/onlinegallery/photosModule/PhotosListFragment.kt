@@ -32,7 +32,7 @@ class PhotosListFragment : Fragment() {
 
         photoViewModelFactory= PhotViewModelFactory(credential)
         photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
-        
+
         return fragmentPhotosListBinding.root
     }
 

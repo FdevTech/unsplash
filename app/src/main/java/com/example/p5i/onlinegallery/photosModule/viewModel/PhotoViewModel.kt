@@ -19,7 +19,6 @@ class PhotoViewModel(val credential:String) :ViewModel()
 
     fun initPhotoData()
     {
-
         viewModelScope.launch {
          try {
              val value= TopicsAPI.topics.getPhotosFromTopics(credential)
