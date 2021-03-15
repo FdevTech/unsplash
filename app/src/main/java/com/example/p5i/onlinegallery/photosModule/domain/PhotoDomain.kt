@@ -8,5 +8,6 @@ data class PhotoDomain(
     var photo_thumb:String?,
     var views:Int?,
     var download: Int?,
-    val liked_by_user:Boolean?
+    val liked_by_user:Boolean?,
+    val likes:Int
 )

@@ -49,7 +49,7 @@ class PhotosListFragment : Fragment() {
             adapter=photoViewModelAdapter
         }
         photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
-           
+
             photoViewModelAdapter.submitList(it)
         })
 
