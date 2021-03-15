@@ -1,38 +1,60 @@
 package com.example.p5i.onlinegallery.photosModule.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.p5i.onlinegallery.R
+import com.example.p5i.onlinegallery.databinding.PhotosItemBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
-class PhotoViewModelAdapter (): RecyclerView.Adapter<PhotoViewModelAdapter.ViewHolder>()
-{
-    var data= listOf<PhotoDomain>()
-    set(value) {
-        field=value
-        notifyDataSetChanged()
-    }
+class PhotoViewModelAdapter() : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotoDiffUtill()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =LayoutInflater.from(parent.context).inflate(R.layout.photos_item,parent,false)
-        return ViewHolder(view)
+
+        return ViewHolder.from(parent)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(holder.itemView.context)
-            .load(data.get(position).photo_regular)
-            .into(holder.imageView)
+        val value = getItem(position)
+        holder.bind(value)
     }
-    class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
+
+    class ViewHolder private constructor(val binding: PhotosItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        companion object{
+            fun from(parent: ViewGroup):ViewHolder
+            {
+                val inflater=LayoutInflater.from(parent.context)
+                val binding=PhotosItemBinding.inflate(inflater,parent,false)
+                return ViewHolder(binding)
+            }
+        }
+
+        fun bind(data: PhotoDomain) {
+
+            binding.photo=data
+
+        }
+    }
+
+
+    class PhotoDiffUtill: DiffUtil.ItemCallback<PhotoDomain>()
     {
-           val imageView=itemView.findViewById<ImageView>(R.id.image)
+        override fun areItemsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean {
+
+            return oldItem.id==newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean {
+
+           return oldItem==oldItem
+        }
+
     }
+
+
 }

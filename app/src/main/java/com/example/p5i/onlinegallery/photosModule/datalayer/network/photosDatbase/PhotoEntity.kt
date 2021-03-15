@@ -21,7 +21,8 @@ data class PhotoEntity(
     var photo_small:String?,
     var photo_thumb:String?,
     var views:Int?,
-    var download: Int?)
+    var download: Int?,
+    val liked_by_user:Boolean?)
 
 
 
@@ -35,7 +36,9 @@ fun List<PhotoEntity>.asDomainModel():List<PhotoDomain>{
             photo_small = it.photo_small,
             photo_thumb = it.photo_thumb,
             download = it.download,
-            views = it.views
+            views = it.views,
+            id = it.phot_id,
+            liked_by_user = it.liked_by_user
         )
     }
 }
@@ -56,7 +59,8 @@ fun List<PhotoPOJ>.asDatabasePhotoModel():List<PhotoEntity>{
             photo_small = it.urls.small,
             photo_thumb = it.urls.thumb,
             views = it.views,
-            download = it.download
+            download = it.download,
+            liked_by_user = it.liked_by_user
 
         )
     }

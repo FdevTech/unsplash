@@ -49,8 +49,8 @@ class PhotosListFragment : Fragment() {
             adapter=photoViewModelAdapter
         }
         photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
-            Log.d(TAG, "onCreateView: ${it.get(0).photo_regular}")
-            photoViewModelAdapter.data=it
+           
+            photoViewModelAdapter.submitList(it)
         })
 
         return fragmentPhotosListBinding.root

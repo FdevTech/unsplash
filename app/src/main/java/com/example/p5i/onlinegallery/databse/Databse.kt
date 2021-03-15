@@ -9,7 +9,7 @@ import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbas
 
 
 
-@Database(entities = [PhotoEntity::class], version = 1, exportSchema = false)
+@Database(entities = [PhotoEntity::class], version = 2, exportSchema = false)
 abstract class UnsplashDatabase : RoomDatabase() {
 
     abstract val photosDao: PhotosDao
@@ -28,7 +28,8 @@ fun getDatabse(context: Context):UnsplashDatabase
                 context,
                UnsplashDatabase::class.java,
                "UnsplashDatabase"
-           ).build()
+           )   .fallbackToDestructiveMigration()
+               .build()
         }
     }
     return INSTANCE
