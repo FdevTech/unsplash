@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+      <variable
+          name="topicDomain"
+          type="com.example.p5i.onlinegallery.topicModule.doamin.TopicsDomain" />
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTopics="@{topicDomain}"
+            />
+
+        <ImageView
+            android:id="@+id/topicCover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="h,4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            app:coverTopic="@{topicDomain}"/>
+
+        <TextView
+            android:id="@+id/desciptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Desciption about the topic"
+            app:layout_constraintTop_toBottomOf="@+id/topicCover"
+            app:descriptionTopics="@{topicDomain}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
