@@ -13,7 +13,7 @@ fun ImageView.getCover(data:CollectionDomain)
 {
     Log.d(TAG, "getCover: ${data.cover_photo_regular}")
     Glide.with(context)
-        .load(data.cover_photo_regular)
+        .load(data.cover_photo_small)
         .into(this)
 }
 
@@ -22,7 +22,7 @@ fun ImageView.getFirst(data:CollectionDomain)
 {
     Log.d(TAG, "getFirst: ${data.third_photo_regular}")
     Glide.with(context)
-        .load(data.third_photo_regular)
+        .load(data.third_photo_small)
         .into(this)
 }
 @BindingAdapter("second")
@@ -30,7 +30,7 @@ fun ImageView.getSecpond(data:CollectionDomain)
 {
     Log.d(TAG, "getSecpond: ${data.second_photo_regular}")
     Glide.with(context)
-        .load(data.second_photo_regular)
+        .load(data.second_photo_small)
         .into(this)
 }
 
