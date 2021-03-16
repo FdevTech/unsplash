@@ -13,7 +13,7 @@ interface Photos {
 
     @GET("photos")
     suspend fun getPhotos(@Header("Authorization")autorization:String):List<PhotoPOJ>
-    @GET("photos/uWFFw7leQNI")
+    @GET("photos/?per_page=100")
     suspend fun getPhoto(@Header("Authorization")autorization:String):PhotoPOJ
 
     @POST("photos/Z1TG5G3TArs/like")
