@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+   <data>
+       <variable
+           name="profileDomain"
+           type="com.example.p5i.onlinegallery.usersModule.domain.ProfileDomain" />
+   </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usersModule.ProfileFragment">
+    tools:context=".usersModule.ProfileFragment"
+   >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profileImageContainer"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            app:profileImage="@{profileDomain}"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/userNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageContainer"
+        tools:text="Fares Othmane Mokhtari"
+        android:layout_marginTop="20dp"
+        app:profileName="@{profileDomain}"
+        />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameText"
+        android:drawableLeft="@drawable/location_on"
+        tools:text="about the end"
+        app:profileLocation="@{profileDomain}"/>
+
+    <TextView
+        android:id="@+id/aboutmeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+        tools:text="something about me"
+        app:profileBio="@{profileDomain}"/>
+
+   
 
 
 
