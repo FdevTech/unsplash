@@ -44,8 +44,10 @@ class TopicFragment : Fragment() {
 
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
+
         topicViewModelFactory= TopicsViewModelFactory(acttiviy.application,credential)
         topicViewModel=ViewModelProvider(this,topicViewModelFactory).get(TopicsViewModel::class.java)
+
         topicViewModelAdapter= TopicsRecyclerAdpater()
         topicViewModel.topics.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: ${it.size}")

@@ -10,14 +10,17 @@ import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbas
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.PhotosDao
 import com.example.p5i.onlinegallery.topicModule.databse.TopicsEntity
 import com.example.p5i.onlinegallery.topicModule.databse.TopicsDAO
+import com.example.p5i.onlinegallery.usersModule.datalayer.databse.ProfileDAO
+import com.example.p5i.onlinegallery.usersModule.datalayer.databse.ProfileEntity
 
 
-@Database(entities = [PhotoEntity::class,CollectionEntity::class,TopicsEntity::class], version = 6, exportSchema = false)
+@Database(entities = [PhotoEntity::class,CollectionEntity::class,TopicsEntity::class,ProfileEntity::class], version = 7, exportSchema = false)
 abstract class UnsplashDatabase : RoomDatabase() {
 
     abstract val photosDao: PhotosDao
     abstract val topicsDAO: TopicsDAO
     abstract val collectionDao:CollectionDAO
+    abstract val profileDAO: ProfileDAO
 
 }
 

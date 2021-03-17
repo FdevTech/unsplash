@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.usersModule.dtaLayer.newtwork
+package com.example.p5i.onlinegallery.usersModule
 
 import com.example.p5i.onlinegallery.Util.POJs.UserPOJ
 import com.example.p5i.onlinegallery.Util.retrofit
