@@ -71,7 +71,7 @@
         tools:text="something about me"
         app:profileBio="@{profileDomain}"/>
 
-   
+
 
 
 

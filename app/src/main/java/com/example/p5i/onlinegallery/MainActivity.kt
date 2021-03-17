@@ -11,8 +11,13 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.topicModule.networkLayer.TopicsAPI
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import kotlinx.coroutines.launch
@@ -41,6 +46,10 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+        val navHost=supportFragmentManager.findFragmentById(R.id.creatingCollectionContainer) as NavHostFragment
+        val contoller=navHost.navController
+        val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationMenu.setupWithNavController(contoller)
 
     }
 
