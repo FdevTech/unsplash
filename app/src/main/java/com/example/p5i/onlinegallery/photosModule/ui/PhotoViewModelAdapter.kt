@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.p5i.onlinegallery.databinding.PhotosItemBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
-class PhotoViewModelAdapter() : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotoDiffUtill()){
+class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotoDiffUtill()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -20,7 +19,7 @@ class PhotoViewModelAdapter() : ListAdapter<PhotoDomain,PhotoViewModelAdapter.Vi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val value = getItem(position)
-        holder.bind(value)
+        holder.bind(value,onPhotoClickListne)
     }
 
     class ViewHolder private constructor(val binding: PhotosItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -34,9 +33,13 @@ class PhotoViewModelAdapter() : ListAdapter<PhotoDomain,PhotoViewModelAdapter.Vi
             }
         }
 
-        fun bind(data: PhotoDomain) {
+        fun bind(
+            data: PhotoDomain,
+            ohotoClickListne: OnPhotoClickListner?
+        ) {
 
             binding.photo=data
+            binding.onlickeListner=ohotoClickListne
 
         }
     }
@@ -57,4 +60,13 @@ class PhotoViewModelAdapter() : ListAdapter<PhotoDomain,PhotoViewModelAdapter.Vi
     }
 
 
+
+
+}
+class OnPhotoClickListner(val onlick:(data: PhotoDomain)->Unit )
+{
+    fun onClick(data: PhotoDomain)
+    {
+        return onlick(data)
+    }
 }

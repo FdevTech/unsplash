@@ -16,6 +16,7 @@ import com.example.p5i.onlinegallery.authenticationModule.authorizationData.Logi
 import com.example.p5i.onlinegallery.databinding.FragmentPhotosListBinding
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
 import com.example.p5i.onlinegallery.databse.getDatabse
+import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
 import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotoViewModel
@@ -39,7 +40,11 @@ class PhotosListFragment : Fragment() {
           val activity = requireNotNull(this.activity)
           photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
           photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
-          photoViewModelAdapter=PhotoViewModelAdapter()
+
+          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {
+
+              Log.d(TAG, "onCreateView: ${it.id}")
+          })
 
 
 
