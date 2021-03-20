@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentPhotoBinding
+import com.example.p5i.onlinegallery.photoModule.ui.DepthPageTransformer
 import com.example.p5i.onlinegallery.photoModule.ui.PhotoViewAdapter
+import com.example.p5i.onlinegallery.photoModule.ui.ZoomOutPageTransformer
 import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModel
 import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModelFactory
 
@@ -45,8 +47,9 @@ class PhotoFragment : Fragment() {
         photoViewAdapter=PhotoViewAdapter()
 
         fragmentPhotoBinding.bigPhotRecyclerView.apply {
-            layoutManager=LinearLayoutManager(this@PhotoFragment.context,LinearLayoutManager.HORIZONTAL,false)
+
             adapter=photoViewAdapter
+            setPageTransformer(DepthPageTransformer())
         }
         photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
 

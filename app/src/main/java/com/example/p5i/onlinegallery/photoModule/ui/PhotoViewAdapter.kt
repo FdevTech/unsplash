@@ -1,5 +1,6 @@
 package com.example.p5i.onlinegallery.photoModule.ui
 
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class PhotoViewAdapter ():ListAdapter<PhotoDomain,PhotoViewAdapter.PhotovViewHol
     }
     class PhotovViewHolder(val view: View): RecyclerView.ViewHolder(view)
     {
+        var latspoition=-1
        companion object{
 
            fun from (parent: ViewGroup):PhotovViewHolder
@@ -42,6 +44,8 @@ class PhotoViewAdapter ():ListAdapter<PhotoDomain,PhotoViewAdapter.PhotovViewHol
             Glide.with(view.context)
                 .load(data.photo_regular)
                 .into(image)
+
+
         }
     }
     class PhotoDiffUtil():DiffUtil.ItemCallback<PhotoDomain>()

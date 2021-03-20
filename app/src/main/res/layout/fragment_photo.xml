@@ -18,7 +18,7 @@
             tools:context=".photoModule.PhotoFragment">
 
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/bigPhotRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
