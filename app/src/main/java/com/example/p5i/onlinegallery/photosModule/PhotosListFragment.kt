@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,18 +15,17 @@ import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentPhotosListBinding
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
-import com.example.p5i.onlinegallery.databse.getDatabse
 import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
 import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
-import com.example.p5i.onlinegallery.photosModule.viewModel.PhotoViewModel
+import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
 
 private const val TAG = "PhotosListFragment"
 class PhotosListFragment : Fragment() {
 
      lateinit var fragmentPhotosListBinding: FragmentPhotosListBinding
      lateinit var photoViewModelFactory: PhotViewModelFactory
-     lateinit var photoViewModel:PhotoViewModel
+     lateinit var photosViewModel:PhotosViewModel
      private lateinit var loginCredential: LoginStateModel
      private lateinit var credential:String
      private lateinit var photoViewModelAdapter: PhotoViewModelAdapter
@@ -40,7 +38,7 @@ class PhotosListFragment : Fragment() {
         credential="Bearer ${loginCredential.retriveTockenl()}"
           val activity = requireNotNull(this.activity)
           photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
-          photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
+          photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
 
           photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {
              Toast.makeText(this.context,"${it.id}",Toast.LENGTH_SHORT).show()
@@ -54,7 +52,7 @@ class PhotosListFragment : Fragment() {
             layoutManager=LinearLayoutManager(context)
             adapter=photoViewModelAdapter
         }
-        photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
+        photosViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
 
             photoViewModelAdapter.submitList(it)
         })

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/photosListFragment">
+    app:startDestination="@id/photoFragment">
 
     <fragment
         android:id="@+id/photosListFragment"
@@ -24,4 +24,8 @@
         android:name="com.example.p5i.onlinegallery.topicModule.TopicFragment"
         android:label="fragment_topic"
         tools:layout="@layout/fragment_topic" />
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.example.p5i.onlinegallery.photoModule.PhotoFragment"
+        android:label="PhotoFragment" />
 </navigation>

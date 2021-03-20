@@ -14,7 +14,7 @@ import java.io.IOException
 
 private const val TAG = "photoViewModel"
 private lateinit var credential:String
-class PhotoViewModel(application: Application, val credential:String) :ViewModel()
+class PhotosViewModel(application: Application, val credential:String) :ViewModel()
 {
     val photoRepository= PhotoRepository(getDatabse(application),credential)
     val photosRetrived=photoRepository.photos
