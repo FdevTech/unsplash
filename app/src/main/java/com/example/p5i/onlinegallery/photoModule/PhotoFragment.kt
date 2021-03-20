@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
+import com.example.p5i.onlinegallery.databinding.FragmentPhotoBinding
+import com.example.p5i.onlinegallery.photoModule.ui.PhotoViewAdapter
 import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModel
 import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModelFactory
 
@@ -17,30 +20,42 @@ import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModelFactory
 private const val TAG = "PhotoFragment"
 class PhotoFragment : Fragment() {
   
-   lateinit var photoViewModelFactory: PhotoViewModelFactory
+    lateinit var photoViewModelFactory: PhotoViewModelFactory
     lateinit var photoViewModel: PhotoViewModel
     private lateinit var loginCredential: LoginStateModel
     private lateinit var credential:String
+    private lateinit var fragmentPhotoBinding:FragmentPhotoBinding
+    private lateinit var photoViewAdapter: PhotoViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val activity = requireNotNull(this.activity)
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
+
+        fragmentPhotoBinding= FragmentPhotoBinding.inflate(inflater,container,false)
+
         photoViewModelFactory= PhotoViewModelFactory(activity.application,credential)
         photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
+
+        photoViewAdapter=PhotoViewAdapter()
+
+        fragmentPhotoBinding.bigPhotRecyclerView.apply {
+            layoutManager=LinearLayoutManager(this@PhotoFragment.context,LinearLayoutManager.HORIZONTAL,false)
+            adapter=photoViewAdapter
+        }
         photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
 
-            Log.d(TAG, "onCreateView: ${it?.get(0)?.id}")
+            photoViewAdapter.submitList(it)
         })
-        return inflater.inflate(R.layout.fragment_photo, container, false)
+
+
+
+        return fragmentPhotoBinding.root
     }
 
 

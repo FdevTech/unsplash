@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.p5i.onlinegallery.databinding.PhotosItemBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
-class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotoDiffUtill()){
+class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotosDiffUtill()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -45,7 +45,7 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
     }
 
 
-    class PhotoDiffUtill: DiffUtil.ItemCallback<PhotoDomain>()
+    class PhotosDiffUtill: DiffUtil.ItemCallback<PhotoDomain>()
     {
         override fun areItemsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean {
 
