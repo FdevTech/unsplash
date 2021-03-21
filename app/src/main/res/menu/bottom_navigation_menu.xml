@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/photosListFragment"
+        android:title="photos"
+        android:icon="@drawable/ic_photo"/>
+    <item
+        android:id="@+id/collectionListFragment"
+        android:title="colections"
+        android:icon="@drawable/ic_collection"/>
 <item
     android:id="@+id/topicFragment"
     android:title="topics"
     android:iconTint="#FFF"
-    android:icon="@drawable/ic_baseline_topic"/>
-    <item
-        android:id="@+id/collectionListFragment"
-        android:title="topics"
-        android:icon="@drawable/ic_baseline_collections"/>
-    <item
-        android:id="@+id/photosListFragment"
-        android:title="topics"
-        android:icon="@drawable/ic_baseline_share"/>
+    android:icon="@drawable/ic_topic"/>
+
+
     <item
         android:id="@+id/profileFragment"
-        android:title="topics"
+        android:title="profile"
         android:icon="@drawable/ic_baseline_account"/>
 </menu>

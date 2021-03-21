@@ -14,7 +14,7 @@ import com.example.p5i.onlinegallery.usersModule.datalayer.databse.ProfileDAO
 import com.example.p5i.onlinegallery.usersModule.datalayer.databse.ProfileEntity
 
 
-@Database(entities = [PhotoEntity::class,CollectionEntity::class,TopicsEntity::class,ProfileEntity::class], version = 7, exportSchema = false)
+@Database(entities = [PhotoEntity::class,CollectionEntity::class,TopicsEntity::class,ProfileEntity::class], version = 8, exportSchema = false)
 abstract class UnsplashDatabase : RoomDatabase() {
 
     abstract val photosDao: PhotosDao

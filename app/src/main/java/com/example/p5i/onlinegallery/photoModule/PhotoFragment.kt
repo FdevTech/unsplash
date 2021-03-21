@@ -45,20 +45,26 @@ class PhotoFragment : Fragment() {
         photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
 
         photoViewAdapter=PhotoViewAdapter()
-
+        photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "onCreateView: ${it.size}")
+            photoViewAdapter.submitList(it)
+        })
         fragmentPhotoBinding.bigPhotRecyclerView.apply {
+
 
             adapter=photoViewAdapter
             setPageTransformer(DepthPageTransformer())
         }
-        photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
 
-            photoViewAdapter.submitList(it)
-        })
 
 
 
         return fragmentPhotoBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fragmentPhotoBinding.bigPhotRecyclerView.setCurrentItem(3)
     }
 
 

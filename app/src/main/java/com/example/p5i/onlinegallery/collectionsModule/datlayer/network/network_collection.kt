@@ -10,8 +10,8 @@ import retrofit2.http.*
 
 interface Collections{
 
-    @GET("collections?page=10&per_page=20")
-    suspend fun getCollection(@Header("Authorization") authorization:String): List<CollectionPOJ>
+    @GET("collections?page=1&per_page=30")
+    suspend fun getCollection(@Header("Authorization") authorization:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=30): Response<List<CollectionPOJ>>
 
     @GET("/collections/51171413/photos")
     suspend fun getCollectionPhotos(@Header("Authorization")authorization:String):List<PhotoPOJ>

@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     lateinit var creatingCollectionContainer:FragmentContainerView
-    lateinit var fab:FloatingActionButton
     lateinit var content:ViewGroup
     lateinit var loginCredential: LoginStateModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,15 +36,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         creatingCollectionContainer=findViewById(R.id.creatingCollectionContainer)
-        fab=findViewById(R.id.fab)
+
         content=findViewById(R.id.content)
 
-        fab.setOnClickListener { view: View? ->
 
-
-
-
-        }
         val navHost=supportFragmentManager.findFragmentById(R.id.creatingCollectionContainer) as NavHostFragment
         val contoller=navHost.navController
         val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
