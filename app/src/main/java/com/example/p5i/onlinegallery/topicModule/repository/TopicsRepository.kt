@@ -27,6 +27,7 @@ class TopicsRepository (val unsplashDatabase: UnsplashDatabase,val credentials:S
         {
             var topicsList=TopicsAPI.topics.getTopics(credentials).body()
             val xtotal= TopicsAPI.topics.getTopics(credentials).headers().get("X-Total")
+            Log.d(TAG, "refrechTopics: $xtotal")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
             if(topicsList!=null)
             {

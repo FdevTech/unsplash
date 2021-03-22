@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.p5i.onlinegallery.R
@@ -33,7 +34,7 @@ class PhotosListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)
-
+        val navController=findNavController()
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
           val activity = requireNotNull(this.activity)
@@ -43,6 +44,7 @@ class PhotosListFragment : Fragment() {
           photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {
              Toast.makeText(this.context,"${it.id}",Toast.LENGTH_SHORT).show()
               Log.d(TAG, "onCreateView: ${it.id}")
+              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment())
           })
 
 

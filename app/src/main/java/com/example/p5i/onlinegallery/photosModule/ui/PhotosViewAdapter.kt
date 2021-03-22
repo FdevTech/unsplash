@@ -47,7 +47,8 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
 
     class PhotosDiffUtill: DiffUtil.ItemCallback<PhotoDomain>()
     {
-        override fun areItemsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean {
+        override fun areItemsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean
+        {
 
             return oldItem.id==newItem.id
         }
@@ -70,3 +71,4 @@ class OnPhotoClickListner(val onlick:(data: PhotoDomain)->Unit )
         return onlick(data)
     }
 }
+
