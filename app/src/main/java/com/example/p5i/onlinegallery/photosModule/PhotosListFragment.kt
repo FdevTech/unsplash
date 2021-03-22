@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,9 +43,10 @@ class PhotosListFragment : Fragment() {
           photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
 
           photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {
+              val extras= FragmentNavigatorExtras()
              Toast.makeText(this.context,"${it.id}",Toast.LENGTH_SHORT).show()
-              Log.d(TAG, "onCreateView: ${it.id}")
-              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment())
+              Log.d(TAG, "onCreateView: ${it.id},")
+              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(6))
           })
 
 

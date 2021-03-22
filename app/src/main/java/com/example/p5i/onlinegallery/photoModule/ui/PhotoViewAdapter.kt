@@ -1,6 +1,7 @@
 package com.example.p5i.onlinegallery.photoModule.ui
 
 import android.animation.ObjectAnimator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +14,9 @@ import com.bumptech.glide.Glide
 import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
+import kotlin.math.log
 
-
+private const val TAG = "PhotoViewAdapter"
 class PhotoViewAdapter ():ListAdapter<PhotoDomain,PhotoViewAdapter.PhotovViewHolder>(PhotoDiffUtil())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotovViewHolder {
@@ -23,6 +25,7 @@ class PhotoViewAdapter ():ListAdapter<PhotoDomain,PhotoViewAdapter.PhotovViewHol
     }
 
     override fun onBindViewHolder(holder: PhotovViewHolder, position: Int) {
+        Log.d(TAG, "onBindViewHolder: $position")
         val data=getItem(position)
         holder.bind(data)
     }

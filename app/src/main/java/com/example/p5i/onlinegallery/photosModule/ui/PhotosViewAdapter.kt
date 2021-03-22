@@ -1,5 +1,6 @@
 package com.example.p5i.onlinegallery.photosModule.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.p5i.onlinegallery.databinding.PhotosItemBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
+private const val TAG = "PhotosViewAdapter"
 class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotosDiffUtill()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,6 +20,7 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d(TAG, "onBindViewHolder: $position")
         val value = getItem(position)
         holder.bind(value,onPhotoClickListne)
     }
