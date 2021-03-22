@@ -13,6 +13,14 @@
         <action
             android:id="@+id/action_photosListFragment_to_photoFragment"
             app:destination="@id/photoFragment" />
+        <argument
+            android:name="topics"
+            app:argType="string"
+            android:defaultValue="Null" />
+        <argument
+            android:name="collections"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -22,12 +30,20 @@
         android:id="@+id/collectionListFragment"
         android:name="com.example.p5i.onlinegallery.collectionsModule.CollectionListFragment"
         android:label="fragment_collection_list"
-        tools:layout="@layout/fragment_collection_list" />
+        tools:layout="@layout/fragment_collection_list" >
+        <action
+            android:id="@+id/action_collectionListFragment_to_photosListFragment"
+            app:destination="@id/photosListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/topicFragment"
         android:name="com.example.p5i.onlinegallery.topicModule.TopicFragment"
         android:label="fragment_topic"
-        tools:layout="@layout/fragment_topic" />
+        tools:layout="@layout/fragment_topic" >
+        <action
+            android:id="@+id/action_topicFragment_to_photosListFragment"
+            app:destination="@id/photosListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/photoFragment"
         android:name="com.example.p5i.onlinegallery.photoModule.PhotoFragment"

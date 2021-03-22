@@ -21,6 +21,7 @@ import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
 import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
+import kotlin.math.log
 
 private const val TAG = "PhotosListFragment"
 class PhotosListFragment : Fragment() {
@@ -36,6 +37,11 @@ class PhotosListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)
         val navController=findNavController()
+        val args=PhotosListFragmentArgs.fromBundle(requireArguments())
+
+        Log.d(TAG, "onCreateView: collection ${args.collections}")
+        Log.d(TAG, "onCreateView: topic ${args.topics}")
+
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
           val activity = requireNotNull(this.activity)
