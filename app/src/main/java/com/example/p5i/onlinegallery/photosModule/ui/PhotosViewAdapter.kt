@@ -43,6 +43,8 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
 
             binding.photo=data
             binding.onlickeListner=ohotoClickListne
+            binding.position=adapterPosition
+            Log.d(TAG, "bind: $adapterPosition")
 
         }
     }
@@ -67,11 +69,12 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
 
 
 }
-class OnPhotoClickListner(val onlick:(data: PhotoDomain)->Unit )
+class OnPhotoClickListner(val onlick:(data: PhotoDomain,position:Int)->Unit )
 {
-    fun onClick(data: PhotoDomain)
+    fun onClick(data: PhotoDomain,position:Int)
     {
-        return onlick(data)
+        return onlick(data,position)
     }
 }
+
 

@@ -42,11 +42,12 @@ class PhotosListFragment : Fragment() {
           photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
           photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
 
-          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {
+          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {data, position ->
               val extras= FragmentNavigatorExtras()
-             Toast.makeText(this.context,"${it.id}",Toast.LENGTH_SHORT).show()
-              Log.d(TAG, "onCreateView: ${it.id},")
-              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(6))
+             Toast.makeText(this.context,"${data.id}",Toast.LENGTH_SHORT).show()
+              Log.d(TAG, "onCreateView: ${data.id},")
+              Log.d(TAG, "onCreateView: position  $position")
+              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position))
           })
 
 

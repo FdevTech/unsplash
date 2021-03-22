@@ -52,7 +52,8 @@ class PhotoFragment : Fragment() {
         photoViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: ${it.size}")
             listOfPhotos=it
-            photoViewAdapter.submitList((listOfPhotos.subList(args.position,listOfPhotos.size)))
+            val position=args.position
+            photoViewAdapter.submitList((listOfPhotos.subList(position,listOfPhotos.size)))
            // photoViewAdapter.submitList(it)
         })
         fragmentPhotoBinding.bigPhotRecyclerView.apply {

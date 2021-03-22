@@ -29,21 +29,38 @@ class TopicsRepository (val unsplashDatabase: UnsplashDatabase,val credentials:S
             val xtotal= TopicsAPI.topics.getTopics(credentials).headers().get("X-Total")
             Log.d(TAG, "refrechTopics: $xtotal")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
-            if(topicsList!=null)
-            {
-                while(i.compareTo(pages!!)<=0)
-                {
-                    try {
-                        topicsList=TopicsAPI.topics.getTopics(credentials,page = i).body()
-                        Log.d(TAG, "refrechTopics: ${topicsList?.size} ")
-                        unsplashDatabase.topicsDAO.insertOrUpdate(topicsList?.asTopicsEntity()!!)
-                    }catch (error:Exception)
-                    {
-                        Log.d(TAG, "refrechTopics: ${error.message}")
-                    }
-                    i++
-                }
-            }
+            Log.d(TAG, "refrechTopics: $pages")
+           if(xtotal!=null)
+           {
+               if(topicsList!=null)
+               {
+                   if(xtotal?.toInt()!!>30)
+                   {
+                       while(i.compareTo(pages!!)<=0)
+                       {
+                           try {
+                               topicsList=TopicsAPI.topics.getTopics(credentials,page = i).body()
+                               Log.d(TAG, "refrechTopics: ${topicsList?.size} ")
+                               unsplashDatabase.topicsDAO.insertOrUpdate(topicsList?.asTopicsEntity()!!)
+                           }catch (error:Exception)
+                           {
+                               Log.d(TAG, "refrechTopics: ${error.message}")
+                           }
+                           i++
+                       }
+                   }else
+                   {
+                       try {
+                           topicsList=TopicsAPI.topics.getTopics(credentials).body()
+                           Log.d(TAG, "refrechTopics: ${topicsList?.size} ")
+                           unsplashDatabase.topicsDAO.insertOrUpdate(topicsList?.asTopicsEntity()!!)
+                       }catch (error:Exception)
+                       {
+                           Log.d(TAG, "refrechTopics: ${error.message}")
+                       }
+                   }
+               }
+           }
 
 
         }

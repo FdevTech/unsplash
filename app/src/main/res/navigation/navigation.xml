@@ -33,6 +33,9 @@
         android:name="com.example.p5i.onlinegallery.photoModule.PhotoFragment"
         android:label="PhotoFragment" >
         <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
             android:name="position"
             app:argType="integer" />
     </fragment>
