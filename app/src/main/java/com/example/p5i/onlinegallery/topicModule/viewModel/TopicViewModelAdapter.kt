@@ -10,14 +10,14 @@ import com.example.p5i.onlinegallery.topicModule.doamin.TopicsDomain
 
 
 
-class TopicsRecyclerAdpater():ListAdapter<TopicsDomain,TopicsRecyclerAdpater.TopicViewHolder>(TopicsDiffUtil())
+class TopicsRecyclerAdpater(val topicOnClcik:TopicClicked):ListAdapter<TopicsDomain,TopicsRecyclerAdpater.TopicViewHolder>(TopicsDiffUtil())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
          return TopicViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
-       holder.bind(getItem(position))
+       holder.bind(getItem(position),topicOnClcik)
     }
 
     class TopicViewHolder(val binding: TopicsRowBinding) : RecyclerView.ViewHolder(binding.root)
@@ -31,9 +31,13 @@ class TopicsRecyclerAdpater():ListAdapter<TopicsDomain,TopicsRecyclerAdpater.Top
           }
 
       }
-        fun bind(data:TopicsDomain)
+        fun bind(
+            data: TopicsDomain,
+            topicOnClcik: TopicClicked
+        )
         {
             binding.topicDomain=data
+            binding.onClickOnTopic=topicOnClcik
         }
     }
 
@@ -46,6 +50,14 @@ class TopicsRecyclerAdpater():ListAdapter<TopicsDomain,TopicsRecyclerAdpater.Top
             return oldItem == newItem
         }
 
+    }
+
+    class TopicClicked(val OnClick:(topicdomain:TopicsDomain)->Unit )
+    {
+        fun topicOnClick(topicdomain:TopicsDomain)
+        {
+            OnClick(topicdomain)
+        }
     }
 
 

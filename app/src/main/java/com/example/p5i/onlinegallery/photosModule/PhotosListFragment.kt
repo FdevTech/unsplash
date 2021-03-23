@@ -38,21 +38,52 @@ class PhotosListFragment : Fragment() {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)
         val navController=findNavController()
         val args=PhotosListFragmentArgs.fromBundle(requireArguments())
-
-        Log.d(TAG, "onCreateView: collection ${args.collections}")
-        Log.d(TAG, "onCreateView: topic ${args.topics}")
-
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
-          val activity = requireNotNull(this.activity)
-          photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
-          photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
+        val activity = requireNotNull(this.activity)
+
+
+
+        Log.d(TAG, "onCreateView: collection ${args.collections}")
+
+        if(args.topics!=null || args.collections!=-1)
+        {
+            Log.d(TAG, "onCreateView: hello")
+            if(args.topics!=null)
+            {
+                //todo logic for topics
+                Log.d(TAG, "onCreateView: topic ${args.topics}")
+                photoViewModelFactory= PhotViewModelFactory(activity.application,credential,topics = args.topics)
+                photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
+
+                photosViewModel.topicsPhotosRetrived.observe(viewLifecycleOwner, Observer {
+
+                    photoViewModelAdapter.submitList(it)
+
+                })
+            }
+            else
+            {
+                //todo logic for collection
+            }
+        }
+        else
+        {
+            Log.d(TAG, "onCreateView: fuck")
+            photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
+            photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
+            photosViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
+
+                photoViewModelAdapter.submitList(it)
+            })
+        }
+
+
+
 
           photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {data, position ->
               val extras= FragmentNavigatorExtras()
              Toast.makeText(this.context,"${data.id}",Toast.LENGTH_SHORT).show()
-              Log.d(TAG, "onCreateView: ${data.id},")
-              Log.d(TAG, "onCreateView: position  $position")
               navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position))
           })
 
@@ -63,10 +94,7 @@ class PhotosListFragment : Fragment() {
             layoutManager=LinearLayoutManager(context)
             adapter=photoViewModelAdapter
         }
-        photosViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
 
-            photoViewModelAdapter.submitList(it)
-        })
 
         return fragmentPhotosListBinding.root
     }

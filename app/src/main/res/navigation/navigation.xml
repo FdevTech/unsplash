@@ -16,7 +16,7 @@
         <argument
             android:name="topics"
             app:argType="string"
-            android:defaultValue="Null" />
+            app:nullable="true" />
         <argument
             android:name="collections"
             app:argType="integer"

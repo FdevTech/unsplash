@@ -15,6 +15,13 @@ interface Photos {
     @GET("photos/")
     suspend fun getPhoto(@Header("Authorization")autorization:String):PhotoPOJ
 
+
+    @GET("topics/{topicName}/photos")
+    suspend fun getPhotoFromTopic(@Header("Authorization")autorization:String,@Path("topicName")topicName:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=30):Response<List<PhotoPOJ>>
+
+    @GET("/collections/{collectionID}/photos")
+    suspend fun getPhotosFromCollection(@Header("Authorization")authorization:String,@Path("collectionID")collectionID:String):List<PhotoPOJ>
+
     @POST("photos/Z1TG5G3TArs/like")
     suspend fun likePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.p5i.onlinegallery.R
@@ -44,11 +45,15 @@ class TopicFragment : Fragment() {
 
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
+        val topicFragmentNavController=findNavController()
 
         topicViewModelFactory= TopicsViewModelFactory(acttiviy.application,credential)
         topicViewModel=ViewModelProvider(this,topicViewModelFactory).get(TopicsViewModel::class.java)
 
-        topicViewModelAdapter= TopicsRecyclerAdpater()
+        topicViewModelAdapter= TopicsRecyclerAdpater(TopicsRecyclerAdpater.TopicClicked {
+            Log.d(TAG, "onCreateView: ${it.title}")
+            topicFragmentNavController.navigate(TopicFragmentDirections.actionTopicFragmentToPhotosListFragment(it.title))
+        })
         topicViewModel.topics.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: ${it.size}")
             topicViewModelAdapter.submitList(it)

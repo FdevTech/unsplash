@@ -14,14 +14,31 @@ import java.io.IOException
 
 private const val TAG = "photoViewModel"
 private lateinit var credential:String
-class PhotosViewModel(application: Application, val credential:String) :ViewModel()
+class PhotosViewModel(application: Application, val credential:String,val topics:String?=null,val collectionId:String?=null) :ViewModel()
 {
     val photoRepository= PhotoRepository(getDatabse(application),credential)
     val photosRetrived=photoRepository.photos
+    val topicsPhotosRetrived=photoRepository.photosTopic
     init {
         Log.d(TAG, "ViewModel init: $credential")
         Log.d(TAG, "photosRetrived size:${photosRetrived.value?.size} ")
-        refrechFromRepository()
+        if(topics==null && collectionId==null)
+        {
+            refrechFromRepository()
+        }
+        else
+        {
+            if(topics!=null)
+            {
+                Log.d(TAG, "$topics ")
+                retrivePhotoFromTopics(topics)
+            }
+            else
+            {
+                //todo logic for collection
+            }
+        }
+
     }
 
 
@@ -35,6 +52,18 @@ class PhotosViewModel(application: Application, val credential:String) :ViewMode
             }catch (network:IOException)
             {
                 Log.d(TAG, "refrechFromRepository: ${network.message}")
+            }
+        }
+    }
+    private fun retrivePhotoFromTopics(topicName:String)
+    {
+        Log.d(TAG, "retrivePhotoFromTopics: ")
+        viewModelScope.launch {
+            try {
+                photoRepository.retrivePhotoFromTopics(topicName)
+            }catch (network:IOException)
+            {
+                Log.d(TAG, "retrivePhotoFromTopics: ${network.message}")
             }
         }
     }

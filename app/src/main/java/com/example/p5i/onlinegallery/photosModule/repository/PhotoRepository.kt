@@ -5,8 +5,10 @@ import androidx.lifecycle.Transformations
 import com.example.p5i.onlinegallery.collectionsModule.datlayer.network.CollectionAPI
 import com.example.p5i.onlinegallery.databse.UnsplashDatabase
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.Photos
+import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDatabasePhotTopicoModel
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDatabasePhotoModel
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDomainModel
+import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDomainModelFromTopicPhoto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -16,6 +18,9 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
 {
     val photos=Transformations.map(unsplashDatabase.photosDao.getAllPhotos(),{
         it.asDomainModel()
+    })
+    val photosTopic=Transformations.map(unsplashDatabase.photosDao.getAllPhotosFromTopic(),{
+        it.asDomainModelFromTopicPhoto()
     })
 
     suspend fun referchPhotos()
@@ -42,6 +47,39 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                     }
                     i++
                     Log.d(TAG, "referchPhotos: $i")
+                }
+            }
+
+
+        }
+    }
+    suspend fun retrivePhotoFromTopics(topicName:String)
+    {
+        Log.d(TAG, "retrivePhotoFromTopics: ")
+
+        var i:Int=1
+        withContext(Dispatchers.IO)
+        {
+            unsplashDatabase.photosDao.clearPhotosTopics()
+            var photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName).body()
+            val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
+            Log.d(TAG, "retrivePhotoFromTopics: xtotal: $xtotal")
+            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            Log.d(TAG, "retrivePhotoFromTopics: $pages")
+            if(photosList!=null)
+            {
+                while(i.compareTo(pages!!)<=0)
+                {
+                    try {
+                        photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,page = i,topicName = topicName).body()
+                        //Log.d(TAG, "referchPhotos: ${photosList?.size}")
+                        unsplashDatabase.photosDao.inserOrUpdatePhotosTopics(photosList?.asDatabasePhotTopicoModel()!!)
+                    }catch (exception:Exception)
+                    {
+                        Log.d(TAG, "retrivePhotoFromTopics: ${exception.message}")
+                    }
+                    i++
+                    Log.d(TAG, "retrivePhotoFromTopics: $i")
                 }
             }
 
