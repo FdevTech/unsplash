@@ -65,4 +65,29 @@ class TopicsRepository (val unsplashDatabase: UnsplashDatabase,val credentials:S
 
         }
     }
+
+
+    suspend fun refrechTopicsTotest()
+    {
+
+        Log.d(TAG, "refrechTopics: ${unsplashDatabase.topicsDAO.gettopics().value?.size}")
+        withContext(Dispatchers.IO)
+        {
+            var topicsList=TopicsAPI.topics.getTopics(credentials).body()
+            val xtotal= TopicsAPI.topics.getTopics(credentials).headers().get("X-Total")
+            Log.d(TAG, "refrechTopics: $xtotal")
+            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            Log.d(TAG, "refrechTopics: $pages")
+            try {
+                topicsList=TopicsAPI.topics.getTopics(credentials).body()
+                Log.d(TAG, "refrechTopics: ${topicsList?.size} ")
+                unsplashDatabase.topicsDAO.insertOrUpdate(topicsList?.asTopicsEntity()!!)
+            }catch (error:Exception)
+            {
+                Log.d(TAG, "refrechTopics: ${error.message}")
+            }
+
+
+        }
+    }
 }

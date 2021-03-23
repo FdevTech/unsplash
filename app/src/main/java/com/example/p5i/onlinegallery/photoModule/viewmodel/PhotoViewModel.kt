@@ -25,7 +25,8 @@ class PhotoViewModel(val application: Application, val credential:String):ViewMo
         Log.d(TAG, "refrechFromRepository: ")
         viewModelScope.launch {
             try {
-                photoRepository.referchPhotos()
+               // photoRepository.referchPhotos()
+                photoRepository.referchPhotosToTest()
             }catch (network: IOException)
             {
                 Log.d(TAG, "refrechFromRepository: ${network.message}")

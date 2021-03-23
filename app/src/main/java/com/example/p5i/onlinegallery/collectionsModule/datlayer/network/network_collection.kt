@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface Collections{
 
     @GET("collections?page=1&per_page=30")
-    suspend fun getCollection(@Header("Authorization") authorization:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=30): Response<List<CollectionPOJ>>
+    suspend fun getCollection(@Header("Authorization") authorization:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=10): Response<List<CollectionPOJ>>
 
 
     @POST("collections/?title=jack&description=it is just a test for a fucking collection&private=true")

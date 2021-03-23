@@ -23,7 +23,8 @@ class CollectionViewModel (application: Application, val credential:String):View
     {
         viewModelScope.launch {
             try {
-                collectionRespository.refrechCollections()
+               // collectionRespository.refrechCollections()
+                collectionRespository.refrechCollectionToTest()
             }catch (error:IOException)
             {
                 Log.d(TAG, "refrechCollectionFromRepository: ${error.message}")

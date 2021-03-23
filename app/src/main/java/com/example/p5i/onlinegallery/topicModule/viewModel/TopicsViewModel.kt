@@ -25,7 +25,8 @@ class TopicsViewModel(val application: Application, val credentials:String):View
     {
         viewModelScope.launch {
             try {
-                topicsRepository.refrechTopics()
+                //topicsRepository.refrechTopics()
+                topicsRepository.refrechTopicsTotest()
             }
             catch (excpetion:IOException)
             {

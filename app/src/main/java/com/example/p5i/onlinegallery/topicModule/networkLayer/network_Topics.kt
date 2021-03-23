@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface network_Topics{
 
     @GET("topics")
-    suspend fun getTopics (@Header("Authorization")autorization:String, @Query("page")page:Int=1, @Query("per_page")per_page:Int=30):Response<List<TopicsPOJ>>
+    suspend fun getTopics (@Header("Authorization")autorization:String, @Query("page")page:Int=1, @Query("per_page")per_page:Int=10):Response<List<TopicsPOJ>>
 
     @GET("topics/wallpapers/photos")
     suspend fun getPhotosFromTopics(@Header("Authorization")autorization:String):List<PhotoPOJ>

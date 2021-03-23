@@ -53,9 +53,34 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
 
         }
     }
+    suspend fun referchPhotosToTest()
+    {
+        Log.d(TAG, "referchPhotosToTest: ")
+        var i:Int=1
+        withContext(Dispatchers.IO)
+        {
+            var photosList= Photos.PhotosAPI.photos.getPhotos(credentials).body()
+            val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
+            Log.d(TAG, "referchPhotosToTest: xtotal: $xtotal")
+            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            if(photosList!=null)
+            {
+                try {
+                    photosList= Photos.PhotosAPI.photos.getPhotos(credentials).body()
+                    //Log.d(TAG, "referchPhotos: ${photosList?.size}")
+                    unsplashDatabase.photosDao.inserOrUpdatePhotos(photosList?.asDatabasePhotoModel()!!)
+                }catch (exception:Exception)
+                {
+                    Log.d(TAG, "referchPhotosToTest: ${exception.message}")
+                }
+            }
+
+
+        }
+    }
     suspend fun retrivePhotoFromTopicsToTest(topicName:String)
     {
-        Log.d(TAG, "retrivePhotoFromTopics: ")
+        Log.d(TAG, "retrivePhotoFromTopicsToTest: $topicName")
 
         var i:Int=1
         withContext(Dispatchers.IO)
@@ -63,16 +88,14 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             unsplashDatabase.photosDao.clearPhotosTopics()
             var photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName).body()
             val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
-            Log.d(TAG, "retrivePhotoFromTopics: xtotal: $xtotal")
-            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
-            Log.d(TAG, "retrivePhotoFromTopics: $pages")
+            Log.d(TAG, "retrivePhotoFromTopicsToTest: xtotal: $xtotal")
             try {
                 photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName).body()
-                //Log.d(TAG, "referchPhotos: ${photosList?.size}")
+                Log.d(TAG, "retrivePhotoFromTopicsToTest size: ${photosList?.size}")
                 unsplashDatabase.photosDao.inserOrUpdatePhotosTopics(photosList?.asDatabasePhotTopicoModel()!!)
             }catch (exception:Exception)
             {
-                Log.d(TAG, "retrivePhotoFromTopics: ${exception.message}")
+                Log.d(TAG, "retrivePhotoFromTopicsToTest: ${exception.message}")
             }
 
         }

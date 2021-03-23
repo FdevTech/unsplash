@@ -51,4 +51,32 @@ class CollectionRepository (private val unsplashDatabase: UnsplashDatabase, priv
              }
          }
      }
+    suspend fun refrechCollectionToTest()
+    {
+
+        var i:Int=1
+        withContext(Dispatchers.IO)
+        {
+            var collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
+            val xtotal= CollectionAPI.retrofitService.getCollection(credentials).headers().get("X-Total")
+            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            Log.d(TAG, "refrechCollections error: ${CollectionAPI.retrofitService.getCollection(credentials).code()}")
+            Log.d(TAG, "refrechCollections perpage: ${collectionList?.size}")
+            Log.d(TAG, "refrechCollections total: $xtotal")
+            Log.d(TAG, "refrechCollections total page: $pages")
+            if(collectionList!=null)
+            {
+                try {
+                    collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
+                    unsplashDatabase.collectionDao.insertOrUpdateCollection(collectionList?.asCollectionEntity()!!)
+                }catch (error:Exception)
+                {
+                    Log.d(TAG, "refrechCollections: ${error.message}")
+                }
+
+
+
+            }
+        }
+    }
 }
