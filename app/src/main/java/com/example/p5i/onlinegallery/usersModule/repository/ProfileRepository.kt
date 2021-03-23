@@ -26,6 +26,7 @@ class ProfileRepository (val unsplashDatabase: UnsplashDatabase,val credential:S
             try {
                 val data=network_Profile.ProfileAPI.profile.getMyProfile(credential)
                 unsplashDatabase.profileDAO.insertOrUpdate(data.asProfileEntity())
+                Log.d(TAG, "refrechProfileData: $data")
             }catch (error:Exception)
             {
                 Log.d(TAG, "refrechProfileData: ${error.message}")

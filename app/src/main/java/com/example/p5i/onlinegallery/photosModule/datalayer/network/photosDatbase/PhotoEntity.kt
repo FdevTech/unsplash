@@ -25,8 +25,41 @@ data class PhotoEntity(
     val liked_by_user:Boolean?,
     val likes:Int)
 
+@Entity(tableName = "photos_collection_table")
+data class PhotoEntityCollection(
+    @PrimaryKey
+    val phot_id:String,
+    var created_at:String?,
+    var width:Int?,
+    var height:Int?,
+    var color:String?,
+    var blur_hash:String?,
+    var description:String?,
+    var photo_regular:String?,
+    var photo_small:String?,
+    var photo_thumb:String?,
+    var views:Int?,
+    var download: Int?,
+    val liked_by_user:Boolean?,
+    val likes:Int)
 
-
+@Entity(tableName = "photos_topics_table")
+data class PhotoEntityTopics(
+    @PrimaryKey
+    val phot_id:String,
+    var created_at:String?,
+    var width:Int?,
+    var height:Int?,
+    var color:String?,
+    var blur_hash:String?,
+    var description:String?,
+    var photo_regular:String?,
+    var photo_small:String?,
+    var photo_thumb:String?,
+    var views:Int?,
+    var download: Int?,
+    val liked_by_user:Boolean?,
+    val likes:Int)
 
 fun List<PhotoEntity>.asDomainModel():List<PhotoDomain>{
 
