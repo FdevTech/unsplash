@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.p5i.onlinegallery.collectionsModule.datlayer.domainedata.CollectionDomain
 import com.example.p5i.onlinegallery.databinding.CollectionListRowBinding
-import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
 
-class CollectionViewModelAdapter ():ListAdapter<CollectionDomain, CollectionViewModelAdapter.CollectionViewHolder>(CollectionDiffUtil())
+class CollectionViewModelAdapter (val collectionClick:CollectionClicked):ListAdapter<CollectionDomain, CollectionViewModelAdapter.CollectionViewHolder>(CollectionDiffUtil())
 {
 
 
@@ -19,7 +18,7 @@ class CollectionViewModelAdapter ():ListAdapter<CollectionDomain, CollectionView
 
     override fun onBindViewHolder(holder: CollectionViewHolder, position: Int) {
         val data=getItem(position)
-        holder.bind(data)
+        holder.bind(data,collectionClick)
     }
 
 
@@ -34,9 +33,13 @@ class CollectionViewModelAdapter ():ListAdapter<CollectionDomain, CollectionView
             }
         }
 
-        fun bind(collectionDomain: CollectionDomain)
+        fun bind(
+            collectionDomain: CollectionDomain,
+            collectionClick: CollectionClicked
+        )
         {
             binding.collectiondomain=collectionDomain
+            binding.collectionClick=collectionClick
         }
     }
 
@@ -44,7 +47,13 @@ class CollectionViewModelAdapter ():ListAdapter<CollectionDomain, CollectionView
 }
 
 
-
+class CollectionClicked(val click:(data:CollectionDomain)->Unit)
+{
+    fun onCollectionClicked(data:CollectionDomain)
+    {
+        click(data)
+    }
+}
 
 
 

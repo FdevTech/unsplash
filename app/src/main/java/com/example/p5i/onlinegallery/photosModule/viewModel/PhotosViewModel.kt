@@ -4,11 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
-import com.example.p5i.onlinegallery.databse.UnsplashDatabase
 import com.example.p5i.onlinegallery.databse.getDatabse
 import com.example.p5i.onlinegallery.photosModule.repository.PhotoRepository
-import com.example.p5i.onlinegallery.topicModule.networkLayer.TopicsAPI
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -19,6 +16,7 @@ class PhotosViewModel(application: Application, val credential:String,val topics
     val photoRepository= PhotoRepository(getDatabse(application),credential)
     val photosRetrived=photoRepository.photos
     val topicsPhotosRetrived=photoRepository.photosTopic
+    val collectionPhotosRetrived=photoRepository.photosCollection
     init {
         Log.d(TAG, "ViewModel init: $credential")
         Log.d(TAG, "photosRetrived size:${photosRetrived.value?.size} ")
@@ -33,9 +31,9 @@ class PhotosViewModel(application: Application, val credential:String,val topics
                 Log.d(TAG, "$topics ")
                 retrivePhotoFromTopics(topics)
             }
-            else
+            else if(collectionId!=null)
             {
-                //todo logic for collection
+                retrivePhotoFromCollection(collectionId)
             }
         }
 
@@ -60,10 +58,22 @@ class PhotosViewModel(application: Application, val credential:String,val topics
         Log.d(TAG, "retrivePhotoFromTopics: ")
         viewModelScope.launch {
             try {
-                photoRepository.retrivePhotoFromTopics(topicName)
+                photoRepository.retrivePhotoFromTopicsToTest(topicName)
             }catch (network:IOException)
             {
                 Log.d(TAG, "retrivePhotoFromTopics: ${network.message}")
+            }
+        }
+    }
+    private fun retrivePhotoFromCollection(collectionID:String)
+    {
+        Log.d(TAG, "retrivePhotoFromCollection: ")
+        viewModelScope.launch {
+            try {
+                photoRepository.retrivePhotoFromCollectionToTest(collectionID)
+            }catch (network:IOException)
+            {
+                Log.d(TAG, "retrivePhotoFromCollection: ${network.message}")
             }
         }
     }

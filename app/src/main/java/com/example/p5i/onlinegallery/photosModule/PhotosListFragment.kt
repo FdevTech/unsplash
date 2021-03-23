@@ -44,9 +44,9 @@ class PhotosListFragment : Fragment() {
 
 
 
-        Log.d(TAG, "onCreateView: collection ${args.collections}")
+        Log.d(TAG, "onCreateView: collection ${args.collectionId}")
 
-        if(args.topics!=null || args.collections!=-1)
+        if(args.topics!=null || args.collectionId!=null)
         {
             Log.d(TAG, "onCreateView: hello")
             if(args.topics!=null)
@@ -64,7 +64,15 @@ class PhotosListFragment : Fragment() {
             }
             else
             {
-                //todo logic for collection
+                photoViewModelFactory= PhotViewModelFactory(activity.application,credential,collectionId = args.collectionId)
+                Log.d(TAG, "onCreateView: ${args.collectionId}")
+                photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
+
+                photosViewModel.collectionPhotosRetrived.observe(viewLifecycleOwner, Observer {
+
+                    photoViewModelAdapter.submitList(it)
+
+                })
             }
         }
         else

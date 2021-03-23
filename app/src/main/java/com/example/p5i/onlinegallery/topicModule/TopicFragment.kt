@@ -52,7 +52,7 @@ class TopicFragment : Fragment() {
 
         topicViewModelAdapter= TopicsRecyclerAdpater(TopicsRecyclerAdpater.TopicClicked {
             Log.d(TAG, "onCreateView: ${it.title}")
-            topicFragmentNavController.navigate(TopicFragmentDirections.actionTopicFragmentToPhotosListFragment(it.title))
+            topicFragmentNavController.navigate(TopicFragmentDirections.actionTopicFragmentToPhotosListFragment(it.title,null))
         })
         topicViewModel.topics.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: ${it.size}")

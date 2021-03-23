@@ -139,3 +139,43 @@ fun List<PhotoEntityTopics>.asDomainModelFromTopicPhoto():List<PhotoDomain>{
         )
     }
 }
+
+fun List<PhotoPOJ>.asDatabasePhotCollectionModel():List<PhotoEntityCollection>{
+
+    return this.map {
+        PhotoEntityCollection(
+            phot_id = it.id,
+            created_at = it.created_at,
+            width = it.width,
+            height = it.height,
+            color = it.color,
+            blur_hash = it.blur_hash,
+            description = "${it.description} ${it.alt_description}",
+            photo_regular = it.urls.regular,
+            photo_small = it.urls.small,
+            photo_thumb = it.urls.thumb,
+            views = it.views,
+            download = it.download,
+            liked_by_user = it.liked_by_user,
+            likes = it.likes
+
+        )
+    }
+}
+fun List<PhotoEntityCollection>.asDomainModelFromCollectionPhoto():List<PhotoDomain>{
+
+    return this.map {
+        PhotoDomain(
+            blur_hash = it.blur_hash,
+            photo_regular =it.photo_regular,
+            photo_small = it.photo_small,
+            photo_thumb = it.photo_thumb,
+            download = it.download,
+            views = it.views,
+            id = it.phot_id,
+            liked_by_user = it.liked_by_user,
+            likes = it.likes
+        )
+    }
+}
+

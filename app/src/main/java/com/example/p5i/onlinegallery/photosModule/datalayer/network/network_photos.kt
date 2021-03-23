@@ -5,6 +5,7 @@ import com.example.p5i.onlinegallery.Util.POJs.PhotoPOJ
 import com.example.p5i.onlinegallery.Util.retrofit
 import retrofit2.Response
 import retrofit2.http.*
+import java.util.*
 
 
 interface Photos {
@@ -20,7 +21,7 @@ interface Photos {
     suspend fun getPhotoFromTopic(@Header("Authorization")autorization:String,@Path("topicName")topicName:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=30):Response<List<PhotoPOJ>>
 
     @GET("/collections/{collectionID}/photos")
-    suspend fun getPhotosFromCollection(@Header("Authorization")authorization:String,@Path("collectionID")collectionID:String):List<PhotoPOJ>
+    suspend fun getPhotosFromCollection(@Header("Authorization")authorization:String,@Path("collectionID")collectionID:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=30):Response<List<PhotoPOJ>>
 
     @POST("photos/Z1TG5G3TArs/like")
     suspend fun likePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ

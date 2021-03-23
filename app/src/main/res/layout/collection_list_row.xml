@@ -7,6 +7,9 @@
        <variable
            name="collectiondomain"
            type="com.example.p5i.onlinegallery.collectionsModule.datlayer.domainedata.CollectionDomain" />
+        <variable
+            name="collectionClick"
+            type="com.example.p5i.onlinegallery.collectionsModule.ui.CollectionClicked" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -14,7 +17,9 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:onClick="@{()->collectionClick.onCollectionClicked(collectiondomain)}"
+        >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

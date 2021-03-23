@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var creatingCollectionContainer:FragmentContainerView
     lateinit var content:ViewGroup
     lateinit var loginCredential: LoginStateModel
-    val bundle = bundleOf("topics" to null,"collections" to -1)
+    val bundle = bundleOf("topics" to null,"collectionId" to null)
     override fun onCreate(savedInstanceState: Bundle?) {
         with(window) {
             requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
