@@ -54,5 +54,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <argument
+            android:name="whichTropic"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

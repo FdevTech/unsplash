@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class PhotoViewModelFactory(val application: Application, val credential:String):ViewModelProvider.Factory
+class PhotoViewModelFactory(val application: Application, val credential:String,val from:String?):ViewModelProvider.Factory
 {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(PhotoViewModel::class.java))
         {
-            return PhotoViewModel(application,credential) as T
+            return PhotoViewModel(application,credential,from) as T
         }
         throw IllegalArgumentException("unknow viewmodel instance")
     }

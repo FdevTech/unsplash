@@ -24,6 +24,7 @@ import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
 import kotlin.math.log
 
 private const val TAG = "PhotosListFragment"
+private const val TAG_trans="transitonName"
 class PhotosListFragment : Fragment() {
 
      lateinit var fragmentPhotosListBinding: FragmentPhotosListBinding
@@ -32,7 +33,7 @@ class PhotosListFragment : Fragment() {
      private lateinit var loginCredential: LoginStateModel
      private lateinit var credential:String
      private lateinit var photoViewModelAdapter: PhotoViewModelAdapter
-
+     private  var from:String?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)
@@ -52,6 +53,7 @@ class PhotosListFragment : Fragment() {
             if(args.topics!=null)
             {
                 //todo logic for topics
+                from="topics"
                 Log.d(TAG, "onCreateView: topic ${args.topics}")
                 photoViewModelFactory= PhotViewModelFactory(activity.application,credential,topics = args.topics)
                 photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
@@ -64,6 +66,7 @@ class PhotosListFragment : Fragment() {
             }
             else
             {
+                from="collection"
                 photoViewModelFactory= PhotViewModelFactory(activity.application,credential,collectionId = args.collectionId)
                 Log.d(TAG, "onCreateView: ${args.collectionId}")
                 photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
@@ -89,10 +92,11 @@ class PhotosListFragment : Fragment() {
 
 
 
-          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {data, position ->
-              val extras= FragmentNavigatorExtras()
+          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {data, position,from ->
              Toast.makeText(this.context,"${data.id}",Toast.LENGTH_SHORT).show()
-              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position))
+              Log.d(TAG_trans, "onCreateView -> transitionname: ${data.id}")
+             //navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from),extras)
+              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
           })
 
 

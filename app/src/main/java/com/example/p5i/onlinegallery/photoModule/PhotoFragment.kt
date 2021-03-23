@@ -1,5 +1,6 @@
 package com.example.p5i.onlinegallery.photoModule
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.example.p5i.onlinegallery.photoModule.ui.PhotoViewAdapter
 import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModel
 import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
+import com.google.android.material.transition.MaterialContainerTransform
 
 
 private const val TAG = "PhotoFragment"
@@ -33,6 +35,7 @@ class PhotoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,7 +47,7 @@ class PhotoFragment : Fragment() {
 
         fragmentPhotoBinding= FragmentPhotoBinding.inflate(inflater,container,false)
 
-        photoViewModelFactory= PhotoViewModelFactory(activity.application,credential)
+        photoViewModelFactory= PhotoViewModelFactory(activity.application,credential,args.whichTropic)
         photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
 
         photoViewAdapter=PhotoViewAdapter()
