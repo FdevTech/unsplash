@@ -17,7 +17,7 @@ interface Photos {
     suspend fun getPhoto(@Header("Authorization")autorization:String):PhotoPOJ
 
 
-    @GET("topics/{topicName}/photos")
+    @GET("/topics/{topicName}/photos")
     suspend fun getPhotoFromTopic(@Header("Authorization")autorization:String,@Path("topicName")topicName:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=10):Response<List<PhotoPOJ>>
 
     @GET("/collections/{collectionID}/photos")

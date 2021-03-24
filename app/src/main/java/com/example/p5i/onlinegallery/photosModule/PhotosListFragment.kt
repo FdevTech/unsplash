@@ -33,6 +33,7 @@ class PhotosListFragment : Fragment() {
      private lateinit var credential:String
      private lateinit var photoViewModelAdapter: PhotoViewModelAdapter
      private  var from:String?=null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)

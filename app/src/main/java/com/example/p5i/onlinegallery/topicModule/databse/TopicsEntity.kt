@@ -20,7 +20,9 @@ data class TopicsEntity(
     val cover_photo_blur_hash:String?,
     val cover_photo_regular:String?,
     val cover_photo_small:String?,
-    val cover_photo_thumb:String?
+    val cover_photo_thumb:String?,
+    val slug:String?
+
 
 )
 
@@ -40,7 +42,9 @@ fun List<TopicsPOJ>.asTopicsEntity():List<TopicsEntity>
             cover_photo_blur_hash = it.cover_photo.blur_hash,
             cover_photo_regular = it.cover_photo.urls.regular,
             cover_photo_small = it.cover_photo.urls.small,
-            cover_photo_thumb = it.cover_photo.urls.thumb
+            cover_photo_thumb = it.cover_photo.urls.thumb,
+            slug = it.slug
+
         )
     }
 }
@@ -58,7 +62,8 @@ fun List<TopicsEntity>.astopicsDomain():List<TopicsDomain>
             cover_photo_blur_hash = it.cover_photo_blur_hash,
             cover_photo_regular = it.cover_photo_regular,
             cover_photo_thumb = it.cover_photo_thumb,
-            cover_photo_small = it.cover_photo_small
+            cover_photo_small = it.cover_photo_small,
+            slug = it.slug
         )
     }
 }

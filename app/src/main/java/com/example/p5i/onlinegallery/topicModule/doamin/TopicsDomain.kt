@@ -9,5 +9,6 @@ data class TopicsDomain(val id: String?,
                         val cover_photo_blur_hash:String?,
                         val cover_photo_regular:String?,
                         val cover_photo_small:String?,
-                        val cover_photo_thumb:String?
+                        val cover_photo_thumb:String?,
+                        val slug:String?
     )

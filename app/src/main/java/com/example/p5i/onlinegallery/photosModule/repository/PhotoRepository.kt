@@ -86,11 +86,15 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         withContext(Dispatchers.IO)
         {
             unsplashDatabase.photosDao.clearPhotosTopics()
-            var photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName).body()
+            val response=Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName)
+            var photosList= response.body()
             val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
             Log.d(TAG, "retrivePhotoFromTopicsToTest: xtotal: $xtotal")
+            Log.d(TAG, "retrivePhotoFromTopicsToTest: body ${response.body()?.size}")
+            Log.d(TAG, "retrivePhotoFromTopicsToTest: response errorBody ${response.errorBody()}")
+            Log.d(TAG, "retrivePhotoFromTopicsToTest: response code ${response.code()}")
             try {
-                photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName).body()
+                //photosList= Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName).body()
                 Log.d(TAG, "retrivePhotoFromTopicsToTest size: ${photosList?.size}")
                 unsplashDatabase.photosDao.inserOrUpdatePhotosTopics(photosList?.asDatabasePhotTopicoModel()!!)
             }catch (exception:Exception)
