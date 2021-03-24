@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         with(window) {
             requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-             enterTransition= Explode()
+            enterTransition= Explode()
             exitTransition = Explode()
         }
         super.onCreate(savedInstanceState)
