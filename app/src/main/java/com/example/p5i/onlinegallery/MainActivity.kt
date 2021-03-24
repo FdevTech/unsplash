@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var creatingCollectionContainer:FragmentContainerView
     lateinit var content:ViewGroup
     lateinit var loginCredential: LoginStateModel
-    val bundle = bundleOf("topics" to null,"collectionId" to null)
+   // val bundle = bundleOf("topics" to null,"collectionId" to null)
     override fun onCreate(savedInstanceState: Bundle?) {
         with(window) {
             requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHost=supportFragmentManager.findFragmentById(R.id.creatingCollectionContainer) as NavHostFragment
         val contoller=navHost.navController
-        contoller.setGraph(R.navigation.navigation,bundle)
+        contoller.setGraph(R.navigation.navigation)
         val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationMenu.setupWithNavController(contoller)
 

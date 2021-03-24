@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/photosListFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/photosListFragment"
@@ -58,5 +58,13 @@
             android:name="whichTropic"
             app:argType="string"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.p5i.onlinegallery.collectionsModule.homeFragment.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
     </fragment>
 </navigation>
