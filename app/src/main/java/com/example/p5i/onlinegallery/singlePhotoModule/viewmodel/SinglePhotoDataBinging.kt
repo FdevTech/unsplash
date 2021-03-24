@@ -1,18 +1,15 @@
-package com.example.p5i.onlinegallery.photoModule.viewmodel
+package com.example.p5i.onlinegallery.singlePhotoModule.viewmodel
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.example.p5i.onlinegallery.collectionsModule.viewModel.getSecpond
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
-import xyz.belvi.blurhash.BlurHash
-import xyz.belvi.blurhash.blurPlaceHolder
 
 @BindingAdapter("image")
 fun ImageView.setImage(photo: PhotoDomain)
 {
     //todo fix the problem of memory
-    val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
+    /*val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
     photo.blur_hash?.let {
         Glide.with(context)
             .load(photo.photo_regular)
@@ -20,8 +17,8 @@ fun ImageView.setImage(photo: PhotoDomain)
             { requestBuilder ->
                 requestBuilder.into(this)
             }
-    }
-   /* Glide.with(this.context)
+    }*/
+    Glide.with(this.context)
         .load(photo.photo_regular)
-        .into(this)*/
+        .into(this)
 }

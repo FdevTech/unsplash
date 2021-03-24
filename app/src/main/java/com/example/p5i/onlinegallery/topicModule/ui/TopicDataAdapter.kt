@@ -12,10 +12,10 @@ import xyz.belvi.blurhash.blurPlaceHolder
 @BindingAdapter("coverTopic")
 fun ImageView.setTopicCover(data:TopicsDomain)
 {
-  /*  Glide.with(context)
+    Glide.with(context)
         .load(data.cover_photo_regular)
-        .into(this)*/
-    val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
+        .into(this)
+  /*  val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
     data.cover_photo_blur_hash?.let {
         Glide.with(context)
             .load(data.cover_photo_regular)
@@ -23,7 +23,7 @@ fun ImageView.setTopicCover(data:TopicsDomain)
             { requestBuilder ->
                 requestBuilder.into(this)
             }
-    }
+    }*/
 }
 
 @BindingAdapter("titleTopics")

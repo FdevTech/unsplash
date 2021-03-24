@@ -1,18 +1,13 @@
-package com.example.p5i.onlinegallery.photoModule.viewmodel
+package com.example.p5i.onlinegallery.singlePhotoModule.viewmodel
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.p5i.onlinegallery.databse.getDatabse
-import com.example.p5i.onlinegallery.photoModule.repository.SinglePhotoRepository
+import com.example.p5i.onlinegallery.singlePhotoModule.repository.SinglePhotoRepository
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
-import com.example.p5i.onlinegallery.photosModule.repository.PhotoRepository
-
-import kotlinx.coroutines.launch
-import java.io.IOException
 
 private const val TAG = "PhotoViewModel"
 class PhotoViewModel(val application: Application, val credential:String,from:String?):ViewModel()
@@ -45,7 +40,7 @@ class PhotoViewModel(val application: Application, val credential:String,from:St
         }
         else
         {
-            _photosRetrived=singlePhotoRepository.photosTopic as MutableLiveData<List<PhotoDomain>>
+            _photosRetrived=singlePhotoRepository.photosCollection as MutableLiveData<List<PhotoDomain>>
             Log.d(TAG, "photosRetrived from: $from size:${photosRetrived.value?.size} ")
         }
 

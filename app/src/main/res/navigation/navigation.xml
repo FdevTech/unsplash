@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/photoFragment"
-        android:name="com.example.p5i.onlinegallery.photoModule.PhotoFragment"
+        android:name="com.example.p5i.onlinegallery.singlePhotoModule.PhotoFragment"
         android:label="PhotoFragment" >
         <argument
             android:name="id"

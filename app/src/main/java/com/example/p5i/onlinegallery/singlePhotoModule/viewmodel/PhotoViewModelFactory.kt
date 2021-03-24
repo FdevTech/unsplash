@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.photoModule.viewmodel
+package com.example.p5i.onlinegallery.singlePhotoModule.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
