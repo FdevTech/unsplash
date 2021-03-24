@@ -24,7 +24,6 @@ import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
 import kotlin.math.log
 
 private const val TAG = "PhotosListFragment"
-private const val TAG_trans="transitonName"
 class PhotosListFragment : Fragment() {
 
      lateinit var fragmentPhotosListBinding: FragmentPhotosListBinding
@@ -80,6 +79,7 @@ class PhotosListFragment : Fragment() {
         }
         else
         {
+            from=null
             Log.d(TAG, "onCreateView: fuck")
             photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
             photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
@@ -92,10 +92,11 @@ class PhotosListFragment : Fragment() {
 
 
 
-          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {data, position,from ->
+          photoViewModelAdapter=PhotoViewModelAdapter(OnPhotoClickListner {data, position,onFak ->
              Toast.makeText(this.context,"${data.id}",Toast.LENGTH_SHORT).show()
-              Log.d(TAG_trans, "onCreateView -> transitionname: ${data.id}")
+              Log.d(TAG, "onCreateView -> transitionname: ${data.id} \n $from")
              //navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from),extras)
+
               navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
           })
 

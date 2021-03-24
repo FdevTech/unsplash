@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.p5i.onlinegallery.collectionsModule.datlayer.domainedata.CollectionDomain
-import com.example.p5i.onlinegallery.databinding.CollectionListRowBinding
+import com.example.p5i.onlinegallery.databinding.CollectionItemBinding
+
 
 class CollectionViewModelAdapter (val collectionClick:CollectionClicked):ListAdapter<CollectionDomain, CollectionViewModelAdapter.CollectionViewHolder>(CollectionDiffUtil())
 {
@@ -22,13 +23,14 @@ class CollectionViewModelAdapter (val collectionClick:CollectionClicked):ListAda
     }
 
 
-    class CollectionViewHolder(val binding:CollectionListRowBinding): RecyclerView.ViewHolder(binding.root)
+    class CollectionViewHolder(val binding:CollectionItemBinding): RecyclerView.ViewHolder(binding.root)
     {
         companion object{
 
             fun from(parent: ViewGroup):CollectionViewHolder{
                 val inflater=LayoutInflater.from(parent.context)
-                val binding=CollectionListRowBinding.inflate(inflater,parent,false)
+
+                val binding=CollectionItemBinding.inflate(inflater,parent,false)
                 return CollectionViewHolder(binding)
             }
         }
