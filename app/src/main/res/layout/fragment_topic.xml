@@ -10,34 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".topicModule.TopicFragment">
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmerTopic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <include
-                        android:id="@+id/include"
-                        layout="@layout/fragment_topic_placeholder" />
-
-                    <include
-                        android:id="@+id/include"
-                        layout="@layout/fragment_topic_placeholder" />
-
-                    <include
-                        android:id="@+id/include"
-                        layout="@layout/fragment_topic_placeholder" />
-
-                </LinearLayout>
-            </ScrollView>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/topicRecyclerView"

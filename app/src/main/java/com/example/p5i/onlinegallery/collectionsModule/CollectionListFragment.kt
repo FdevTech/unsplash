@@ -33,8 +33,6 @@ class CollectionListFragment : Fragment() {
         bindingColectionFragment= FragmentCollectionListBinding.inflate(inflater,container,false)
         val collectionControler=findNavController()
 
-        bindingColectionFragment.shimmerCollectionList.startShimmer()
-
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
         val activity= requireNotNull(this.activity)
@@ -52,19 +50,10 @@ class CollectionListFragment : Fragment() {
         }
 
         collectionViewModel.collections.observe(viewLifecycleOwner, Observer {
-            if(!it.isEmpty())
-            {
-                stopShimming()
-                collectionViewModelAdapter.submitList(it)
-            }
-
+            collectionViewModelAdapter.submitList(it)
         })
         return bindingColectionFragment.root
     }
-    fun stopShimming()
-    {
-        bindingColectionFragment.shimmerCollectionList.stopShimmer()
-        bindingColectionFragment.shimmerCollectionList.visibility=View.GONE
-    }
+
 
 }
