@@ -62,16 +62,22 @@
 
     <TextView
         android:id="@+id/aboutmeText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_navigation_rail"
         app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+        app:profileBio="@{profileDomain}"
         tools:text="something about me"
-        app:profileBio="@{profileDomain}"/>
+        android:paddingStart="8dp"/>
 
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_navigation_rail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"/>
 
 
 

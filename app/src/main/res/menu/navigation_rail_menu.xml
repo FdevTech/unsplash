@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item
+    android:id="@+id/like_navigation_rail"
+    android:title="likes"
+    android:icon="@drawable/ic_favorite"/>
+    <item
+        android:id="@+id/photos_navigation_rail"
+        android:title="likes"
+        android:icon="@drawable/ic_photo"/>
+    <item
+        android:id="@+id/photos_collection_rail"
+        android:title="likes"
+        android:icon="@drawable/ic_collection"/>
+</menu>
