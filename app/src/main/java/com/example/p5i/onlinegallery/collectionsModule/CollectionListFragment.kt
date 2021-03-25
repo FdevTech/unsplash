@@ -32,6 +32,7 @@ class CollectionListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bindingColectionFragment= FragmentCollectionListBinding.inflate(inflater,container,false)
         val collectionControler=findNavController()
+        bindingColectionFragment.shimmerCollection.startShimmer()
 
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
@@ -50,10 +51,19 @@ class CollectionListFragment : Fragment() {
         }
 
         collectionViewModel.collections.observe(viewLifecycleOwner, Observer {
-            collectionViewModelAdapter.submitList(it)
+            if(!it.isEmpty())
+            {
+                stopShimerInCollection()
+                collectionViewModelAdapter.submitList(it)
+            }
+            Log.d(TAG, "onCreateView: ${it.isEmpty()}")
         })
         return bindingColectionFragment.root
     }
 
-
+fun stopShimerInCollection()
+{
+    bindingColectionFragment.shimmerCollection.stopShimmer()
+    bindingColectionFragment.shimmerCollection.visibility=View.GONE
+}
 }

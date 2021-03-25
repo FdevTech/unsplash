@@ -11,11 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".collectionsModule.CollectionListFragment">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerCollection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical">
+                 <include layout="@layout/collection_item_placeholder"/>
+                 <include layout="@layout/collection_item_placeholder"/>
+                 <include layout="@layout/collection_item_placeholder"/>
+             </LinearLayout>
+            </ScrollView>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/collectionRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/collection_list_row" />
+            tools:listitem="@layout/collection_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
