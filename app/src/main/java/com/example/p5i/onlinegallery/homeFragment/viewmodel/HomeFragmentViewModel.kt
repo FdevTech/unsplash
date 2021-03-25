@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.collectionsModule.homeFragment.viewModel
+package com.example.p5i.onlinegallery.homeFragment.viewmodel
 
 import android.app.Application
 import android.util.Log
