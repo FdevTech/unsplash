@@ -60,7 +60,17 @@
             app:layout_constraintTop_toBottomOf="@+id/topicCover"
             app:descriptionTopics="@{topicDomain}"
             />
-
+        <View
+            android:id="@+id/clickableOverlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{()->onClickOnTopic.topicOnClick(topicDomain)}"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

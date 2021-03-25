@@ -1,11 +1,13 @@
 package com.example.p5i.onlinegallery.photosModule.repository
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Transformations
 import com.example.p5i.onlinegallery.collectionsModule.datlayer.network.CollectionAPI
 import com.example.p5i.onlinegallery.databse.UnsplashDatabase
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.Photos
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.*
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -72,6 +74,8 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                 }catch (exception:Exception)
                 {
                     Log.d(TAG, "referchPhotosToTest: ${exception.message}")
+
+
                 }
             }
 

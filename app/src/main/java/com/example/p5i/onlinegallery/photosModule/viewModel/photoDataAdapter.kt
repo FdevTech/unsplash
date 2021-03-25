@@ -1,5 +1,8 @@
 package com.example.p5i.onlinegallery.photosModule.viewModel
 
+import android.animation.ObjectAnimator
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -7,6 +10,28 @@ import com.bumptech.glide.Glide
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 import xyz.belvi.blurhash.BlurHash
 import xyz.belvi.blurhash.blurPlaceHolder
+
+private const val TAG = "photoDataAdapter"
+
+@BindingAdapter("placeHolder")
+fun View.placeHolder(data: PhotoDomain)
+{
+    val animator=ObjectAnimator.ofFloat(this,View.ALPHA,1f,0f).apply {
+        duration=1000
+        repeatMode=ObjectAnimator.REVERSE
+        repeatCount=ObjectAnimator.INFINITE
+
+    }
+    Log.d(TAG, "placeHolder: ${data.id}")
+    if(data==null)
+    {
+        animator.start()
+    }
+    else
+    {
+        animator.end()
+    }
+}
 
 
 @BindingAdapter("image")

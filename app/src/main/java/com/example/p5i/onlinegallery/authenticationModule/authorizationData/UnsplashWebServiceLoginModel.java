@@ -24,7 +24,7 @@ public class UnsplashWebServiceLoginModel
     private MutableLiveData<Boolean> isLogedIn;
     private LoginStateModel mLoginStateModel;
 
-    private String url="https://unsplash.com/oauth/authorize?client_id=CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ&redirect_uri=curta://callback&response_type=code" +
+    private String url="https://unsplash.com/oauth/authorize?client_id=yrnk1pXnbDXXE4MYt_vk0sB5fMWJkVMvokLv16zkG7w&redirect_uri=curta://callback&response_type=code" +
             "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
     public UnsplashWebServiceLoginModel(Context context)
     {
@@ -40,7 +40,7 @@ public class UnsplashWebServiceLoginModel
     }
     public void  getTheTocken(Uri mUri)
     {
-        mAutorizationInterface.getAccessTocken("CH5YIV_t-PtFB52Db4bAXGQxiQEVy79ZTy9wa4z90iQ","yUWMA9JU_1ZuLmwRbnkwDSx1cI3TKktQTK8x2eAC-dk",
+        mAutorizationInterface.getAccessTocken("yrnk1pXnbDXXE4MYt_vk0sB5fMWJkVMvokLv16zkG7w","W9YBYN2mxSenmuVIeqWzxF4JQuePJcjuNGZYvisPz8Y",
                 "curta://callback",mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {
             @Override
             public void onResponse(Call<AutorizationResponsePJO> call, Response<AutorizationResponsePJO> response) {

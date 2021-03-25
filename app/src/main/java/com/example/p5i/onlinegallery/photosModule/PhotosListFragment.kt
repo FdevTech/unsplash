@@ -45,8 +45,8 @@ class PhotosListFragment : Fragment() {
 
 
 
-        Log.d(TAG, "onCreateView: collection ${args.collectionId}")
-
+          Log.d(TAG, "onCreateView: collection ${args.collectionId}")
+          //fragmentPhotosListBinding.shimmer.startShimmer()
         if(args.topics!=null || args.collectionId!=null)
         {
             Log.d(TAG, "onCreateView: hello")
@@ -59,8 +59,14 @@ class PhotosListFragment : Fragment() {
                 photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
 
                 photosViewModel.topicsPhotosRetrived.observe(viewLifecycleOwner, Observer {
+                    //stopShimming()
 
-                    photoViewModelAdapter.submitList(it)
+                    if(!it.isEmpty())
+                    {
+                        stopShimming()
+                        photoViewModelAdapter.submitList(it)
+                    }
+                    Log.d(TAG, "onCreateView:topic ${args.topics} it -> ${it.isEmpty()}")
 
                 })
             }
@@ -72,13 +78,19 @@ class PhotosListFragment : Fragment() {
                 photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
 
                 photosViewModel.collectionPhotosRetrived.observe(viewLifecycleOwner, Observer {
-
-                    photoViewModelAdapter.submitList(it)
+                    //stopShimming()
+                    if(!it.isEmpty())
+                    {
+                        stopShimming()
+                        photoViewModelAdapter.submitList(it)
+                    }
+                    Log.d(TAG, "onCreateView: it -> ${it.isEmpty()}")
+                    //photoViewModelAdapter.submitList(it)
 
                 })
             }
         }
-        else
+        /*else
         {
             from=null
             Log.d(TAG, "onCreateView: fuck")
@@ -88,7 +100,7 @@ class PhotosListFragment : Fragment() {
 
                 photoViewModelAdapter.submitList(it)
             })
-        }
+        }*/
 
 
 
@@ -113,5 +125,10 @@ class PhotosListFragment : Fragment() {
         return fragmentPhotosListBinding.root
     }
 
+    fun stopShimming()
+    {
+        fragmentPhotosListBinding.shimmer.stopShimmer()
+        fragmentPhotosListBinding.shimmer.hideShimmer()
+    }
 
 }

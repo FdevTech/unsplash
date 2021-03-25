@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                android:background="@color/placeholder_bg"
+                app:layout_constraintDimensionRatio="h,4:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                />
+
+            <ImageView
+                android:background="@color/placeholder_bg"
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/like_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintEnd_toStartOf="@+id/views"/>
+
+            <ImageView
+                android:id="@+id/views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/views_icon"
+                app:layout_constraintStart_toEndOf="@+id/like"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintEnd_toStartOf="@id/download"/>
+
+            <ImageView
+                android:id="@+id/download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/views"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
+
+
+            <TextView
+                android:background="@color/placeholder_bg"
+                android:id="@+id/viewnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2500"
+                app:layout_constraintTop_toBottomOf="@+id/views"
+                app:layout_constraintStart_toStartOf="@+id/views"
+                app:layout_constraintEnd_toEndOf="@+id/views"
+                />
+
+            <TextView
+                android:background="@color/placeholder_bg"
+                android:id="@+id/downloadnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2500"
+                app:layout_constraintEnd_toEndOf="@id/download"
+                app:layout_constraintStart_toStartOf="@+id/download"
+                app:layout_constraintTop_toBottomOf="@+id/download"
+
+
+                />
+            <TextView
+                android:background="@color/placeholder_bg"
+                android:id="@+id/likenumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/like"
+                app:layout_constraintStart_toStartOf="@+id/like"
+                app:layout_constraintEnd_toEndOf="@id/like"
+                tools:text="2500"
+
+                />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+            <View
+                android:id="@+id/clickableOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{()->OnlickeListner.onClick(photo,position,whichTopics)}"
+               />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>

@@ -16,5 +16,6 @@
     <color name="secondaryDarkColor">#cccccc</color>
     <color name="onPrimaryColor">#ffffff</color>
     <color name="onSecondaryColor">#000000</color>
+    <color name="placeholder_bg">#cccccc</color>
 
 </resources>

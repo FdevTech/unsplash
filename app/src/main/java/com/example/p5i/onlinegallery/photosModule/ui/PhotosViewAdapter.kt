@@ -13,6 +13,7 @@ private const val TAG = "PhotosViewAdapter"
 class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotosDiffUtill()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        Log.d(TAG, "onCreateViewHolder: ")
         return ViewHolder.from(parent)
     }
 
