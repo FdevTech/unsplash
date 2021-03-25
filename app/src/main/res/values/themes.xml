@@ -27,4 +27,8 @@
         <item name="colorOnSecondary">@color/onPrimaryColor</item>
         <item name="colorOnSurface">@color/primaryDarkColor</item>
     </style>
+
+    <style name="CircularImageView">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

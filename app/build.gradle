@@ -93,5 +93,7 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     testImplementation "androidx.room:room-testing:$room_version"
+
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 }
 apply plugin: 'androidx.navigation.safeargs'

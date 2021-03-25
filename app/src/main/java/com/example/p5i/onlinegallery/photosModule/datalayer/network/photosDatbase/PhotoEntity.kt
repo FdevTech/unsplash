@@ -23,7 +23,14 @@ data class PhotoEntity(
     var views:Int?,
     var download: Int?,
     val liked_by_user:Boolean?,
-    val likes:Int)
+    val likes:Int,
+    val user_name:String?,
+    val user_first_name:String?,
+    val user_last_name:String?,
+    val user_profile_image_small:String?,
+    val user_profile_image_medium:String?,
+    val user_profile_large:String?
+)
 
 @Entity(tableName = "photos_collection_table")
 data class PhotoEntityCollection(
@@ -41,7 +48,16 @@ data class PhotoEntityCollection(
     var views:Int?,
     var download: Int?,
     val liked_by_user:Boolean?,
-    val likes:Int)
+    val likes:Int,
+    val user_name:String?,
+    val user_first_name:String?,
+    val user_last_name:String?,
+    val user_profile_image_small:String?,
+    val user_profile_image_medium:String?,
+    val user_profile_large:String?
+
+
+)
 
 @Entity(tableName = "photos_topics_table")
 data class PhotoEntityTopics(
@@ -59,7 +75,14 @@ data class PhotoEntityTopics(
     var views:Int?,
     var download: Int?,
     val liked_by_user:Boolean?,
-    val likes:Int)
+    val likes:Int,
+    val user_name:String?,
+    val user_first_name:String?,
+    val user_last_name:String?,
+    val user_profile_image_small:String?,
+    val user_profile_image_medium:String?,
+    val user_profile_large:String?
+)
 
 fun List<PhotoEntity>.asDomainModel():List<PhotoDomain>{
 
@@ -73,7 +96,13 @@ fun List<PhotoEntity>.asDomainModel():List<PhotoDomain>{
             views = it.views,
             id = it.phot_id,
             liked_by_user = it.liked_by_user,
-            likes = it.likes
+            likes = it.likes,
+            user_name = it.user_name,
+            user_first_name = it.user_first_name,
+            user_last_name = it.user_last_name,
+            user_profile_image_medium = it.user_profile_image_medium,
+            user_profile_image_small = it.user_profile_image_small,
+            user_profile_large = it.user_profile_large
         )
     }
 }
@@ -96,7 +125,13 @@ fun List<PhotoPOJ>.asDatabasePhotoModel():List<PhotoEntity>{
             views = it.views,
             download = it.download,
             liked_by_user = it.liked_by_user,
-            likes = it.likes
+            likes = it.likes,
+            user_name = it.user.name,
+            user_first_name = it.user.first_name,
+            user_last_name = it.user.last_name,
+            user_profile_image_small = it.user.profile_image.small,
+            user_profile_image_medium = it.user.profile_image.medium,
+            user_profile_large = it.user.profile_image.large
 
         )
     }
@@ -118,7 +153,13 @@ fun List<PhotoPOJ>.asDatabasePhotTopicoModel():List<PhotoEntityTopics>{
             views = it.views,
             download = it.download,
             liked_by_user = it.liked_by_user,
-            likes = it.likes
+            likes = it.likes,
+            user_name = it.user.name,
+            user_first_name = it.user.first_name,
+            user_last_name = it.user.last_name,
+            user_profile_image_small = it.user.profile_image.small,
+            user_profile_image_medium = it.user.profile_image.medium,
+            user_profile_large = it.user.profile_image.large
 
         )
     }
@@ -135,7 +176,13 @@ fun List<PhotoEntityTopics>.asDomainModelFromTopicPhoto():List<PhotoDomain>{
             views = it.views,
             id = it.phot_id,
             liked_by_user = it.liked_by_user,
-            likes = it.likes
+            likes = it.likes,
+            user_name = it.user_name,
+            user_first_name = it.user_first_name,
+            user_last_name = it.user_last_name,
+            user_profile_image_medium = it.user_profile_image_medium,
+            user_profile_image_small = it.user_profile_image_small,
+            user_profile_large = it.user_profile_large
         )
     }
 }
@@ -157,7 +204,13 @@ fun List<PhotoPOJ>.asDatabasePhotCollectionModel():List<PhotoEntityCollection>{
             views = it.views,
             download = it.download,
             liked_by_user = it.liked_by_user,
-            likes = it.likes
+            likes = it.likes,
+            user_name = it.user.name,
+            user_first_name = it.user.first_name,
+            user_last_name = it.user.last_name,
+            user_profile_image_small = it.user.profile_image.small,
+            user_profile_image_medium = it.user.profile_image.medium,
+            user_profile_large = it.user.profile_image.large
 
         )
     }
@@ -174,7 +227,13 @@ fun List<PhotoEntityCollection>.asDomainModelFromCollectionPhoto():List<PhotoDom
             views = it.views,
             id = it.phot_id,
             liked_by_user = it.liked_by_user,
-            likes = it.likes
+            likes = it.likes,
+            user_name = it.user_name,
+            user_first_name = it.user_first_name,
+            user_last_name = it.user_last_name,
+            user_profile_image_medium = it.user_profile_image_medium,
+            user_profile_image_small = it.user_profile_image_small,
+            user_profile_large = it.user_profile_large
         )
     }
 }

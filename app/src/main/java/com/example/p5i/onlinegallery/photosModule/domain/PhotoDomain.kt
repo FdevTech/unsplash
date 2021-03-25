@@ -9,5 +9,11 @@ data class PhotoDomain(
     var views:Int?,
     var download: Int?,
     val liked_by_user:Boolean?,
-    val likes:Int
+    val likes:Int,
+    val user_name:String?,
+    val user_first_name:String?,
+    val user_last_name:String?,
+    val user_profile_image_small:String?,
+    val user_profile_image_medium:String?,
+    val user_profile_large:String?
 )

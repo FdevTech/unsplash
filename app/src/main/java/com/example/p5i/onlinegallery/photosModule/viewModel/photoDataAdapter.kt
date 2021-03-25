@@ -8,31 +8,26 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
+import com.mikhaellopez.circularimageview.CircularImageView
 import xyz.belvi.blurhash.BlurHash
 import xyz.belvi.blurhash.blurPlaceHolder
 
 private const val TAG = "photoDataAdapter"
 
-@BindingAdapter("placeHolder")
-fun View.placeHolder(data: PhotoDomain)
-{
-    val animator=ObjectAnimator.ofFloat(this,View.ALPHA,1f,0f).apply {
-        duration=1000
-        repeatMode=ObjectAnimator.REVERSE
-        repeatCount=ObjectAnimator.INFINITE
 
-    }
-    Log.d(TAG, "placeHolder: ${data.id}")
-    if(data==null)
-    {
-        animator.start()
-    }
-    else
-    {
-        animator.end()
-    }
+@BindingAdapter("profile_avatar")
+fun ImageView.setAvatr(data: PhotoDomain)
+{
+    Glide.with(context)
+        .load(data.user_profile_image_small)
+        .into(this)
 }
 
+@BindingAdapter("profile_name")
+fun TextView.setName(data: PhotoDomain)
+{
+   text="${data.user_first_name} ${data.user_last_name}"
+}
 
 @BindingAdapter("image")
 fun ImageView.get(data: PhotoDomain)
