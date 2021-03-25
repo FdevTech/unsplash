@@ -1,16 +1,15 @@
 package com.example.p5i.onlinegallery.photosModule.viewModel
 
-import android.animation.ObjectAnimator
-import android.util.Log
-import android.view.View
+import android.R
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
-import com.mikhaellopez.circularimageview.CircularImageView
-import xyz.belvi.blurhash.BlurHash
-import xyz.belvi.blurhash.blurPlaceHolder
+
 
 private const val TAG = "photoDataAdapter"
 
@@ -32,18 +31,26 @@ fun TextView.setName(data: PhotoDomain)
 @BindingAdapter("image")
 fun ImageView.get(data: PhotoDomain)
 {
-    val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
+   /* val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
     data.blur_hash?.let {
         Glide.with(context)
-        .load(data.photo_regular)
+        .load(data.photo_small)
         .blurPlaceHolder(it,this, blurHash)
         { requestBuilder ->
             requestBuilder.into(this)
         }
-    }
-    /*Glide.with(context)
-        .load(data.photo_regular)
-        .into(this)*/
+    }*/
+    val requestOptions =
+        RequestOptions()
+    requestOptions.placeholder(R.drawable.picture_frame)
+
+
+    val thumbnail=Glide.with(this.context).load(data.photo_thumb)
+    Glide.with(this.context)
+        .load(data.photo_small)
+        .thumbnail(thumbnail)
+        .into(this)
+
 
 }
 @BindingAdapter("viewNumber")

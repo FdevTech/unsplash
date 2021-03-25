@@ -8,7 +8,7 @@ interface PhotosDao
 {
     @Query("select * from photos_table")
     fun getAllPhotos():LiveData<List<PhotoEntity>>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun inserOrUpdatePhotos(photos:List<PhotoEntity>)
 
     @Query("select * from photos_collection_table")

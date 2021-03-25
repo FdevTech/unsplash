@@ -10,7 +10,7 @@ import com.example.p5i.onlinegallery.topicModule.databse.TopicsEntity
 @Dao
 interface TopicsDAO {
 
-    @Insert(onConflict =OnConflictStrategy.REPLACE)
+    @Insert(onConflict =OnConflictStrategy.IGNORE)
     suspend fun insertOrUpdate(data:List<TopicsEntity>)
 
     @Query("select * from topics_table")

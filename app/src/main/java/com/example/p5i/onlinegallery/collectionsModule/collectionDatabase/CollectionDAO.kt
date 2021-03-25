@@ -11,7 +11,7 @@ import androidx.room.Query
 interface CollectionDAO
 {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrUpdateCollection(collection:List<CollectionEntity>)
 
     @Query("select * from collection_table")

@@ -13,15 +13,14 @@ private const val TAG = "PhotosViewAdapter"
 class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotosDiffUtill()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.d(TAG, "onCreateViewHolder: ")
         return ViewHolder.from(parent)
     }
 
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d(TAG, "onBindViewHolder: $position")
         val value = getItem(position)
+        Log.d(TAG, "onBindViewHolder: $position data-> ${value.photo_regular}")
         holder.bind(value,onPhotoClickListne)
     }
 
@@ -44,7 +43,7 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
             binding.photo=data
             binding.onlickeListner=ohotoClickListne
             binding.position=adapterPosition
-            Log.d(TAG, "bind: $adapterPosition")
+
 
         }
     }
