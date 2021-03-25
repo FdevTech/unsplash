@@ -42,7 +42,7 @@ class TopicFragment : Fragment() {
         val acttiviy= requireNotNull(this.activity)
 
         fragmentTopicBidning= FragmentTopicBinding.inflate(inflater,container,false)
-
+        fragmentTopicBidning.shimmerTopics.startShimmer()
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
         val topicFragmentNavController=findNavController()
@@ -56,7 +56,12 @@ class TopicFragment : Fragment() {
         })
         topicViewModel.topics.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: ${it.size}")
-            topicViewModelAdapter.submitList(it)
+            if(!it.isEmpty())
+            {
+                stopShimerTopic()
+                topicViewModelAdapter.submitList(it)
+            }
+
         })
         fragmentTopicBidning.root.findViewById<RecyclerView>(R.id.topicRecyclerView).apply {
             layoutManager=LinearLayoutManager(this@TopicFragment.context)
@@ -65,5 +70,9 @@ class TopicFragment : Fragment() {
         return fragmentTopicBidning.root
     }
 
-
+fun stopShimerTopic()
+{
+    fragmentTopicBidning.shimmerTopics.stopShimmer()
+    fragmentTopicBidning.shimmerTopics.visibility=View.GONE
+}
 }

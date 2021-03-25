@@ -90,17 +90,6 @@ class PhotosListFragment : Fragment() {
                 })
             }
         }
-        /*else
-        {
-            from=null
-            Log.d(TAG, "onCreateView: fuck")
-            photoViewModelFactory= PhotViewModelFactory(activity.application,credential)
-            photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
-            photosViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
-
-                photoViewModelAdapter.submitList(it)
-            })
-        }*/
 
 
 
@@ -128,7 +117,7 @@ class PhotosListFragment : Fragment() {
     fun stopShimming()
     {
         fragmentPhotosListBinding.shimmer.stopShimmer()
-        fragmentPhotosListBinding.shimmer.hideShimmer()
+        fragmentPhotosListBinding.shimmer.visibility=View.GONE
     }
 
 }

@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-      <variable
-          name="topicDomain"
-          type="com.example.p5i.onlinegallery.topicModule.doamin.TopicsDomain" />
-        
-        <variable
-            name="onClickOnTopic"
-            type="com.example.p5i.onlinegallery.topicModule.viewModel.TopicsRecyclerAdpater.TopicClicked" />
-    </data>
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="5dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="@{()->onClickOnTopic.topicOnClick(topicDomain)}"
-        >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="5dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="16dp"
+    android:onClick="@{()->onClickOnTopic.topicOnClick(topicDomain)}"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +22,7 @@
             android:layout_height="wrap_content"
             tools:text="Title"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTopics="@{topicDomain}"
+
             />
 
         <ImageView
@@ -49,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
-            app:coverTopic="@{topicDomain}"/>
+            />
 
         <TextView
             style="@style/TextAppearance.AppCompat.Body1"
@@ -59,19 +48,8 @@
             android:layout_height="wrap_content"
             tools:text="Desciption about the topic"
             app:layout_constraintTop_toBottomOf="@+id/topicCover"
-            app:descriptionTopics="@{topicDomain}"
+
             />
-        <View
-            android:id="@+id/clickableOverlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="?attr/selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{()->onClickOnTopic.topicOnClick(topicDomain)}"
-            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</layout>
+</com.google.android.material.card.MaterialCardView>
