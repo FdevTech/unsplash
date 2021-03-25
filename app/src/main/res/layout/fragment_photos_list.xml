@@ -36,7 +36,6 @@
                         />
 
                     <include
-                        app:layout_constraintTop_toBottomOf="@+id/include2"
                         layout="@layout/photos_item_placeholder"
                         />
 
