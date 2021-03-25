@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.singlePhotoModule.ui
+package com.example.p5i.onlinegallery.photoModule.ui
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

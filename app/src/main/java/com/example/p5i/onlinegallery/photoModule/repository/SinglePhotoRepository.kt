@@ -1,4 +1,4 @@
-package com.example.p5i.onlinegallery.singlePhotoModule.repository
+package com.example.p5i.onlinegallery.photoModule.repository
 
 import android.util.Log
 import androidx.lifecycle.Transformations

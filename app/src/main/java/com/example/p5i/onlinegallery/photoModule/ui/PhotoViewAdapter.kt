@@ -1,11 +1,14 @@
-package com.example.p5i.onlinegallery.singlePhotoModule.ui
+package com.example.p5i.onlinegallery.photoModule.ui
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.databinding.SinglePhotosBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 

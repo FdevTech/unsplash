@@ -1,5 +1,6 @@
-package com.example.p5i.onlinegallery.singlePhotoModule
+package com.example.p5i.onlinegallery.photoModule
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,13 +9,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Transition
+import androidx.transition.TransitionInflater
+import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentPhotoBinding
-import com.example.p5i.onlinegallery.singlePhotoModule.ui.DepthPageTransformer
-import com.example.p5i.onlinegallery.singlePhotoModule.ui.PhotoViewAdapter
-import com.example.p5i.onlinegallery.singlePhotoModule.viewmodel.PhotoViewModel
-import com.example.p5i.onlinegallery.singlePhotoModule.viewmodel.PhotoViewModelFactory
+import com.example.p5i.onlinegallery.photoModule.ui.DepthPageTransformer
+import com.example.p5i.onlinegallery.photoModule.ui.PhotoViewAdapter
+import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModel
+import com.example.p5i.onlinegallery.photoModule.viewmodel.PhotoViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
+import com.google.android.material.transition.MaterialContainerTransform
 
 
 private const val TAG = "PhotoFragment"

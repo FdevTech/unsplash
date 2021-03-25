@@ -38,17 +38,17 @@ fun View.placeHolder(data: PhotoDomain)
 fun ImageView.get(data: PhotoDomain)
 {
     val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
-  /*  data.blur_hash?.let {
+    data.blur_hash?.let {
         Glide.with(context)
         .load(data.photo_regular)
         .blurPlaceHolder(it,this, blurHash)
         { requestBuilder ->
             requestBuilder.into(this)
         }
-    }*/
-    Glide.with(context)
+    }
+    /*Glide.with(context)
         .load(data.photo_regular)
-        .into(this)
+        .into(this)*/
 
 }
 @BindingAdapter("viewNumber")

@@ -14,8 +14,8 @@ private const val TAG = "CollectionDataAdapter"
 @BindingAdapter("cover")
 fun ImageView.getCover(data:CollectionDomain)
 {
-    Log.d(TAG, "getCover: ${data.cover_photo_small}")
-   /* Glide.with(context)
+    Log.d(TAG, "getCover: ${data.cover_photo_small}")/*
+    Glide.with(context)
         .load(data.cover_photo_small)
         .into(this)*/
     val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
