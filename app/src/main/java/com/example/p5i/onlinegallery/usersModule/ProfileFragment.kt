@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHost
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
@@ -49,9 +53,39 @@ class ProfileFragment : Fragment() {
          profileViewModel.profiledata.observe(viewLifecycleOwner, Observer {
              fragmentProfileBinding.profileDomain=it
          })
+        val navHost= childFragmentManager.findFragmentById(R.id.fuck) as NavHostFragment
+        val controler= navHost.findNavController()
+
+
+       fragmentProfileBinding.navigationRail.setOnNavigationItemSelectedListener { item ->
+
+           when(item.itemId)
+           {
+               R.id.userLikedPhoto ->{
+                  controler.navigate(R.id.userLikedPhoto)
+                   true
+               }
+               R.id.userPhotos ->{
+                   controler.navigate(R.id.userPhotos)
+                   true
+               }
+               R.id.userCollection ->{
+                   controler.navigate(R.id.userCollection)
+                   true
+               }
+               else -> false
+           }
+       }
+
+
 
         return fragmentProfileBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
 
 }

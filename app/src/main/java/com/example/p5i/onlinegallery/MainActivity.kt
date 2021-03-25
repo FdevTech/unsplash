@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHost=supportFragmentManager.findFragmentById(R.id.creatingCollectionContainer) as NavHostFragment
         val contoller=navHost.navController
+
         contoller.setGraph(R.navigation.navigation)
         val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationMenu.setupWithNavController(contoller)
