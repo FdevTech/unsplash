@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding= FragmentHomeBinding.inflate(inflater,container,false)
         fragmentHomeBinding.shimmerHome.startShimmer()
         
-        
+
         val navController=findNavController()
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"

@@ -12,6 +12,7 @@ import android.view.Window
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var creatingCollectionContainer:FragmentContainerView
     lateinit var content:ViewGroup
     lateinit var loginCredential: LoginStateModel
-   // val bundle = bundleOf("topics" to null,"collectionId" to null)
+    lateinit var  contoller:NavController
+    lateinit var navHost:NavHostFragment
+    val bundle = bundleOf("topics" to null)
     override fun onCreate(savedInstanceState: Bundle?) {
         with(window) {
             requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
@@ -41,14 +44,18 @@ class MainActivity : AppCompatActivity() {
         content=findViewById(R.id.content)
 
 
-        val navHost=supportFragmentManager.findFragmentById(R.id.creatingCollectionContainer) as NavHostFragment
-        val contoller=navHost.navController
+         navHost=supportFragmentManager.findFragmentById(R.id.creatingCollectionContainer) as NavHostFragment
+         contoller=navHost.navController
 
-        contoller.setGraph(R.navigation.navigation)
+        contoller.setGraph(R.navigation.navigation,bundle)
         val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationMenu.setupWithNavController(contoller)
 
+      
     }
+
+
+
 
 
 }
