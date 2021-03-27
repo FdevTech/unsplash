@@ -19,6 +19,7 @@ import com.example.p5i.onlinegallery.databinding.FragmentPhotosListBinding
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
 import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
 import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
+import com.example.p5i.onlinegallery.photosModule.ui.ProfileOnClick
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
 import kotlin.math.log

@@ -12,6 +12,10 @@ import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 private const val TAG = "PhotosViewAdapter"
 class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotosDiffUtill()){
 
+    var profileOnClick:ProfileOnClick?=null
+    var likeClic:LikeClic?=null
+    var downloadClic:DownloadClic?=null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
@@ -21,7 +25,7 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val value = getItem(position)
         Log.d(TAG, "onBindViewHolder: $position data-> ${value.photo_regular}")
-        holder.bind(value,onPhotoClickListne)
+        holder.bind(value,onPhotoClickListne,profileOnClick,likeClic,downloadClic)
     }
 
     class ViewHolder private constructor(val binding: PhotosItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -37,12 +41,18 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
 
         fun bind(
             data: PhotoDomain,
-            ohotoClickListne: OnPhotoClickListner?
+            ohotoClickListne: OnPhotoClickListner?,
+            profileOnClick: ProfileOnClick?,
+            likeClic: LikeClic?,
+            downloadClic: DownloadClic?
         ) {
 
             binding.photo=data
             binding.onlickeListner=ohotoClickListne
             binding.position=adapterPosition
+            binding.onProfileClicked=profileOnClick
+            binding.onLikeClcik=likeClic
+            binding.onDownloadClic=downloadClic
 
 
         }
@@ -73,6 +83,27 @@ class OnPhotoClickListner(val onlick:(data: PhotoDomain,position:Int,from:String
     fun onClick(data: PhotoDomain,position:Int,from:String?)
     {
         return onlick(data,position,from)
+    }
+}
+class ProfileOnClick(val onPorilfeClick:()->Unit)
+{
+    fun onPorfileClciked()
+    {
+       return onPorilfeClick()
+    }
+}
+class LikeClic(val onLikeCkick:()->Unit)
+{
+    fun onLike()
+    {
+      return onLikeCkick()
+    }
+}
+class DownloadClic(val onDownloadCkick:()->Unit)
+{
+    fun onDownload()
+    {
+        return onDownloadCkick()
     }
 }
 

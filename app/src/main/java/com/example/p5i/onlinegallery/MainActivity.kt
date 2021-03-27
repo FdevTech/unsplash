@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationMenu.setupWithNavController(contoller)
 
-      
+
     }
 
 

@@ -14,8 +14,7 @@ import com.example.p5i.onlinegallery.authenticationModule.authorizationData.Logi
 import com.example.p5i.onlinegallery.databinding.FragmentHomeBinding
 import com.example.p5i.onlinegallery.homeFragment.viewmodel.HomeFragmentViewModel
 import com.example.p5i.onlinegallery.homeFragment.viewmodel.HomeFragmentViewModelFactory
-import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
-import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
+import com.example.p5i.onlinegallery.photosModule.ui.*
 
 
 private const val TAG = "HomeFragment"
@@ -61,6 +60,7 @@ class HomeFragment : Fragment() {
             Log.d(TAG, "onCreateView: ${it.isEmpty()}")
         })
         photoViewModelAdapter= PhotoViewModelAdapter(OnPhotoClickListner{data,position,from ->
+            Log.d(TAG, "onCreateView: $position")
             navController.navigate(
                 HomeFragmentDirections.actionHomeFragmentToPhotoFragment(
                     data.id,
@@ -69,6 +69,20 @@ class HomeFragment : Fragment() {
                 )
             )
         })
+        photoViewModelAdapter.profileOnClick= ProfileOnClick {
+
+            Log.d(TAG, "onCreateView: onPhotoClicked by using properties")
+        }
+        
+        photoViewModelAdapter.downloadClic= DownloadClic {
+
+            Log.d(TAG, "onCreateView:downloadClic by using properties ")
+        }
+        
+        photoViewModelAdapter.likeClic= LikeClic {
+            Log.d(TAG, "onCreateView: by using properties")
+        }
+        
         fragmentHomeBinding.homeRecyclerView.apply {
             layoutManager= LinearLayoutManager(context)
              adapter=photoViewModelAdapter
