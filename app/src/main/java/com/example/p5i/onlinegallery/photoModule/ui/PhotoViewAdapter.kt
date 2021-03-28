@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.p5i.onlinegallery.R
-import com.example.p5i.onlinegallery.databinding.SinglePhotosBinding
+import com.example.p5i.onlinegallery.databinding.SinglePhotoBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
 private const val TAG = "PhotoViewAdapter"
@@ -27,7 +27,7 @@ class PhotoViewAdapter ():ListAdapter<PhotoDomain,PhotoViewAdapter.PhotovViewHol
         val data=getItem(position)
         holder.bind(data)
     }
-    class PhotovViewHolder(val binding: SinglePhotosBinding): RecyclerView.ViewHolder(binding.root)
+    class PhotovViewHolder(val binding: SinglePhotoBinding): RecyclerView.ViewHolder(binding.root)
     {
         var latspoition=-1
        companion object{
@@ -35,7 +35,7 @@ class PhotoViewAdapter ():ListAdapter<PhotoDomain,PhotoViewAdapter.PhotovViewHol
            fun from (parent: ViewGroup):PhotovViewHolder
            {
                val inflater=LayoutInflater.from(parent.context)
-               val binding=SinglePhotosBinding.inflate(inflater,parent,false)
+               val binding=SinglePhotoBinding.inflate(inflater,parent,false)
 
                return PhotovViewHolder(binding)
            }

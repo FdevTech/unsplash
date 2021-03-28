@@ -25,6 +25,20 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         it.asDomainModelFromCollectionPhoto()
     })
 
+
+
+    suspend fun like_unlikePhoto(photo_id:String)
+    {
+        withContext(Dispatchers.IO)
+        {
+            val chekLikedByUserOrNo=unsplashDatabase.photosDao.chekLike(photo_id)
+            Log.d(TAG, "like_unlikePhoto: $chekLikedByUserOrNo")
+            //todo we should send a post request to the server before updating the database
+            unsplashDatabase.photosDao.insertLikedByUser(photo_id,!chekLikedByUserOrNo)
+        }
+    }
+
+
     suspend fun referchPhotos()
     {
         Log.d(TAG, "referchPhotos: ")

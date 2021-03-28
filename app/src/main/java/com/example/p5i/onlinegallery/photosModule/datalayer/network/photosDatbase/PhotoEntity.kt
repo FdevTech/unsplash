@@ -108,6 +108,8 @@ fun List<PhotoEntity>.asDomainModel():List<PhotoDomain>{
 }
 
 
+
+
 fun List<PhotoPOJ>.asDatabasePhotoModel():List<PhotoEntity>{
 
     return this.map {

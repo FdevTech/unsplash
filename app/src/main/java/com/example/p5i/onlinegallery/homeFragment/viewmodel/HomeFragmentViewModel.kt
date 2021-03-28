@@ -30,7 +30,13 @@ class HomeFragmentViewModel (val application: Application, val credential:String
             }
         }
     }
-
+    fun like_unlikePhoto(photo_id:String)
+    {
+        viewModelScope.launch {
+            Log.d(TAG, "like_unlikePhoto: photoid $photo_id")
+            photoRepository.like_unlikePhoto(photo_id)
+        }
+    }
     override fun onCleared() {
         super.onCleared()
         Log.d(TAG, "onCleared: ")

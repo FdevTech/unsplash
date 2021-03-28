@@ -22,7 +22,7 @@
                 android:id="@+id/bigPhotRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/single_photos"
+                tools:listitem="@layout/single_photo"
                 android:orientation="horizontal"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

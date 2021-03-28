@@ -92,11 +92,11 @@ class ProfileOnClick(val onPorilfeClick:()->Unit)
        return onPorilfeClick()
     }
 }
-class LikeClic(val onLikeCkick:()->Unit)
+class LikeClic(val onLikeCkick:(data: PhotoDomain)->Unit)
 {
-    fun onLike()
+    fun onLike(data: PhotoDomain)
     {
-      return onLikeCkick()
+      return onLikeCkick(data)
     }
 }
 class DownloadClic(val onDownloadCkick:()->Unit)
