@@ -46,7 +46,7 @@ class PhotoFragment : Fragment() {
         val args=PhotoFragmentArgs.fromBundle(requireArguments())
 
         fragmentPhotoBinding= FragmentPhotoBinding.inflate(inflater,container,false)
-        Log.d(TAG, "onCreateView:args.whichTropic  $args.whichTropic")
+        Log.d(TAG, "onCreateView:args.whichTropic  ${args.whichTropic}")
         photoViewModelFactory= PhotoViewModelFactory(activity.application,credential,args.whichTropic)
         photoViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotoViewModel::class.java)
 

@@ -68,7 +68,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             if(photosList!=null)
             {
                 try {
-                    photosList= Photos.PhotosAPI.photos.getPhotos(credentials).body()
+                   // photosList= Photos.PhotosAPI.photos.getPhotos(credentials).body()
                     //Log.d(TAG, "referchPhotos: ${photosList?.size}")
                     unsplashDatabase.photosDao.inserOrUpdatePhotos(photosList?.asDatabasePhotoModel()!!)
                 }catch (exception:Exception)
@@ -121,10 +121,11 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
             Log.d(TAG, "retrivePhotoFromCollectionToTest: xtotal: $xtotal")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
-            Log.d(TAG, "retrivePhotoFromCollectionToTest: $pages")
+            Log.d(TAG, "retrivePhotoFromCollectionToTest: pages $pages")
             try {
-                photosList= Photos.PhotosAPI.photos.getPhotosFromCollection(credentials,collectionID = collectionID).body()
+                //photosList= Photos.PhotosAPI.photos.getPhotosFromCollection(credentials,collectionID = collectionID).body()
                 //Log.d(TAG, "referchPhotos: ${photosList?.size}")
+                Log.d(TAG, "retrivePhotoFromCollectionToTest: size ${photosList?.size}")
                 unsplashDatabase.photosDao.inserOrUpdatePhotosCollection(photosList?.asDatabasePhotCollectionModel()!!)
             }catch (exception:Exception)
             {

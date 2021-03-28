@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 private const val TAG = "photoViewModel"
-private lateinit var credential:String
+
 class PhotosViewModel(application: Application, val credential:String,val topics:String?=null,val collectionId:String?=null) :ViewModel()
 {
     val photoRepository= PhotoRepository(getDatabse(application),credential)

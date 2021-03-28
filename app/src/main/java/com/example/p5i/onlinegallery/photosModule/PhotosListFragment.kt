@@ -47,7 +47,7 @@ class PhotosListFragment : Fragment() {
 
 
           Log.d(TAG, "onCreateView: collection ${args.collectionId}")
-          //fragmentPhotosListBinding.shimmer.startShimmer()
+          fragmentPhotosListBinding.shimmer.startShimmer()
         if(args.topics!=null || args.collectionId!=null)
         {
             Log.d(TAG, "onCreateView: hello")

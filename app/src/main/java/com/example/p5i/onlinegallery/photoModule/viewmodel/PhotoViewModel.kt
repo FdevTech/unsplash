@@ -17,7 +17,7 @@ import java.io.IOException
 private const val TAG = "PhotoViewModel"
 class PhotoViewModel(val application: Application, val credential:String,from:String?):ViewModel()
 {
-    //val photoRepository= PhotoRepository(getDatabse(application),credential)
+
     private lateinit var _photosRetrived:MutableLiveData<List<PhotoDomain>>
     val photosRetrived:LiveData<List<PhotoDomain>>
     get(){
@@ -49,15 +49,7 @@ class PhotoViewModel(val application: Application, val credential:String,from:St
             Log.d(TAG, "photosRetrived from: $from size:${photosRetrived.value?.size} ")
         }
 
-        /*viewModelScope.launch {
-            try {
-               // photoRepository.referchPhotos()
-                photoRepository.referchPhotosToTest()
-            }catch (network: IOException)
-            {
-                Log.d(TAG, "refrechFromRepository: ${network.message}")
-            }
-        }*/
+
     }
     override fun onCleared() {
         super.onCleared()
