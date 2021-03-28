@@ -44,7 +44,7 @@ class PhotosViewModel(application: Application, val credential:String,val topics
     {
         viewModelScope.launch {
             Log.d(TAG, "like_unlikePhoto: photoid $photo_id, like $liked_by_user")
-            photoRepository.like_unlikePhoto(photo_id,liked_by_user)
+            photoRepository.like_unlikePhoto(photo_id)
         }
     }
     private fun refrechFromRepository()

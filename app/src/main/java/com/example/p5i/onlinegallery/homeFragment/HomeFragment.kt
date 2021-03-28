@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
         
         photoViewModelAdapter.likeClic= LikeClic {
             Log.d(TAG, "onCreateView: by using properties${it.id}")
-            homeFragmentViewModel.like_unlikePhoto(it.id,true)
+            homeFragmentViewModel.like_unlikePhoto(it.id)
 
         }
         
