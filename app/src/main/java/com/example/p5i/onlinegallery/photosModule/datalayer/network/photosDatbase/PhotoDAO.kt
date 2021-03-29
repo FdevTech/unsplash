@@ -11,11 +11,21 @@ interface PhotosDao
     suspend fun insertLikedByUser(photo_id:String,liked_by_user:Boolean)
     @Query("select liked_by_user from photos_table where phot_id=:photo_id")
     suspend fun chekLike(photo_id:String):Boolean
+
     @Query("select * from photos_table")
     fun getAllPhotos():LiveData<List<PhotoEntity>>
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun inserOrUpdatePhotos(photos:List<PhotoEntity>)
 
+    @Query("select * from user_photos_table")
+    fun getAllUserPhotos():LiveData<List<UserPhotoEntity>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun inserOrUpdateUserPhotos(photos:List<UserPhotoEntity>)
+
+    @Query("select * from user_liked_photos_table")
+    fun getAllUserLikedPhotos():LiveData<List<UserLikedPhotoEntity>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun inserOrUpdateUserLikedPhotos(photos:List<UserLikedPhotoEntity>)
 
     @Query("update photos_collection_table set liked_by_user = :liked_by_user where phot_id=:photo_id ")
     suspend fun insertLikedByUserInCollectionPhoto(photo_id:String,liked_by_user:Boolean)
