@@ -10,13 +10,20 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 private const val TAG = "CollectionViewModel"
-class CollectionViewModel (application: Application, val credential:String):ViewModel()
+class CollectionViewModel (application: Application, val credential:String,val user:String?):ViewModel()
 {
     val collectionRespository= CollectionRepository(getDatabse(application),credential)
     val collections=collectionRespository.collections
+    val userCollections=collectionRespository.userCollections
     init {
         Log.d(TAG, "size: ${collectionRespository?.collections.value?.size} ")
-        refrechCollectionFromRepository()
+        if(user!=null)
+        {
+            refrechUserCollectionFromRepository(user)
+        }else
+        {
+            refrechCollectionFromRepository()
+        }
     }
 
     private fun refrechCollectionFromRepository()
@@ -25,6 +32,19 @@ class CollectionViewModel (application: Application, val credential:String):View
             try {
                // collectionRespository.refrechCollections()
                 collectionRespository.refrechCollectionToTest()
+            }catch (error:IOException)
+            {
+                Log.d(TAG, "refrechCollectionFromRepository: ${error.message}")
+            }
+        }
+    }
+    private fun refrechUserCollectionFromRepository(user:String)
+    {
+        Log.d(TAG, "refrechUserCollectionFromRepository: ")
+        viewModelScope.launch {
+            try {
+                // collectionRespository.refrechCollections()
+                collectionRespository.refrechUserCollectionToTest(user)
             }catch (error:IOException)
             {
                 Log.d(TAG, "refrechCollectionFromRepository: ${error.message}")

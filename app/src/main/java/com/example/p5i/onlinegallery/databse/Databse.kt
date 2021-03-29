@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.p5i.onlinegallery.collectionsModule.collectionDatabase.CollectionDAO
 import com.example.p5i.onlinegallery.collectionsModule.collectionDatabase.CollectionEntity
+import com.example.p5i.onlinegallery.collectionsModule.collectionDatabase.UserCollectionEntity
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.PhotoEntity
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.PhotoEntityCollection
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.PhotoEntityTopics
@@ -16,7 +17,8 @@ import com.example.p5i.onlinegallery.usersModule.datalayer.databse.ProfileDAO
 import com.example.p5i.onlinegallery.usersModule.datalayer.databse.ProfileEntity
 
 
-@Database(entities = [PhotoEntity::class,PhotoEntityCollection::class,PhotoEntityTopics::class,CollectionEntity::class,TopicsEntity::class,ProfileEntity::class], version = 11, exportSchema = false)
+@Database(entities = [PhotoEntity::class,PhotoEntityCollection::class,PhotoEntityTopics::class,CollectionEntity::class,TopicsEntity::class
+    ,ProfileEntity::class, UserCollectionEntity::class], version = 12, exportSchema = false)
 abstract class UnsplashDatabase : RoomDatabase() {
 
     abstract val photosDao: PhotosDao

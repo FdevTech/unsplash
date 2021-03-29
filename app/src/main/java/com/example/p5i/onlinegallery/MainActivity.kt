@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var loginCredential: LoginStateModel
     lateinit var  contoller:NavController
     lateinit var navHost:NavHostFragment
+    lateinit var bottomNavigationMenu:BottomNavigationView
     val bundle = bundleOf("topics" to null)
     override fun onCreate(savedInstanceState: Bundle?) {
         with(window) {
@@ -48,12 +49,44 @@ class MainActivity : AppCompatActivity() {
          contoller=navHost.navController
 
         contoller.setGraph(R.navigation.navigation,bundle)
-        val bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationMenu=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationMenu.setupWithNavController(contoller)
 
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        bottomNavigationMenu.setOnNavigationItemSelectedListener {
+            when( it.itemId)
+            {
+                R.id.homeFragment ->{
+                    Log.d(TAG, "onResume: homeFragment clicked")
+                    contoller.navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.collectionListFragment ->{
+                    Log.d(TAG, "onResume: collectionListFragment")
+                    contoller.navigate(R.id.collectionListFragment, bundleOf("user" to null))
+                    true
+                }
+                R.id.topicFragment ->{
+                    Log.d(TAG, "onResume: topicFragment")
+                    contoller.navigate(R.id.topicFragment)
+                    true
+                }
+                R.id.profileFragment ->{
+                    Log.d(TAG, "onResume: profileFragment")
+                    contoller.navigate(R.id.profileFragment)
+                    true
+                }
+                else ->
+                {
+                    false
+                }
+            }
+        }
+    }
 
 
 

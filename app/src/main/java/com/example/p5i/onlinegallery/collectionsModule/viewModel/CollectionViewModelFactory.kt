@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class CollectionViewModelFactory( val application: Application, val credential:String) :ViewModelProvider.Factory {
+class CollectionViewModelFactory( val application: Application, val credential:String,val user:String?=null) :ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(CollectionViewModel::class.java))
         {
-            return CollectionViewModel(application ,credential ) as T
+            return CollectionViewModel(application ,credential,user ) as T
         }
         throw IllegalArgumentException("unknown viewmodel instance")
     }

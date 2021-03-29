@@ -32,12 +32,16 @@ class CollectionListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bindingColectionFragment= FragmentCollectionListBinding.inflate(inflater,container,false)
         val collectionControler=findNavController()
+        val args=CollectionListFragmentArgs.fromBundle(requireArguments())
+        Log.d(TAG, "onCreateView: user  => ${args.user}")
+
         bindingColectionFragment.shimmerCollection.startShimmer()
 
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
         val activity= requireNotNull(this.activity)
-        collecytionViewModelFactory= CollectionViewModelFactory(activity.application,credential)
+
+        collecytionViewModelFactory= CollectionViewModelFactory(activity.application,credential,args.user)
         collectionViewModel=ViewModelProvider(this,collecytionViewModelFactory).get(CollectionViewModel::class.java)
 
         collectionViewModelAdapter=CollectionViewModelAdapter(CollectionClicked {
@@ -50,14 +54,31 @@ class CollectionListFragment : Fragment() {
              adapter=collectionViewModelAdapter
         }
 
-        collectionViewModel.collections.observe(viewLifecycleOwner, Observer {
-            if(!it.isEmpty())
-            {
-                stopShimerInCollection()
-                collectionViewModelAdapter.submitList(it)
-            }
-            Log.d(TAG, "onCreateView: ${it.isEmpty()}")
-        })
+
+        if(args.user!=null)
+        {
+            collectionViewModel.userCollections.observe(viewLifecycleOwner, Observer {
+                if(!it.isEmpty())
+                {
+                    stopShimerInCollection()
+                    collectionViewModelAdapter.submitList(it)
+                }
+                Log.d(TAG, "onCreateView:is Empty ${it.isEmpty()}")
+            })
+        }
+        else
+        {
+            collectionViewModel.collections.observe(viewLifecycleOwner, Observer {
+                if(!it.isEmpty())
+                {
+                    stopShimerInCollection()
+                    collectionViewModelAdapter.submitList(it)
+                }
+                Log.d(TAG, "onCreateView: ${it.isEmpty()}")
+            })
+        }
+
+
         return bindingColectionFragment.root
     }
 

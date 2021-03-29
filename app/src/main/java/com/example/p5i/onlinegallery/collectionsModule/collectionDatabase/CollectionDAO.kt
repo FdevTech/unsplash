@@ -16,4 +16,10 @@ interface CollectionDAO
 
     @Query("select * from collection_table")
     fun getAllinCollection():LiveData<List<CollectionEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrUpdateUserCollection(collection:List<UserCollectionEntity>)
+
+    @Query("select * from `user-collection_table`")
+    fun getAllinUserCollection():LiveData<List<UserCollectionEntity>>
 }

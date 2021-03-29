@@ -77,7 +77,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/user_nav_graph"
+        app:navGraph="@navigation/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline_navigation_rail"
         app:layout_constraintTop_toBottomOf="@+id/aboutmeText"

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -62,15 +63,18 @@ class ProfileFragment : Fragment() {
            when(item.itemId)
            {
                R.id.userLikedPhoto ->{
-                  controler.navigate(R.id.userLikedPhoto)
+                  //controler.navigate(R.id.userLikedPhoto)
+                   controler.navigate(R.id.photosListFragment)
                    true
                }
                R.id.userPhotos ->{
-                   controler.navigate(R.id.userPhotos)
+                  // controler.navigate(R.id.userPhotos)
+                   controler.navigate(R.id.photosListFragment)
                    true
                }
                R.id.userCollection ->{
-                   controler.navigate(R.id.userCollection)
+                   //controler.navigate(R.id.userCollection)
+                   controler.navigate(R.id.collectionListFragment, bundleOf("user" to "user"))
                    true
                }
                else -> false
