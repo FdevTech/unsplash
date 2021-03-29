@@ -20,6 +20,7 @@ import com.example.p5i.onlinegallery.authenticationModule.authorizationData.Logi
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
 import com.example.p5i.onlinegallery.usersModule.viewmodel.ProfileViewModel
 import com.example.p5i.onlinegallery.usersModule.viewmodel.ProfileViewModelFactory
+import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.log
 private const val TAG = "ProfileFragment"
 
@@ -84,11 +85,16 @@ class ProfileFragment : Fragment() {
            }
        }
 
-       
-        fragmentProfileBinding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
 
-            Log.d(TAG, "onCreateView: $scrollY")
+
+        val listner= AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
+            fragmentProfileBinding.constraintLayout.progress=seekPosition
+            
         }
+        fragmentProfileBinding.appbarLayout.addOnOffsetChangedListener(listner)
+
+
 
         return fragmentProfileBinding.root
     }
