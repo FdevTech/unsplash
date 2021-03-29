@@ -48,7 +48,7 @@ class PhotosListFragment : Fragment() {
 
           Log.d(TAG, "onCreateView: collection ${args.collectionId}")
           fragmentPhotosListBinding.shimmer.startShimmer()
-        if(args.topics!=null || args.collectionId!=null)
+        if(args.topics!=null || args.collectionId!=null||args.user!=null)
         {
             Log.d(TAG, "onCreateView: hello")
             if(args.topics!=null)
@@ -71,7 +71,7 @@ class PhotosListFragment : Fragment() {
 
                 })
             }
-            else
+            else if(args.collectionId!=null)
             {
                 from="collection"
                 photoViewModelFactory= PhotViewModelFactory(activity.application,credential,collectionId = args.collectionId)
@@ -89,6 +89,47 @@ class PhotosListFragment : Fragment() {
                     //photoViewModelAdapter.submitList(it)
 
                 })
+            }
+            else if (args.user!=null)
+            {
+               if(args.typeOfPhotos=="liked")
+               {
+                   from="user"
+                   Log.d(TAG, "onCreateView: ${args.user}, ${args.typeOfPhotos}")
+                   photoViewModelFactory= PhotViewModelFactory(activity.application,credential,user = args.user, typeOfPhotos = args.typeOfPhotos)
+                   photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
+
+                   photosViewModel.userLikedphotos.observe(viewLifecycleOwner, Observer {
+                       //stopShimming()
+                       if(!it.isEmpty())
+                       {
+                           stopShimming()
+                           photoViewModelAdapter.submitList(it)
+                       }
+                       Log.d(TAG, "onCreateView: it -> ${it.isEmpty()}")
+                       //photoViewModelAdapter.submitList(it)
+
+                   })
+               }
+                else if(args.typeOfPhotos=="userPhoto")
+               {
+                   from="user"
+                   Log.d(TAG, "onCreateView: ${args.user}, ${args.typeOfPhotos}")
+                   photoViewModelFactory= PhotViewModelFactory(activity.application,credential,user = args.user, typeOfPhotos = args.typeOfPhotos)
+                   photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
+
+                   photosViewModel.userPhotos.observe(viewLifecycleOwner, Observer {
+                       //stopShimming()
+                       if(!it.isEmpty())
+                       {
+                           stopShimming()
+                           photoViewModelAdapter.submitList(it)
+                       }
+                       Log.d(TAG, "onCreateView: it -> ${it.isEmpty()}")
+                       //photoViewModelAdapter.submitList(it)
+
+                   })
+               }
             }
         }
 

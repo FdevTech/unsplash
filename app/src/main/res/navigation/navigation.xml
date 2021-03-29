@@ -21,6 +21,14 @@
             android:name="collectionId"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="user"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="typeOfPhotos"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

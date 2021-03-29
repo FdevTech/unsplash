@@ -7,10 +7,10 @@
     android:icon="@drawable/ic_favorite"/>
     <item
         android:id="@+id/userPhotos"
-        android:title="likes"
+        android:title="photos"
         android:icon="@drawable/ic_photo"/>
     <item
         android:id="@+id/userCollection"
-        android:title="likes"
+        android:title="collection"
         android:icon="@drawable/ic_collection"/>
 </menu>

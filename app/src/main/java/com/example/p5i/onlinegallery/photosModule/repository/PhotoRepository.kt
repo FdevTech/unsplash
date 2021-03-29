@@ -24,6 +24,12 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
     val photosCollection=Transformations.map(unsplashDatabase.photosDao.getAllPhotosFromCollection(),{
         it.asDomainModelFromCollectionPhoto()
     })
+    val userPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserPhotos()){
+        it.asUserPhotoDomainModel()
+    }
+    val userLikedPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserLikedPhotos()){
+        it.asUserLikedPhotoDomainModel()
+    }
 
 
 
@@ -178,6 +184,63 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                  }
              }
 
+
+        }
+    }
+    suspend fun retriveUserPhotosToTest(user:String)
+    {
+        Log.d(TAG, "retriveUserPhotosToTest: ")
+
+        var i:Int=1
+        withContext(Dispatchers.IO)
+        {
+            unsplashDatabase.photosDao.clearUserPhotosCollection()
+            val response=Photos.PhotosAPI.photos.getUserPhotos(credentials,username = "curta")
+            var photosList= response.body()
+            val xtotal= response.headers().get("X-Total")
+            Log.d(TAG, "retriveUserPhotosToTest: xtotal: $xtotal")
+            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            Log.d(TAG, "retriveUserPhotosToTest: pages $pages")
+            if(photosList!=null)
+            {
+                try {
+
+                    Log.d(TAG, "retriveUserPhotosToTest: size ${photosList?.size}")
+                    unsplashDatabase.photosDao.inserOrUpdateUserPhotos(photosList?.asDatabaseUserPhotoModel()!!)
+                }catch (exception:Exception)
+                {
+                    Log.d(TAG, "retriveUserPhotosToTest: ${exception.message}")
+                }
+            }
+
+        }
+    }
+    suspend fun retriveUserLikedPhotosToTest(user:String)
+    {
+        Log.d(TAG, "retriveUserLikedPhotosToTest: ")
+
+        var i:Int=1
+        withContext(Dispatchers.IO)
+        {
+            unsplashDatabase.photosDao.clearUserPhotosCollection()
+            val response=Photos.PhotosAPI.photos.getUserLikedPhotos(credentials,username = "curta")
+            var photosList= response.body()
+            val xtotal= response.headers().get("X-Total")
+            Log.d(TAG, "retriveUserLikedPhotosToTest: xtotal: $xtotal")
+            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            Log.d(TAG, "retriveUserLikedPhotosToTest: pages $pages")
+            Log.d(TAG, "retriveUserLikedPhotosToTest: code ${response.code()}")
+            if(photosList!=null)
+            {
+                try {
+
+                    Log.d(TAG, "retriveUserLikedPhotosToTest: size ${photosList?.size}")
+                    unsplashDatabase.photosDao.inserOrUpdateUserLikedPhotos(photosList?.asDatabaseUserLikedPhotoModel()!!)
+                }catch (exception:Exception)
+                {
+                    Log.d(TAG, "retriveUserLikedPhotosToTest: ${exception.message}")
+                }
+            }
 
         }
     }

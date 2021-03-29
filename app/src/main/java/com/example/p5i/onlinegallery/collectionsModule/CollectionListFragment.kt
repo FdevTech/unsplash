@@ -46,7 +46,7 @@ class CollectionListFragment : Fragment() {
 
         collectionViewModelAdapter=CollectionViewModelAdapter(CollectionClicked {
             Log.d(TAG, "onCreateView: ${it.id}")
-            collectionControler.navigate(CollectionListFragmentDirections.actionCollectionListFragmentToPhotosListFragment(null,it.id))
+            collectionControler.navigate(CollectionListFragmentDirections.actionCollectionListFragmentToPhotosListFragment(null,it.id,null,null))
         })
 
         bindingColectionFragment.root.findViewById<RecyclerView>(R.id.collectionRecyclerView).apply {

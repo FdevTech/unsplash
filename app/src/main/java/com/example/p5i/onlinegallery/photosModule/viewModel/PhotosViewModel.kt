@@ -11,16 +11,19 @@ import java.io.IOException
 
 private const val TAG = "photoViewModel"
 
-class PhotosViewModel(application: Application, val credential:String,val topics:String?=null,val collectionId:String?=null) :ViewModel()
+class PhotosViewModel(application: Application, val credential:String,val topics:String?=null,val collectionId:String?=null,val user:String?,val typeOfPhotos:String?) :ViewModel()
 {
     val photoRepository= PhotoRepository(getDatabse(application),credential)
     val photosRetrived=photoRepository.photos
     val topicsPhotosRetrived=photoRepository.photosTopic
+    val userPhotos=photoRepository.userPhotos
+    val userLikedphotos=photoRepository.userLikedPhotos
     val collectionPhotosRetrived=photoRepository.photosCollection
     init {
-        Log.d(TAG, "ViewModel init: $credential")
-        Log.d(TAG, "photosRetrived size:${photosRetrived.value?.size} ")
-        if(topics==null && collectionId==null)
+        //Log.d(TAG, "ViewModel init: $credential")
+       // Log.d(TAG, "photosRetrived size:${photosRetrived.value?.size} ")
+        Log.d(TAG, "user => $user typeOfPhotos => $typeOfPhotos topic=>  $topics collectionid => $collectionId ")
+        if(topics==null && collectionId==null&&user==null)
         {
             refrechFromRepository()
         }
@@ -34,6 +37,16 @@ class PhotosViewModel(application: Application, val credential:String,val topics
             else if(collectionId!=null)
             {
                 retrivePhotoFromCollection(collectionId)
+            }
+            else if(user!=null)
+            {
+                if(typeOfPhotos=="liked")
+                {
+                  retriveUserLikedPhotos(user)
+                }else if(typeOfPhotos=="userPhoto")
+                {
+                    retriveUserPhotos(user)
+                }
             }
         }
 
@@ -81,6 +94,30 @@ class PhotosViewModel(application: Application, val credential:String,val topics
             }catch (network:IOException)
             {
                 Log.d(TAG, "retrivePhotoFromCollection: ${network.message}")
+            }
+        }
+    }
+    private fun retriveUserPhotos(user:String)
+    {
+        Log.d(TAG, "retriveUserPhotos: ")
+        viewModelScope.launch {
+            try {
+                photoRepository.retriveUserPhotosToTest(user)
+            }catch (network:IOException)
+            {
+                Log.d(TAG, "retriveUserPhotos: ${network.message}")
+            }
+        }
+    }
+    private fun retriveUserLikedPhotos(user:String)
+    {
+        Log.d(TAG, "retriveUserLikedPhotos: ")
+        viewModelScope.launch {
+            try {
+                photoRepository.retriveUserLikedPhotosToTest(user)
+            }catch (network:IOException)
+            {
+                Log.d(TAG, "retriveUserLikedPhotos: ${network.message}")
             }
         }
     }

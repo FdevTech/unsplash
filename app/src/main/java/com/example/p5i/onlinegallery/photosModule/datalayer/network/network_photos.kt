@@ -13,6 +13,12 @@ interface Photos {
     @GET("photos")
     suspend fun getPhotos(@Header("Authorization")autorization:String,@Query("page")page:Int=1, @Query("per_page")per_page:Int=10):Response<List<PhotoPOJ>>
 
+    @GET("users/{username}/photos")
+    suspend fun getUserPhotos(@Header("Authorization")autorization:String, @Path("username")username:String, @Query("page")page:Int=1, @Query("per_page")per_page:Int=10):Response<List<PhotoPOJ>>
+
+    @GET("users/{username}/likes")
+    suspend fun getUserLikedPhotos(@Header("Authorization")autorization:String, @Path("username")username:String, @Query("page")page:Int=1, @Query("per_page")per_page:Int=10):Response<List<PhotoPOJ>>
+
     @GET("photos/")
     suspend fun getPhoto(@Header("Authorization")autorization:String):PhotoPOJ
 

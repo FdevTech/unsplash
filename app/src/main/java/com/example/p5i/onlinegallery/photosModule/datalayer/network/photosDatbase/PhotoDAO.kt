@@ -21,11 +21,15 @@ interface PhotosDao
     fun getAllUserPhotos():LiveData<List<UserPhotoEntity>>
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun inserOrUpdateUserPhotos(photos:List<UserPhotoEntity>)
+    @Query("delete from user_photos_table")
+    fun clearUserPhotosCollection()
 
     @Query("select * from user_liked_photos_table")
     fun getAllUserLikedPhotos():LiveData<List<UserLikedPhotoEntity>>
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun inserOrUpdateUserLikedPhotos(photos:List<UserLikedPhotoEntity>)
+    @Query("delete from user_liked_photos_table")
+    fun clearUserLikedPhotosCollection()
 
     @Query("update photos_collection_table set liked_by_user = :liked_by_user where phot_id=:photo_id ")
     suspend fun insertLikedByUserInCollectionPhoto(photo_id:String,liked_by_user:Boolean)
