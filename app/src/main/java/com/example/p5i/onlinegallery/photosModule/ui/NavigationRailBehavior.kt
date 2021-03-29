@@ -32,7 +32,7 @@ class NavigationRailBehavior(context: Context ,attrs:AttributeSet): CoordinatorL
         val width=child.width
 
         child.translationX=(width*(factory-1f)).toFloat()
-        
+
 
         return true
     }
