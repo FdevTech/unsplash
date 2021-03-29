@@ -81,8 +81,9 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         var i:Int=1
         withContext(Dispatchers.IO)
         {
-            var photosList= Photos.PhotosAPI.photos.getPhotos(credentials).body()
-            val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
+            val response=Photos.PhotosAPI.photos.getPhotos(credentials)
+            var photosList= response.body()
+            val xtotal= response.headers().get("X-Total")
             Log.d(TAG, "referchPhotosToTest: xtotal: $xtotal")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
             if(photosList!=null)
@@ -194,7 +195,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         var i:Int=1
         withContext(Dispatchers.IO)
         {
-            unsplashDatabase.photosDao.clearUserPhotosCollection()
+            //unsplashDatabase.photosDao.clearUserPhotosCollection()
             val response=Photos.PhotosAPI.photos.getUserPhotos(credentials,username = "curta")
             var photosList= response.body()
             val xtotal= response.headers().get("X-Total")
@@ -222,7 +223,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         var i:Int=1
         withContext(Dispatchers.IO)
         {
-            unsplashDatabase.photosDao.clearUserPhotosCollection()
+           // unsplashDatabase.photosDao.clearUserPhotosCollection()
             val response=Photos.PhotosAPI.photos.getUserLikedPhotos(credentials,username = "curta")
             var photosList= response.body()
             val xtotal= response.headers().get("X-Total")

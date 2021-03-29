@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -83,7 +84,11 @@ class ProfileFragment : Fragment() {
            }
        }
 
+       
+        fragmentProfileBinding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
 
+            Log.d(TAG, "onCreateView: $scrollY")
+        }
 
         return fragmentProfileBinding.root
     }

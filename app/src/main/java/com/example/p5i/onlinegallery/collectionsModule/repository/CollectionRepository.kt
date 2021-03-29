@@ -29,10 +29,11 @@ class CollectionRepository (private val unsplashDatabase: UnsplashDatabase, priv
          var i:Int=1
          withContext(Dispatchers.IO)
          {
-             var collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
-             val xtotal= CollectionAPI.retrofitService.getCollection(credentials).headers().get("X-Total")
+             val response=CollectionAPI.retrofitService.getCollection(credentials)
+             var collectionList=response.body()
+             val xtotal= response.headers().get("X-Total")
              val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
-             Log.d(TAG, "refrechCollections error: ${CollectionAPI.retrofitService.getCollection(credentials).code()}")
+             Log.d(TAG, "refrechCollections error: ${response.code()}")
              Log.d(TAG, "refrechCollections perpage: ${collectionList?.size}")
              Log.d(TAG, "refrechCollections total: $xtotal")
              Log.d(TAG, "refrechCollections total page: $pages")
@@ -42,7 +43,7 @@ class CollectionRepository (private val unsplashDatabase: UnsplashDatabase, priv
                  {
                      Log.d(TAG, "refrechCollections: $i")
                      try {
-                         collectionList=CollectionAPI.retrofitService.getCollection(credentials,page = i).body()
+                        // collectionList=CollectionAPI.retrofitService.getCollection(credentials,page = i).body()
                          unsplashDatabase.collectionDao.insertOrUpdateCollection(collectionList?.asCollectionEntity()!!)
                      }catch (error:Exception)
                      {
@@ -63,17 +64,18 @@ class CollectionRepository (private val unsplashDatabase: UnsplashDatabase, priv
         var i:Int=1
         withContext(Dispatchers.IO)
         {
-            var collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
+            val response=CollectionAPI.retrofitService.getCollection(credentials)
+            var collectionList=response.body()
             val xtotal= CollectionAPI.retrofitService.getCollection(credentials).headers().get("X-Total")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
-            Log.d(TAG, "refrechCollections error: ${CollectionAPI.retrofitService.getCollection(credentials).code()}")
+            Log.d(TAG, "refrechCollections error: ${response.code()}")
             Log.d(TAG, "refrechCollections perpage: ${collectionList?.size}")
             Log.d(TAG, "refrechCollections total: $xtotal")
             Log.d(TAG, "refrechCollections total page: $pages")
             if(collectionList!=null)
             {
                 try {
-                    collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
+                    //collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
                     unsplashDatabase.collectionDao.insertOrUpdateCollection(collectionList?.asCollectionEntity()!!)
                 }catch (error:Exception)
                 {
