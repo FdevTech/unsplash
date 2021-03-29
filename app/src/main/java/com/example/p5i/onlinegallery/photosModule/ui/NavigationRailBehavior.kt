@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ScrollView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.NestedScrollView
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigationrail.NavigationRailView
 
 private const val TAG = "NavigationRailBehavior"
@@ -17,7 +18,7 @@ class NavigationRailBehavior(context: Context ,attrs:AttributeSet): CoordinatorL
         child: NavigationRailView,
         dependency: View
     ): Boolean {
-        return dependency is NestedScrollView
+        return dependency is AppBarLayout
     }
 
     override fun onDependentViewChanged(
@@ -25,28 +26,13 @@ class NavigationRailBehavior(context: Context ,attrs:AttributeSet): CoordinatorL
         child: NavigationRailView,
         dependency: View
     ): Boolean {
+        val view=dependency as AppBarLayout
+        val range=view.totalScrollRange
+        val factory=(view.y/range)+1.0
+        val width=child.width
 
-        val scrollUp=false
-        dependency.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY->
-            var i=0
-            if(oldScrollY<scrollY)
-            {
-
-                if(scrollY<300f)
-                {
-                    child.translationX=-scrollY.toFloat()
-                }
-
-            }
-            else
-            {
-
-                child.translationX=0f
-
-                Log.d(TAG, "onDependentViewChanged: ${oldScrollY-scrollY}")
-
-            }
-        }
+        child.translationX=(width*(factory-1f)).toFloat()
+        
 
         return true
     }

@@ -90,7 +90,7 @@ class ProfileFragment : Fragment() {
         val listner= AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
             fragmentProfileBinding.constraintLayout.progress=seekPosition
-            
+
         }
         fragmentProfileBinding.appbarLayout.addOnOffsetChangedListener(listner)
 
