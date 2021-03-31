@@ -355,7 +355,7 @@ fun List<PhotoPOJ>.asDatabasePhotCollectionModel():List<PhotoEntityCollection>{
             download = it.download,
             liked_by_user = it.liked_by_user,
             likes = it.likes,
-            user_name = it.user.name,
+            user_name = it.user.username,
             user_first_name = it.user.first_name,
             user_last_name = it.user.last_name,
             user_profile_image_small = it.user.profile_image.small,

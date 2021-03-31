@@ -138,11 +138,13 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         withContext(Dispatchers.IO)
         {
             unsplashDatabase.photosDao.clearPhotosCollection()
-            var photosList= Photos.PhotosAPI.photos.getPhotosFromCollection(credentials,collectionID = collectionID).body()
-            val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
+            val response=Photos.PhotosAPI.photos.getPhotosFromCollection(credentials,collectionID = collectionID)
+            var photosList= response.body()
+            val xtotal= response.headers().get("X-Total")
             Log.d(TAG, "retrivePhotoFromCollectionToTest: xtotal: $xtotal")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
             Log.d(TAG, "retrivePhotoFromCollectionToTest: pages $pages")
+            Log.d(TAG, "retrivePhotoFromCollectionToTest: code: ${response.code()}")
             try {
                 //photosList= Photos.PhotosAPI.photos.getPhotosFromCollection(credentials,collectionID = collectionID).body()
                 //Log.d(TAG, "referchPhotos: ${photosList?.size}")
@@ -196,13 +198,14 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         withContext(Dispatchers.IO)
         {
             //unsplashDatabase.photosDao.clearUserPhotosCollection()
+            unsplashDatabase.photosDao.clearUserPhotos()
             val userName:String?=if(user=="me")
             {
-                unsplashDatabase.profileDAO.getUserName().value
+                unsplashDatabase.profileDAO.getUserName()
             }
             else
             {
-                unsplashDatabase.photosDao.clearUserPhotos()
+
                 user
             }
            if(userName!=null)
@@ -235,17 +238,19 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         var i:Int=1
         withContext(Dispatchers.IO)
         {
-           // unsplashDatabase.photosDao.clearUserPhotosCollection()
+            Log.d(TAG, "retriveUserLikedPhotosToTest: user --> $user")
+            unsplashDatabase.photosDao.clearUserLikedPhotosC()
             val userName:String?=if(user=="me")
             {
-                unsplashDatabase.profileDAO.getUserName().value
+                unsplashDatabase.profileDAO.getUserName()
             }
             else
             {
-                unsplashDatabase.photosDao.clearUserLikedPhotosC()
+
                 user
             }
             Log.d(TAG, "retriveUserLikedPhotosToTest username==>: $userName")
+            Log.d(TAG, "retriveUserLikedPhotosToTest: name=> ${unsplashDatabase.profileDAO.getName()}")
            // val response=Photos.PhotosAPI.photos.getUserLikedPhotos(credentials,username = "curta")
            if(userName!=null)
            {

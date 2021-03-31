@@ -96,7 +96,7 @@ class CollectionRepository (private val unsplashDatabase: UnsplashDatabase, priv
         {
             val userName:String?=if(user=="me")
             {
-                unsplashDatabase.profileDAO.getUserName().value
+                unsplashDatabase.profileDAO.getUserName()
             }
             else
             {

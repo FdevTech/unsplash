@@ -78,18 +78,23 @@ class ProfileFragment : Fragment() {
                R.id.userLikedPhoto ->{
                   //controler.navigate(R.id.userLikedPhoto)
                    Log.d(TAG, "onCreateView: userLikedPhoto")
-                   controler.navigate(R.id.photosListFragment,bundleOf("user" to args.user,"typeOfPhotos" to "liked","collectionId" to null, "topics" to null))
+
+                   //controler.navigate(R.id.action_global_photosListFragment,bundleOf("user" to args.user,"typeOfPhotos" to "liked","collectionId" to null, "topics" to null))
+                   controler.navigate(ProfileFragmentDirections.actionGlobalPhotosListFragment(null,null,args.user,"liked"))
                    true
                }
                R.id.userPhotos ->{
                    Log.d(TAG, "onCreateView: userPhotos")
-                   controler.navigate(R.id.photosListFragment, bundleOf("user" to args.user,"typeOfPhotos" to "userPhoto","collectionId" to null, "topics" to null))
+                   // controler.navigate(R.id.action_global_photosListFragment, bundleOf("user" to args.user,"typeOfPhotos" to "userPhoto","collectionId" to null, "topics" to null))
+                   controler.navigate(ProfileFragmentDirections.actionGlobalPhotosListFragment(null,null,args.user,"userPhoto"))
                    true
                }
                R.id.userCollection ->{
                    //controler.navigate(R.id.userCollection)
                    Log.d(TAG, "onCreateView: userCollection")
-                   controler.navigate(R.id.collectionListFragment, bundleOf("user" to args.user))
+
+                   //controler.navigate(R.id.action_global_collectionListFragment, bundleOf("user" to args.user))
+                   controler.navigate(ProfileFragmentDirections.actionGlobalCollectionListFragment(args.user))
                    true
                }
                else -> false

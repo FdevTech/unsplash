@@ -17,7 +17,8 @@ interface ProfileDAO {
     fun getProfileData():LiveData<ProfileEntity>
 
     @Query("select username from profile_table ")
-    fun getUserName():LiveData<String>
+    suspend fun getUserName():String
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdatePhotographerProfile(data:PhotographerProfileEntity)

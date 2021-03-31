@@ -67,17 +67,20 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.collectionListFragment ->{
                     Log.d(TAG, "onResume: collectionListFragment")
-                    contoller.navigate(R.id.collectionListFragment, bundleOf("user" to null))
+                   // contoller.navigate(R.id.collectionListFragment, bundleOf("user" to null))
+                    contoller.navigate(R.id.action_global_collectionListFragment,bundleOf("user" to null))
                     true
                 }
                 R.id.topicFragment ->{
                     Log.d(TAG, "onResume: topicFragment")
-                    contoller.navigate(R.id.topicFragment)
+                   // contoller.navigate(R.id.topicFragment)
+                    contoller.navigate(R.id.action_global_topicFragment)
                     true
                 }
                 R.id.profileFragment ->{
                     Log.d(TAG, "onResume: profileFragment")
-                    contoller.navigate(R.id.profileFragment, bundleOf("user" to "me"))
+                    //contoller.navigate(R.id.profileFragment, bundleOf("user" to "me"))
+                    contoller.navigate(R.id.action_global_profileFragment,bundleOf("user" to "me"))
                     true
                 }
                 else ->

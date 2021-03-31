@@ -12,6 +12,7 @@ import xyz.belvi.blurhash.BlurHash
 import xyz.belvi.blurhash.blurPlaceHolder
 
 private const val TAG = "CollectionDataAdapter"
+
 @BindingAdapter("cover")
 fun ImageView.getCover(data:CollectionDomain)
 {

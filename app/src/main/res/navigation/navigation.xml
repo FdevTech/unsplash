@@ -86,5 +86,5 @@
         <action
             android:id="@+id/action_homeFragment_to_photoFragment"
             app:destination="@id/photoFragment" />
-    </fragment>
+    </fragment><action android:id="@+id/action_global_collectionListFragment" app:destination="@id/collectionListFragment"/><action android:id="@+id/action_global_topicFragment" app:destination="@id/topicFragment"/><action android:id="@+id/action_global_photosListFragment" app:destination="@id/photosListFragment"/><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
 </navigation>
