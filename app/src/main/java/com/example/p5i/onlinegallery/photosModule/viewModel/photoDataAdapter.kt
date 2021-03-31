@@ -1,18 +1,31 @@
 package com.example.p5i.onlinegallery.photosModule.viewModel
 
-import android.R
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.util.Log
+import com.example.p5i.onlinegallery.R
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
 
 private const val TAG = "photoDataAdapter"
 
+@BindingAdapter("anim")
+fun ImageView.addAnim(data: PhotoDomain)
+{
+    Log.d(TAG, "addAnim: ${data.liked_by_user}")
+
+    if(data.liked_by_user!!)
+    {
+        setImageResource(R.drawable.ic_like_icon)
+    }
+    else
+    {
+        setImageResource(R.drawable.ic_unlike_icon)
+    }
+    invalidate()
+}
 
 @BindingAdapter("profile_avatar")
 fun ImageView.setAvatr(data: PhotoDomain)
@@ -31,19 +44,6 @@ fun TextView.setName(data: PhotoDomain)
 @BindingAdapter("image")
 fun ImageView.get(data: PhotoDomain)
 {
-   /* val blurHash: BlurHash = BlurHash(this.context, lruSize = 20, punch = 1F)
-    data.blur_hash?.let {
-        Glide.with(context)
-        .load(data.photo_small)
-        .blurPlaceHolder(it,this, blurHash)
-        { requestBuilder ->
-            requestBuilder.into(this)
-        }
-    }*/
-    val requestOptions =
-        RequestOptions()
-    requestOptions.placeholder(R.drawable.picture_frame)
-
 
     val thumbnail=Glide.with(this.context).load(data.photo_thumb)
     Glide.with(this.context)

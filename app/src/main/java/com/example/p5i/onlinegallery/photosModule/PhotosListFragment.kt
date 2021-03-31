@@ -44,7 +44,7 @@ class PhotosListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)
         val navController=activity?.findNavController(R.id.creatingCollectionContainer)
-        //val navController=findNavController()
+        val navController_second=findNavController()
         val args=PhotosListFragmentArgs.fromBundle(requireArguments())
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
@@ -71,7 +71,7 @@ class PhotosListFragment : Fragment() {
                     if(!it.isEmpty())
                     {
                         stopShimming()
-                        photoViewModelAdapter.submitList(it)
+                        photoViewModelAdapter.data=it
                     }
                     Log.d(TAG, "onCreateView:topic ${args.topics} it -> ${it.isEmpty()}")
 
@@ -89,7 +89,7 @@ class PhotosListFragment : Fragment() {
                     if(!it.isEmpty())
                     {
                         stopShimming()
-                        photoViewModelAdapter.submitList(it)
+                        photoViewModelAdapter.data=it
                     }
                     Log.d(TAG, "onCreateView: it -> ${it.isEmpty()}")
                     //photoViewModelAdapter.submitList(it)
@@ -110,7 +110,7 @@ class PhotosListFragment : Fragment() {
                        if(!it.isEmpty())
                        {
                            stopShimming()
-                           photoViewModelAdapter.submitList(it)
+                           photoViewModelAdapter.data=it
                        }
                        Log.d(TAG, "onCreateView: it -> ${it.isEmpty()}")
                        //photoViewModelAdapter.submitList(it)
@@ -129,7 +129,7 @@ class PhotosListFragment : Fragment() {
                        if(!it.isEmpty())
                        {
                            stopShimming()
-                           photoViewModelAdapter.submitList(it)
+                           photoViewModelAdapter.data=it
                        }
                        Log.d(TAG, "onCreateView: it -> ${it.isEmpty()}")
                        //photoViewModelAdapter.submitList(it)
@@ -147,7 +147,7 @@ class PhotosListFragment : Fragment() {
               Log.d(TAG, "onCreateView -> transitionname: ${data.id} \n $from")
              //navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from),extras)
 
-              navController?.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
+              navController_second?.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
           })
 
         photoViewModelAdapter.profileOnClick= ProfileOnClick {
@@ -156,10 +156,10 @@ class PhotosListFragment : Fragment() {
             Log.d(TAG, "onCreateView: ${it.user_name}")
         }
 
-        photoViewModelAdapter.likeClic= LikeClic {
+        photoViewModelAdapter.likeClic= LikeClic {data,position->
 
-            Log.d(TAG, "onCreateView: $it.id")
-            photosViewModel.likeDesLikePhoto(it.id)
+            Log.d(TAG, "onCreateView: $data.id")
+            photosViewModel.likeDesLikePhoto(data.id)
         }
 
         fragmentPhotosListBinding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {

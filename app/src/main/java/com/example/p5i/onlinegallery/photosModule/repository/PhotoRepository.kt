@@ -13,6 +13,7 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 private const val TAG = "PhotoRepository"
+
 class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val credentials:String)
 {
     val photos=Transformations.map(unsplashDatabase.photosDao.getAllPhotos(),{
@@ -292,6 +293,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             Log.d(TAG, "likeDesLikePhoto: responseRequest is succefull=${responseRequest.isSuccessful} reponse code =<>${responseRequest.code()} ")
             if(responseRequest.isSuccessful)
             {
+
                 unsplashDatabase.photosDao.insertLikedByUser(photoid,!photolikedornot)
             }
         }catch (e:Exception)

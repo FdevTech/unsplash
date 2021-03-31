@@ -10,20 +10,35 @@ import com.example.p5i.onlinegallery.databinding.PhotosItemBinding
 import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 
 private const val TAG = "PhotosViewAdapter"
-class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAdapter<PhotoDomain,PhotoViewModelAdapter.ViewHolder>(PhotosDiffUtill()){
-
+class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) :
+    RecyclerView.Adapter<PhotoViewModelAdapter.ViewHolder>() {
+    var data= listOf<PhotoDomain>()
+    set(value) {
+        field=value
+        notifyDataSetChanged()
+    }
     var profileOnClick:ProfileOnClick?=null
     var likeClic:LikeClic?=null
     var downloadClic:DownloadClic?=null
 
+
+   /* fun submit(dataSubmitted:List<PhotoDomain>)
+    {
+        val oldlist=data
+        val diffResult:DiffUtil.DiffResult=DiffUtil.calculateDiff(PhotosDiffUtill(oldlist,dataSubmitted))
+        data=dataSubmitted
+        diffResult.dispatchUpdatesTo(this)
+    }*/
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-
+    override fun getItemCount(): Int {
+        return data.size
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val value = getItem(position)
+        val value = data.get(position)
         Log.d(TAG, "onBindViewHolder: $position data-> ${value.photo_regular}")
         holder.bind(value,onPhotoClickListne,profileOnClick,likeClic,downloadClic)
     }
@@ -46,7 +61,7 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
             likeClic: LikeClic?,
             downloadClic: DownloadClic?
         ) {
-
+            Log.d(TAG, "bind: ${data.id} is liked by user: ${data.liked_by_user}")
             binding.photo=data
             binding.onlickeListner=ohotoClickListne
             binding.position=adapterPosition
@@ -59,18 +74,25 @@ class PhotoViewModelAdapter(val onPhotoClickListne:OnPhotoClickListner) : ListAd
     }
 
 
-    class PhotosDiffUtill: DiffUtil.ItemCallback<PhotoDomain>()
+    class PhotosDiffUtill(var oldItem: List<PhotoDomain> , var newItem: List<PhotoDomain>): DiffUtil.Callback()
     {
-        override fun areItemsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean
-        {
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
 
-            return oldItem.id==newItem.id
+            return oldItem.get(oldItemPosition).id==newItem.get(newItemPosition).id
         }
 
-        override fun areContentsTheSame(oldItem: PhotoDomain, newItem: PhotoDomain): Boolean {
-
-           return oldItem==oldItem
+        override fun getOldListSize(): Int {
+           return oldItem.size
         }
+
+        override fun getNewListSize(): Int {
+            return newItem.size
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItem==newItem
+        }
+
 
     }
 
@@ -92,11 +114,11 @@ class ProfileOnClick(val onPorilfeClick:(data: PhotoDomain)->Unit)
        return onPorilfeClick(data)
     }
 }
-class LikeClic(val onLikeCkick:(data: PhotoDomain)->Unit)
+class LikeClic(val onLikeCkick:(data: PhotoDomain,position:Int)->Unit)
 {
-    fun onLike(data: PhotoDomain)
+    fun onLike(data: PhotoDomain,position:Int)
     {
-      return onLikeCkick(data)
+      return onLikeCkick(data,position)
     }
 }
 class DownloadClic(val onDownloadCkick:()->Unit)

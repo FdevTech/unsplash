@@ -53,13 +53,16 @@ class HomeFragment : Fragment() {
         homeFragmentViewModel=ViewModelProvider(this,homeFragmentViewModelFactory).get(
             HomeFragmentViewModel::class.java)
         homeFragmentViewModel.photosRetrived.observe(viewLifecycleOwner, Observer {
-            
+
             if(!it.isEmpty())
             {
-                photoViewModelAdapter.submitList(it)
+                photoViewModelAdapter.data=it
+               // photoViewModelAdapter.submit(it)
+               // photoViewModelAdapter.notifyDataSetChanged()
+
                 stopShimmerHome()
             }
-            Log.d(TAG, "onCreateView: ${it.isEmpty()}")
+            Log.d(TAG, "onCreateView:=======> ${it.isEmpty()}")
         })
         photoViewModelAdapter= PhotoViewModelAdapter(OnPhotoClickListner{data,position,from ->
             Log.d(TAG, "onCreateView: $position")
@@ -82,9 +85,11 @@ class HomeFragment : Fragment() {
             Log.d(TAG, "onCreateView:downloadClic by using properties ")
         }
         
-        photoViewModelAdapter.likeClic= LikeClic {
-            Log.d(TAG, "onCreateView: by using properties ${it.id}")
-            homeFragmentViewModel.likeDesLikePhoto(it.id)
+        photoViewModelAdapter.likeClic= LikeClic {data,position->
+            Log.d(TAG, "onCreateView: by using properties ${data.id}")
+
+            homeFragmentViewModel.likeDesLikePhoto(data.id)
+           // photoViewModelAdapter.notifyItemChanged(position)
 
         }
         

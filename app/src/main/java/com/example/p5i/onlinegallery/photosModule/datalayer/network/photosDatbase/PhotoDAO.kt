@@ -10,12 +10,15 @@ interface PhotosDao
     @Query("update photos_table set liked_by_user = :liked_by_user where phot_id=:photo_id ")
     suspend fun insertLikedByUser(photo_id:String,liked_by_user:Boolean)
 
+    //this method is just used to test
+
+
     @Query("select liked_by_user from photos_table where phot_id=:photo_id")
     suspend fun chekLike(photo_id:String):Boolean
 
     @Query("select * from photos_table")
     fun getAllPhotos():LiveData<List<PhotoEntity>>
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun inserOrUpdatePhotos(photos:List<PhotoEntity>)
 
     @Query("select * from user_photos_table")
