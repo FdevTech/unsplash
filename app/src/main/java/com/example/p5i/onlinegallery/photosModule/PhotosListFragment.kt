@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -19,11 +20,13 @@ import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentPhotosListBinding
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
+import com.example.p5i.onlinegallery.photosModule.ui.LikeClic
 import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
 import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
 import com.example.p5i.onlinegallery.photosModule.ui.ProfileOnClick
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
+import kotlinx.coroutines.launch
 import kotlin.math.log
 
 private const val TAG = "PhotosListFragment"
@@ -153,6 +156,11 @@ class PhotosListFragment : Fragment() {
             Log.d(TAG, "onCreateView: ${it.user_name}")
         }
 
+        photoViewModelAdapter.likeClic= LikeClic {
+
+            Log.d(TAG, "onCreateView: $it.id")
+            photosViewModel.likeDesLikePhoto(it.id)
+        }
 
         fragmentPhotosListBinding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager=LinearLayoutManager(context)
@@ -168,5 +176,6 @@ class PhotosListFragment : Fragment() {
         fragmentPhotosListBinding.shimmer.stopShimmer()
         fragmentPhotosListBinding.shimmer.visibility=View.GONE
     }
+
 
 }

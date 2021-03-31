@@ -53,13 +53,7 @@ class PhotosViewModel(application: Application, val credential:String,val topics
     }
 
 
-    fun like_unlikePhoto(photo_id:String,liked_by_user:Boolean)
-    {
-        viewModelScope.launch {
-            Log.d(TAG, "like_unlikePhoto: photoid $photo_id, like $liked_by_user")
-            photoRepository.like_unlikePhoto(photo_id)
-        }
-    }
+
     private fun refrechFromRepository()
     {
         Log.d(TAG, "refrechFromRepository: ")
@@ -119,6 +113,13 @@ class PhotosViewModel(application: Application, val credential:String,val topics
             {
                 Log.d(TAG, "retriveUserLikedPhotos: ${network.message}")
             }
+        }
+    }
+
+    fun likeDesLikePhoto(photoid:String)
+    {
+        viewModelScope.launch {
+            photoRepository.likeDesLikePhoto(photoid)
         }
     }
     override fun onCleared() {

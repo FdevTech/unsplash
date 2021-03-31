@@ -29,11 +29,11 @@ interface Photos {
     @GET("/collections/{collectionID}/photos")
     suspend fun getPhotosFromCollection(@Header("Authorization")authorization:String,@Path("collectionID")collectionID:String,@Query("page")page:Int=1,@Query("per_page")per_page:Int=10):Response<List<PhotoPOJ>>
 
-    @POST("photos/Z1TG5G3TArs/like")
-    suspend fun likePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ
+    @POST("/photos/{photoid}/like")
+    suspend fun likePhoto(@Header("Authorization")autorization:String,@Path("photoid")photoid:String): Response<LikeUnlikePOJ>
 
-    @DELETE("photos/Z1TG5G3TArs/like")
-    suspend fun unLikePhoto(@Header("Authorization")autorization:String): LikeUnlikePOJ
+    @DELETE("/photos/{photoid}/like")
+    suspend fun unLikePhoto(@Header("Authorization")autorization:String,@Path("photoid")photoid:String): Response<LikeUnlikePOJ>
 
      object PhotosAPI {
         val photos: Photos by lazy {

@@ -250,7 +250,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                 user
             }
             Log.d(TAG, "retriveUserLikedPhotosToTest username==>: $userName")
-            Log.d(TAG, "retriveUserLikedPhotosToTest: name=> ${unsplashDatabase.profileDAO.getName()}")
+
            // val response=Photos.PhotosAPI.photos.getUserLikedPhotos(credentials,username = "curta")
            if(userName!=null)
            {
@@ -274,6 +274,29 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                }
            }
 
+        }
+    }
+
+    suspend fun likeDesLikePhoto(photoid:String)
+    {
+        val photolikedornot=unsplashDatabase.photosDao.chekLike(photoid)
+        Log.d(TAG, "likeDesLikePhoto: photolikedornot=>${photolikedornot}")
+        try{
+            val responseRequest=if(photolikedornot)
+            {
+                Photos.PhotosAPI.photos.unLikePhoto(autorization = credentials,photoid = photoid)
+            }else
+            {
+                Photos.PhotosAPI.photos.likePhoto(autorization = credentials,photoid = photoid)
+            }
+            Log.d(TAG, "likeDesLikePhoto: responseRequest is succefull=${responseRequest.isSuccessful} reponse code =<>${responseRequest.code()} ")
+            if(responseRequest.isSuccessful)
+            {
+                unsplashDatabase.photosDao.insertLikedByUser(photoid,!photolikedornot)
+            }
+        }catch (e:Exception)
+        {
+            Log.d(TAG, "likeDesLikePhoto: ${e.message}")
         }
     }
 }

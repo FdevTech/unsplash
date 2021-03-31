@@ -9,6 +9,7 @@ interface PhotosDao
 
     @Query("update photos_table set liked_by_user = :liked_by_user where phot_id=:photo_id ")
     suspend fun insertLikedByUser(photo_id:String,liked_by_user:Boolean)
+
     @Query("select liked_by_user from photos_table where phot_id=:photo_id")
     suspend fun chekLike(photo_id:String):Boolean
 
