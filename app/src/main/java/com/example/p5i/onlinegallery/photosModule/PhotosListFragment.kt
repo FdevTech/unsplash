@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +40,8 @@ class PhotosListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPhotosListBinding= FragmentPhotosListBinding.inflate(inflater,container,false)
-        val navController=findNavController()
+        val navController=activity?.findNavController(R.id.creatingCollectionContainer)
+        //val navController=findNavController()
         val args=PhotosListFragmentArgs.fromBundle(requireArguments())
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
@@ -142,12 +144,12 @@ class PhotosListFragment : Fragment() {
               Log.d(TAG, "onCreateView -> transitionname: ${data.id} \n $from")
              //navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from),extras)
 
-              navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
+              navController?.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
           })
 
         photoViewModelAdapter.profileOnClick= ProfileOnClick {
 
-            navController.navigate(R.id.profileFragment, bundleOf("user" to it.user_name))
+            navController?.navigate(R.id.profileFragment, bundleOf("user" to it.user_name))
             Log.d(TAG, "onCreateView: ${it.user_name}")
         }
 
