@@ -32,7 +32,7 @@ class PhotoViewModel(val application: Application, val credential:String,from:St
     }
     private fun refrechFromRepository(from:String?)
     {
-        Log.d(TAG, "refrechFromRepository: ")
+        Log.d(TAG, "refrechFromRepository: $from ")
         if(from==null)
         {
             _photosRetrived=singlePhotoRepository.photos as MutableLiveData<List<PhotoDomain>>
@@ -51,12 +51,12 @@ class PhotoViewModel(val application: Application, val credential:String,from:St
         else if(from=="userPhotos")
         {
             _photosRetrived=singlePhotoRepository.userPhotos as MutableLiveData<List<PhotoDomain>>
-            Log.d(TAG, "photosRetrived from: $from size:${photosRetrived.value?.size} ")
+            Log.d(TAG, "photosRetrived from: $from  size:${photosRetrived.value?.size} ")
         }
         else if(from=="userLikedPhoto")
         {
-            _photosRetrived=singlePhotoRepository.userLikedPhoto as MutableLiveData<List<PhotoDomain>>
-            Log.d(TAG, "photosRetrived from: $from size:${photosRetrived.value?.size} ")
+            _photosRetrived=singlePhotoRepository.userLikedPhotos as MutableLiveData<List<PhotoDomain>>
+            Log.d(TAG, "photosRetrived from: $from==> ${singlePhotoRepository.userLikedPhotos.value?.size} size:${_photosRetrived.value?.size} ")
         }
 
 

@@ -23,12 +23,12 @@ class SinglePhotoRepository (private val unsplashDatabase: UnsplashDatabase)
                 Log.d(TAG, "getAllPhotosFromCollection: ${it.size}")
         it.asDomainModelFromCollectionPhoto()
     })
-    val userPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserPhotos(),
-        {
-            it.asUserPhotoDomainModel()
-        })
-
-    val userLikedPhoto=Transformations.map(unsplashDatabase.photosDao.getAllUserLikedPhotos()){
+    val userPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserPhotos()){
+        Log.d(TAG, "userPhotos it size: ${it.size} ")
+        it.asUserPhotoDomainModel()
+    }
+    val userLikedPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserLikedPhotos()){
+        Log.d(TAG, "userLikedPhotos it size: ${it.size} ")
         it.asUserLikedPhotoDomainModel()
     }
 }

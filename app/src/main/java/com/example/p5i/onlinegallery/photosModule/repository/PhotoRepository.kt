@@ -281,13 +281,17 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
     suspend fun likeDesLikePhoto(photoid:String)
     {
         val photolikedornot=unsplashDatabase.photosDao.chekLike(photoid)
+        var numberOflikes=unsplashDatabase.photosDao.cheknumberOflikes(photoid)
         Log.d(TAG, "likeDesLikePhoto: photolikedornot=>${photolikedornot}")
         try{
             val responseRequest=if(photolikedornot)
             {
+                numberOflikes-=1
                 Photos.PhotosAPI.photos.unLikePhoto(autorization = credentials,photoid = photoid)
+
             }else
             {
+                numberOflikes+=1
                 Photos.PhotosAPI.photos.likePhoto(autorization = credentials,photoid = photoid)
             }
             Log.d(TAG, "likeDesLikePhoto: responseRequest is succefull=${responseRequest.isSuccessful} reponse code =<>${responseRequest.code()} ")
@@ -295,6 +299,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             {
 
                 unsplashDatabase.photosDao.insertLikedByUser(photoid,!photolikedornot)
+                unsplashDatabase.photosDao.addOrRemoveLiked(photoid,numberOflikes)
             }
         }catch (e:Exception)
         {

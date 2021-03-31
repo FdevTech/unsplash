@@ -19,9 +19,9 @@ class ProfileViewModel (val application:Application,val credential:String,val us
     val photgrapherProfile=profileRepository.photographer
     init {
         Log.d(TAG, "${user}: ")
-        if(user!=null )
+        if(user!="me" )
         {
-            refrechPhotographerProfileFromProfileRepository(user)
+            refrechPhotographerProfileFromProfileRepository(user!!)
         }
         else
         {
