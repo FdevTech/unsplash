@@ -109,7 +109,7 @@ fun ProfileEntity.asProfileDomain():ProfileDomain
         )
 
 }
-fun ProfileEntity.asPhotographerProfileDomain():ProfileDomain
+fun PhotographerProfileEntity.asPhotographerProfileDomain():ProfileDomain
 {
     return ProfileDomain(
         id=this.id,

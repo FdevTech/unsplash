@@ -12,23 +12,50 @@ import java.io.IOException
 
 private const val TAG = "ProfileViewModel"
 
-class ProfileViewModel (val application:Application,val credential:String): ViewModel()
+class ProfileViewModel (val application:Application,val credential:String,val user:String?): ViewModel()
 {
     val profileRepository= ProfileRepository(getDatabse(application),credential)
     val profiledata=profileRepository.profile
+    val photgrapherProfile=profileRepository.photographer
     init {
-        refrechFromProfileRepository()
+        Log.d(TAG, "${user}: ")
+        if(user!=null )
+        {
+            refrechPhotographerProfileFromProfileRepository(user)
+        }
+        else
+        {
+            refrechUserProfileFromProfileRepository()
+        }
+
     }
-    fun refrechFromProfileRepository()
+    fun refrechUserProfileFromProfileRepository()
     {
         viewModelScope.launch {
            try {
                profileRepository.refrechProfileData()
            }
+
            catch (excption:IOException)
            {
                Log.d(TAG, "refrechFromProfileRepository: ${excption.message}")
            }
+
+
+        }
+    }
+    fun refrechPhotographerProfileFromProfileRepository(user:String)
+    {
+        viewModelScope.launch {
+
+            try {
+                profileRepository.refrechPhotographerProfileData(user)
+            }
+
+            catch (excption:IOException)
+            {
+                Log.d(TAG, "refrechPhotographerProfileFromProfileRepository: ${excption.message}")
+            }
 
 
         }

@@ -5,12 +5,16 @@ import com.example.p5i.onlinegallery.Util.retrofit
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 
 interface network_Profile
 {
     @GET("/me")
     suspend fun getMyProfile(@Header("Authorization")autorization:String): UserPOJ
+
+    @GET("/users/{username}")
+    suspend fun getPhotographerProfile(@Header("Authorization")autorization:String,@Path("username")username:String): UserPOJ
 
     @PUT("me?first_name=Curta&last_name=Dz&location=this my location is 127.0.0.1&bio=I'm android developper")
     suspend fun updateMyInfo(@Header("Authorization")autorization:String):UserPOJ

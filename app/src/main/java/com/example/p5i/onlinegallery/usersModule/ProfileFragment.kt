@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
 
         Log.d(TAG, "onCreateView: ${args.user}")
 
-        profileViewModelFactory=ProfileViewModelFactory(activity.application, credential)
+        profileViewModelFactory=ProfileViewModelFactory(activity.application, credential,args.user)
 
         profileViewModel=ViewModelProvider(this, profileViewModelFactory).get(ProfileViewModel::class.java)
 
@@ -56,9 +56,17 @@ class ProfileFragment : Fragment() {
 
             Log.d(TAG, "onCreateView: ${it?.id}")
         })
-         profileViewModel.profiledata.observe(viewLifecycleOwner, Observer {
-             fragmentProfileBinding.profileDomain=it
-         })
+        if(args.user!=null)
+        {
+            profileViewModel.photgrapherProfile.observe(viewLifecycleOwner, Observer {
+                fragmentProfileBinding.profileDomain=it
+            })
+        }
+        else {
+            profileViewModel.profiledata.observe(viewLifecycleOwner, Observer {
+                fragmentProfileBinding.profileDomain=it
+            })
+        }
         val navHost= childFragmentManager.findFragmentById(R.id.fuck) as NavHostFragment
         val controler= navHost.findNavController()
         controler.navigate(R.id.photosListFragment,bundleOf("user" to "user","typeOfPhotos" to "liked","collectionId" to null, "topics" to null))

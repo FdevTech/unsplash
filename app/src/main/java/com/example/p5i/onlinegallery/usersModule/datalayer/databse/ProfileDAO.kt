@@ -21,4 +21,7 @@ interface ProfileDAO {
 
     @Query("select * from photographer_profile_table")
     fun getPhotographerProfileData():LiveData<PhotographerProfileEntity>
+
+    @Query("delete from photographer_profile_table")
+    fun clearphtographertable()
 }
