@@ -56,7 +56,7 @@ class ProfileFragment : Fragment() {
 
             Log.d(TAG, "onCreateView: ${it?.id}")
         })
-        if(args.user!=null)
+        if(args.user!="me")
         {
             profileViewModel.photgrapherProfile.observe(viewLifecycleOwner, Observer {
                 fragmentProfileBinding.profileDomain=it
@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
         }
         val navHost= childFragmentManager.findFragmentById(R.id.fuck) as NavHostFragment
         val controler= navHost.findNavController()
-        controler.navigate(R.id.photosListFragment,bundleOf("user" to "user","typeOfPhotos" to "liked","collectionId" to null, "topics" to null))
+        controler.navigate(R.id.photosListFragment,bundleOf("user" to args.user,"typeOfPhotos" to "liked","collectionId" to null, "topics" to null))
 
        fragmentProfileBinding.navigationRail.setOnNavigationItemSelectedListener { item ->
 
@@ -78,18 +78,18 @@ class ProfileFragment : Fragment() {
                R.id.userLikedPhoto ->{
                   //controler.navigate(R.id.userLikedPhoto)
                    Log.d(TAG, "onCreateView: userLikedPhoto")
-                   controler.navigate(R.id.photosListFragment,bundleOf("user" to "user","typeOfPhotos" to "liked","collectionId" to null, "topics" to null))
+                   controler.navigate(R.id.photosListFragment,bundleOf("user" to args.user,"typeOfPhotos" to "liked","collectionId" to null, "topics" to null))
                    true
                }
                R.id.userPhotos ->{
                    Log.d(TAG, "onCreateView: userPhotos")
-                   controler.navigate(R.id.photosListFragment, bundleOf("user" to "user","typeOfPhotos" to "userPhoto","collectionId" to null, "topics" to null))
+                   controler.navigate(R.id.photosListFragment, bundleOf("user" to args.user,"typeOfPhotos" to "userPhoto","collectionId" to null, "topics" to null))
                    true
                }
                R.id.userCollection ->{
                    //controler.navigate(R.id.userCollection)
                    Log.d(TAG, "onCreateView: userCollection")
-                   controler.navigate(R.id.collectionListFragment, bundleOf("user" to "user"))
+                   controler.navigate(R.id.collectionListFragment, bundleOf("user" to args.user))
                    true
                }
                else -> false

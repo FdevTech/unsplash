@@ -22,4 +22,7 @@ interface CollectionDAO
 
     @Query("select * from `user-collection_table`")
     fun getAllinUserCollection():LiveData<List<UserCollectionEntity>>
+
+    @Query("delete from `user-collection_table`")
+    fun clearphtographerCollectionTable()
 }

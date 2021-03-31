@@ -94,34 +94,46 @@ class CollectionRepository (private val unsplashDatabase: UnsplashDatabase, priv
         var i:Int=1
         withContext(Dispatchers.IO)
         {
-            val response=CollectionAPI.retrofitService.getUserCollection(credentials,"curta")
-            var collectionList=response.body()
-            val xtotal= response.headers().get("X-Total")
-            val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
-            Log.d(TAG, "refrechCollections response code: ${response.code()}")
-            Log.d(TAG, "refrechUserCollectionToTest perpage: ${collectionList?.size}")
-           // Log.d(TAG, "refrechCollections total: $xtotal")
-            //Log.d(TAG, "refrechCollections total page: $pages")
-            if(collectionList!=null)
+            val userName:String?=if(user=="me")
             {
-                Log.d(TAG, "refrechUserCollectionToTest: inside the if test")
-                try {
-                   // collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
-                    Log.d(TAG, "refrechUserCollectionToTest: insede the try block")
-                    val newlist=collectionList?.asUserCollectionEntity()
-                    Log.d(TAG, "refrechUserCollectionToTest:newlist=> ${newlist.size}")
-                    unsplashDatabase.collectionDao.insertOrUpdateUserCollection(collectionList?.asUserCollectionEntity()!!)
-                }catch (error:Exception)
-                {
-                    Log.d(TAG, "refrechCollections: insde the catch ${error.message}")
-                }
-
-
-
+                unsplashDatabase.profileDAO.getUserName().value
             }
             else
             {
-                Log.d(TAG, "refrechUserCollectionToTest: outside the elf test")
+                unsplashDatabase.collectionDao.clearphtographerCollectionTable()
+                user
+            }
+            if(userName!=null)
+            {
+                val response=CollectionAPI.retrofitService.getUserCollection(credentials,userName)
+                var collectionList=response.body()
+                val xtotal= response.headers().get("X-Total")
+                val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+                Log.d(TAG, "refrechCollections response code: ${response.code()}")
+                Log.d(TAG, "refrechUserCollectionToTest perpage: ${collectionList?.size}")
+                // Log.d(TAG, "refrechCollections total: $xtotal")
+                //Log.d(TAG, "refrechCollections total page: $pages")
+                if(collectionList!=null)
+                {
+                    Log.d(TAG, "refrechUserCollectionToTest: inside the if test")
+                    try {
+                        // collectionList=CollectionAPI.retrofitService.getCollection(credentials).body()
+                        Log.d(TAG, "refrechUserCollectionToTest: insede the try block")
+                        val newlist=collectionList?.asUserCollectionEntity()
+                        Log.d(TAG, "refrechUserCollectionToTest:newlist=> ${newlist.size}")
+                        unsplashDatabase.collectionDao.insertOrUpdateUserCollection(collectionList?.asUserCollectionEntity()!!)
+                    }catch (error:Exception)
+                    {
+                        Log.d(TAG, "refrechCollections: insde the catch ${error.message}")
+                    }
+
+
+
+                }
+                else
+                {
+                    Log.d(TAG, "refrechUserCollectionToTest: outside the elf test")
+                }
             }
         }
     }
