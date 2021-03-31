@@ -42,6 +42,9 @@ class ProfileFragment : Fragment() {
         loginCredential= LoginStateModel(context)
         credential="Bearer ${loginCredential.retriveTockenl()}"
         val activity= requireNotNull(this.activity)
+        val args=ProfileFragmentArgs.fromBundle(requireArguments())
+
+        Log.d(TAG, "onCreateView: ${args.user}")
 
         profileViewModelFactory=ProfileViewModelFactory(activity.application, credential)
 

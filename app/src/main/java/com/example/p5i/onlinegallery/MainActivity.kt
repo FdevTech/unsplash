@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.profileFragment ->{
                     Log.d(TAG, "onResume: profileFragment")
-                    contoller.navigate(R.id.profileFragment)
+                    contoller.navigate(R.id.profileFragment, bundleOf("user" to null))
                     true
                 }
                 else ->

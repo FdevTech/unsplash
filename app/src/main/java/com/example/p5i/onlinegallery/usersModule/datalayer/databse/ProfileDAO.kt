@@ -15,4 +15,10 @@ interface ProfileDAO {
 
     @Query("select * from profile_table")
     fun getProfileData():LiveData<ProfileEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrUpdatePhotographerProfile(data:PhotographerProfileEntity)
+
+    @Query("select * from photographer_profile_table")
+    fun getPhotographerProfileData():LiveData<PhotographerProfileEntity>
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -144,7 +145,11 @@ class PhotosListFragment : Fragment() {
               navController.navigate(PhotosListFragmentDirections.actionPhotosListFragmentToPhotoFragment(data.id,position,from))
           })
 
+        photoViewModelAdapter.profileOnClick= ProfileOnClick {
 
+            navController.navigate(R.id.profileFragment, bundleOf("user" to it.user_name))
+            Log.d(TAG, "onCreateView: ${it.user_name}")
+        }
 
 
         fragmentPhotosListBinding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {

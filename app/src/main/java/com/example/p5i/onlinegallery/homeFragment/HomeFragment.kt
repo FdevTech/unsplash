@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentHomeBinding
 import com.example.p5i.onlinegallery.homeFragment.viewmodel.HomeFragmentViewModel
@@ -71,7 +73,8 @@ class HomeFragment : Fragment() {
         })
         photoViewModelAdapter.profileOnClick= ProfileOnClick {
 
-            Log.d(TAG, "onCreateView: onPhotoClicked by using properties")
+            navController.navigate(R.id.profileFragment, bundleOf("user" to it.user_name))
+            Log.d(TAG, "onCreateView: ${it.user_name}")
         }
         
         photoViewModelAdapter.downloadClic= DownloadClic {

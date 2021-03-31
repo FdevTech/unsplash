@@ -85,11 +85,11 @@ class OnPhotoClickListner(val onlick:(data: PhotoDomain,position:Int,from:String
         return onlick(data,position,from)
     }
 }
-class ProfileOnClick(val onPorilfeClick:()->Unit)
+class ProfileOnClick(val onPorilfeClick:(data: PhotoDomain)->Unit)
 {
-    fun onPorfileClciked()
+    fun onPorfileClciked(data: PhotoDomain)
     {
-       return onPorilfeClick()
+       return onPorilfeClick(data)
     }
 }
 class LikeClic(val onLikeCkick:(data: PhotoDomain)->Unit)

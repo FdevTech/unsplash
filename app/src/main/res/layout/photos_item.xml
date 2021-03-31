@@ -182,7 +182,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/likenumber"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:clickable="true"
-                    android:onClick="@{()->onProfileClicked.onPorfileClciked()}"
+                    android:onClick="@{()->onProfileClicked.onPorfileClciked(photo)}"
                     />
 
 
