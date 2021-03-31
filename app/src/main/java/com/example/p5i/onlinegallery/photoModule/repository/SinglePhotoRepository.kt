@@ -3,9 +3,7 @@ package com.example.p5i.onlinegallery.photoModule.repository
 import android.util.Log
 import androidx.lifecycle.Transformations
 import com.example.p5i.onlinegallery.databse.UnsplashDatabase
-import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDomainModel
-import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDomainModelFromCollectionPhoto
-import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.asDomainModelFromTopicPhoto
+import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.*
 
 private const val TAG = "SinglePhotoRepository"
 class SinglePhotoRepository (private val unsplashDatabase: UnsplashDatabase)
@@ -20,10 +18,17 @@ class SinglePhotoRepository (private val unsplashDatabase: UnsplashDatabase)
             Log.d(TAG, "getAllPhotosFromTopic: ${it.size}")
         it.asDomainModelFromTopicPhoto()
     })
-    val photosCollection=
-        Transformations.map(unsplashDatabase.photosDao.getAllPhotosFromCollection(),
+    val photosCollection= Transformations.map(unsplashDatabase.photosDao.getAllPhotosFromCollection(),
             {
                 Log.d(TAG, "getAllPhotosFromCollection: ${it.size}")
         it.asDomainModelFromCollectionPhoto()
     })
+    val userPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserPhotos(),
+        {
+            it.asUserPhotoDomainModel()
+        })
+
+    val userLikedPhoto=Transformations.map(unsplashDatabase.photosDao.getAllUserLikedPhotos()){
+        it.asUserLikedPhotoDomainModel()
+    }
 }

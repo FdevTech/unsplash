@@ -100,7 +100,7 @@ class PhotosListFragment : Fragment() {
             {
                if(args.typeOfPhotos=="liked")
                {
-                   from="user"
+                   from="userLikedPhoto"
                    Log.d(TAG, "onCreateView: ${args.user}, ${args.typeOfPhotos}")
                    photoViewModelFactory= PhotViewModelFactory(activity.application,credential,user = args.user, typeOfPhotos = args.typeOfPhotos)
                    photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)
@@ -119,7 +119,7 @@ class PhotosListFragment : Fragment() {
                }
                 else if(args.typeOfPhotos=="userPhoto")
                {
-                   from="user"
+                   from="userPhotos"
                    Log.d(TAG, "onCreateView: ${args.user}, ${args.typeOfPhotos}")
                    photoViewModelFactory= PhotViewModelFactory(activity.application,credential,user = args.user, typeOfPhotos = args.typeOfPhotos)
                    photosViewModel=ViewModelProvider(this,photoViewModelFactory).get(PhotosViewModel::class.java)

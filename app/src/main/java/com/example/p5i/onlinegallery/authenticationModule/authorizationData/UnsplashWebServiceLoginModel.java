@@ -24,8 +24,14 @@ public class UnsplashWebServiceLoginModel
     private MutableLiveData<Boolean> isLogedIn;
     private LoginStateModel mLoginStateModel;
 
-    private String url="https://unsplash.com/oauth/authorize?client_id=yrnk1pXnbDXXE4MYt_vk0sB5fMWJkVMvokLv16zkG7w&redirect_uri=curta://callback&response_type=code" +
-            "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
+    private String clientID="U4e3aiPSmYENZTwqMYUMv1P2XftujdL6byd9e_jM_UI";
+    private String clientSecret="TVnudFDwuYEJuL0GvB8qcCAR9Vqsr14GcMYVwa8B0OM";
+    private String redirect_uri="curta://callback";
+
+    private String url="https://unsplash.com/oauth/authorize?client_id="+clientID+"&redirect_uri="+redirect_uri +
+            "&response_type=code&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
+    /*private String url="https://unsplash.com/oauth/authorize?client_id=yrnk1pXnbDXXE4MYt_vk0sB5fMWJkVMvokLv16zkG7w&redirect_uri=curta://callback&response_type=code" +
+            "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";*/
     public UnsplashWebServiceLoginModel(Context context)
     {
         mLoginStateModel=new LoginStateModel(context);
@@ -40,8 +46,8 @@ public class UnsplashWebServiceLoginModel
     }
     public void  getTheTocken(Uri mUri)
     {
-        mAutorizationInterface.getAccessTocken("yrnk1pXnbDXXE4MYt_vk0sB5fMWJkVMvokLv16zkG7w","W9YBYN2mxSenmuVIeqWzxF4JQuePJcjuNGZYvisPz8Y",
-                "curta://callback",mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {
+        mAutorizationInterface.getAccessTocken(clientID,clientSecret,
+                redirect_uri,mUri.getQueryParameter("code"),"authorization_code").enqueue(new Callback<AutorizationResponsePJO>() {
             @Override
             public void onResponse(Call<AutorizationResponsePJO> call, Response<AutorizationResponsePJO> response) {
                 if(response.body()!=null)
