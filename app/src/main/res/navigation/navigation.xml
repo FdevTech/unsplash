@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_photos_list" >
         <action
             android:id="@+id/action_photosListFragment_to_photoFragment"
-            app:destination="@id/photoFragment" />
+            app:destination="@id/photoFragment"
+            app:enterAnim="@anim/enter_from"
+            app:exitAnim="@anim/exit_to"
+            app:popEnterAnim="@anim/enter_from"
+            app:popExitAnim="@anim/exit_to" />
         <argument
             android:name="topics"
             app:argType="string"
@@ -31,7 +35,11 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_photosListFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/enter_from"
+            app:exitAnim="@anim/exit_to"
+            app:popEnterAnim="@anim/enter_from"
+            app:popExitAnim="@anim/exit_to" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -49,7 +57,11 @@
         tools:layout="@layout/fragment_collection_list" >
         <action
             android:id="@+id/action_collectionListFragment_to_photosListFragment"
-            app:destination="@id/photosListFragment" />
+            app:destination="@id/photosListFragment"
+            app:enterAnim="@anim/enter_from"
+            app:exitAnim="@anim/exit_to"
+            app:popEnterAnim="@anim/enter_from"
+            app:popExitAnim="@anim/exit_to" />
         <argument
             android:name="user"
             app:argType="string"
@@ -62,7 +74,11 @@
         tools:layout="@layout/fragment_topic" >
         <action
             android:id="@+id/action_topicFragment_to_photosListFragment"
-            app:destination="@id/photosListFragment" />
+            app:destination="@id/photosListFragment"
+            app:enterAnim="@anim/enter_from"
+            app:exitAnim="@anim/exit_to"
+            app:popEnterAnim="@anim/enter_from"
+            app:popExitAnim="@anim/exit_to" />
     </fragment>
     <fragment
         android:id="@+id/photoFragment"
@@ -85,6 +101,31 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_photoFragment"
-            app:destination="@id/photoFragment" />
-    </fragment><action android:id="@+id/action_global_collectionListFragment" app:destination="@id/collectionListFragment"/><action android:id="@+id/action_global_topicFragment" app:destination="@id/topicFragment"/><action android:id="@+id/action_global_photosListFragment" app:destination="@id/photosListFragment"/><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
+            app:destination="@id/photoFragment"
+            app:enterAnim="@anim/enter_from"
+            app:exitAnim="@anim/exit_to"
+            app:popEnterAnim="@anim/enter_from"
+            app:popExitAnim="@anim/exit_to" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_collectionListFragment"
+        app:destination="@id/collectionListFragment"
+        app:enterAnim="@anim/enter_from"
+        app:exitAnim="@anim/exit_to"
+        app:popEnterAnim="@anim/enter_from"
+        app:popExitAnim="@anim/exit_to" />
+    <action
+        android:id="@+id/action_global_topicFragment"
+        app:destination="@id/topicFragment"
+        app:enterAnim="@anim/enter_from"
+        app:exitAnim="@anim/exit_to"
+        app:popEnterAnim="@anim/enter_from"
+        app:popExitAnim="@anim/exit_to" /><action android:id="@+id/action_global_photosListFragment" app:destination="@id/photosListFragment"/>
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/enter_from"
+        app:exitAnim="@anim/exit_to"
+        app:popEnterAnim="@anim/enter_from"
+        app:popExitAnim="@anim/exit_to" />
 </navigation>
