@@ -83,7 +83,9 @@ class HomeFragment : Fragment() {
         
         photoViewModelAdapter.downloadClic= DownloadClic {
 
-            Log.d(TAG, "onCreateView:downloadClic by using properties ")
+
+            homeFragmentViewModel.donwloadImage(it)
+            Log.d(TAG, "onCreateView:downloadClic by using properties ${it.id}")
         }
         
         photoViewModelAdapter.likeClic= LikeClic {data,position->

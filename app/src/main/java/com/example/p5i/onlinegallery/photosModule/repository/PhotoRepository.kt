@@ -1,5 +1,7 @@
 package com.example.p5i.onlinegallery.photosModule.repository
 
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -9,10 +11,18 @@ import com.example.p5i.onlinegallery.collectionsModule.datlayer.network.Collecti
 import com.example.p5i.onlinegallery.databse.UnsplashDatabase
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.Photos
 import com.example.p5i.onlinegallery.photosModule.datalayer.network.photosDatbase.*
+import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
+import retrofit2.http.Url
+import java.io.BufferedInputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+import java.lang.Error
+import java.net.URL
+import kotlin.Exception
 
 private const val TAG = "PhotoRepository"
 
@@ -320,6 +330,41 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         }catch (e:Exception)
         {
             Log.d(TAG, "likeDesLikePhoto: ${e.message}")
+        }
+    }
+
+    suspend fun donwloadImage(photo:PhotoDomain)
+    {
+        withContext(Dispatchers.IO)
+        {
+            /*try {
+                val url= URL(photo.photo_regular)
+                val urlConnexion=url.openConnection()
+                urlConnexion.connect()
+                val data=ByteArray(1024)
+                val folder=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                //val folder= File("/onlineGalery")
+                if(folder.isNullOrEmpty())
+                {
+                    folder.mkd
+                }
+                val file=File(folder,"photo1.jpg")
+                val inputStream=BufferedInputStream(url.openStream(),8192)
+                val outputStream=FileOutputStream(file)
+                while(inputStream.read(data)!=-1)
+                {
+                    outputStream.write(data,0,inputStream.read(data))
+                }
+                inputStream.close()
+                outputStream.close()
+
+                Log.d(TAG, "donwloadImage: the end of downloading")
+            }catch (e:Exception)
+            {
+
+                Log.d(TAG, "donwloadImage: exception ${e.message}")
+            }*/
+
         }
     }
 }

@@ -121,11 +121,11 @@ class LikeClic(val onLikeCkick:(data: PhotoDomain,position:Int)->Unit)
       return onLikeCkick(data,position)
     }
 }
-class DownloadClic(val onDownloadCkick:()->Unit)
+class DownloadClic(val onDownloadCkick:(data: PhotoDomain)->Unit)
 {
-    fun onDownload()
+    fun onDownload(data: PhotoDomain)
     {
-        return onDownloadCkick()
+        return onDownloadCkick(data)
     }
 }
 

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.p5i.onlinegallery.databse.getDatabse
+import com.example.p5i.onlinegallery.photosModule.domain.PhotoDomain
 import com.example.p5i.onlinegallery.photosModule.repository.PhotoRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -122,6 +123,13 @@ class PhotosViewModel(application: Application, val credential:String,val topics
         viewModelScope.launch {
             photoRepository.likeDesLikePhoto(photoid)
         }
+    }
+    fun donwloadImage(photo: PhotoDomain)
+    {
+       viewModelScope.launch {
+           photoRepository.donwloadImage(photo)
+       }
+
     }
     override fun onCleared() {
         super.onCleared()
