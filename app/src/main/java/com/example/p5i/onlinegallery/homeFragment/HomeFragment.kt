@@ -17,6 +17,7 @@ import com.example.p5i.onlinegallery.databinding.FragmentHomeBinding
 import com.example.p5i.onlinegallery.homeFragment.viewmodel.HomeFragmentViewModel
 import com.example.p5i.onlinegallery.homeFragment.viewmodel.HomeFragmentViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.ui.*
+import com.google.android.material.snackbar.Snackbar
 
 
 private const val TAG = "HomeFragment"
@@ -97,6 +98,25 @@ class HomeFragment : Fragment() {
             layoutManager= LinearLayoutManager(context)
              adapter=photoViewModelAdapter
         }
+
+        homeFragmentViewModel.eroorCode.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "onCreateView: $it")
+            when (it)
+            {
+                401->{
+                    Snackbar.make(fragmentHomeBinding.root, "something went wrong with API ",
+                        Snackbar.LENGTH_LONG).show()
+                }
+                403->{
+                    Snackbar.make(fragmentHomeBinding.root, "something went wrong please try latter",
+                        Snackbar.LENGTH_LONG).show()
+                }
+                404->{
+                    Snackbar.make(fragmentHomeBinding.root, "something went wrong your with your network",
+                        Snackbar.LENGTH_LONG).show()
+                }
+            }
+        })
         return fragmentHomeBinding.root
     }
 

@@ -26,6 +26,7 @@ import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
 import com.example.p5i.onlinegallery.photosModule.ui.ProfileOnClick
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import kotlin.math.log
 
@@ -166,6 +167,25 @@ class PhotosListFragment : Fragment() {
             layoutManager=LinearLayoutManager(context)
             adapter=photoViewModelAdapter
         }
+
+
+
+        photosViewModel.eroorCode.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "onCreateView: $it")
+           when (it)
+           {
+               401->{
+                Snackbar.make(fragmentPhotosListBinding.root, "something went wrong with API ",Snackbar.LENGTH_SHORT).show()
+               }
+               403->{
+                   Snackbar.make(fragmentPhotosListBinding.root, "something went wrong please try latter",Snackbar.LENGTH_SHORT).show()
+               }
+               404->{
+                   Snackbar.make(fragmentPhotosListBinding.root, "something went wrong your with your network",Snackbar.LENGTH_SHORT).show()
+               }
+           }
+        })
+
 
 
         return fragmentPhotosListBinding.root

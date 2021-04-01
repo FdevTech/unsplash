@@ -90,6 +90,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
         var i:Int=1
         withContext(Dispatchers.IO)
         {
+            unsplashDatabase.photosDao.clearPhotos()
             val response=Photos.PhotosAPI.photos.getPhotos(credentials)
             var photosList= response.body()
             val xtotal= response.headers().get("X-Total")

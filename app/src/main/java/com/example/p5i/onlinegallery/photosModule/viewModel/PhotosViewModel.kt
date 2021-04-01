@@ -19,6 +19,7 @@ class PhotosViewModel(application: Application, val credential:String,val topics
     val userPhotos=photoRepository.userPhotos
     val userLikedphotos=photoRepository.userLikedPhotos
     val collectionPhotosRetrived=photoRepository.photosCollection
+    val eroorCode=photoRepository.eroorCode
     init {
         //Log.d(TAG, "ViewModel init: $credential")
        // Log.d(TAG, "photosRetrived size:${photosRetrived.value?.size} ")

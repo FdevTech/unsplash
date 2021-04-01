@@ -2,6 +2,8 @@ package com.example.p5i.onlinegallery.homeFragment.viewmodel
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.p5i.onlinegallery.databse.getDatabse
@@ -14,6 +16,8 @@ class HomeFragmentViewModel (val application: Application, val credential:String
 {
     val photoRepository= PhotoRepository(getDatabse(application),credential)
     val photosRetrived=photoRepository.photos
+    private var _eroorCode= MutableLiveData<Int>()
+    val eroorCode=photoRepository.eroorCode
     init {
         refrechFromRepository()
     }

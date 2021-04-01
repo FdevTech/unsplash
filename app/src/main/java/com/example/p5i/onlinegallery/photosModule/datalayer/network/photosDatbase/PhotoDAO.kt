@@ -26,6 +26,8 @@ interface PhotosDao
     fun getAllPhotos():LiveData<List<PhotoEntity>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun inserOrUpdatePhotos(photos:List<PhotoEntity>)
+    @Query("delete from photos_table")
+    fun clearPhotos()
 
     @Query("select * from user_photos_table")
     fun getAllUserPhotos():LiveData<List<UserPhotoEntity>>
