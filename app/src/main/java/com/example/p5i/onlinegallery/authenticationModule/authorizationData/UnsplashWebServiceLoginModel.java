@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.p5i.onlinegallery.BuildConfig;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationInterface;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.AutorizationResponsePJO;
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel;
@@ -19,25 +20,37 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UnsplashWebServiceLoginModel
 {
     private static final String TAG = "LoginModel";
+
     private Retrofit retrofit;
     private AutorizationInterface mAutorizationInterface;
     private MutableLiveData<Boolean> isLogedIn;
     private LoginStateModel mLoginStateModel;
 
-    private String clientID="U4e3aiPSmYENZTwqMYUMv1P2XftujdL6byd9e_jM_UI";
-    private String clientSecret="TVnudFDwuYEJuL0GvB8qcCAR9Vqsr14GcMYVwa8B0OM";
+    private String clientID= BuildConfig.clientID;
+    private String clientSecret=BuildConfig.clientSecret;
     private String redirect_uri="curta://callback";
+    private String scope="public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
 
-    /*private String url="https://unsplash.com/oauth/authorize?client_id="+clientID+"&redirect_uri="+redirect_uri +
-            "&response_type=code&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";*/
 
-    private String url="https://unsplash.com/oauth/authorize?" +
-            "client_id=U4e3aiPSmYENZTwqMYUMv1P2XftujdL6byd9e_jM_UI&" +
-            "redirect_uri=curta://callback&" +
-            "response_type=code" +
-            "&scope=public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections";
+    private Uri.Builder builder=new Uri.Builder();
+
+    String URL;
+
+
     public UnsplashWebServiceLoginModel(Context context)
     {
+        builder.scheme("https")
+                .authority("unsplash.com")
+                .appendPath("oauth")
+                .appendPath("authorize")
+                 .appendQueryParameter("client_id",clientID)
+                 .appendQueryParameter("redirect_uri",redirect_uri)
+                .appendQueryParameter("response_type","code")
+                 .appendQueryParameter("scope",scope)
+                 .build();
+         URL=builder.toString();
+
+
         mLoginStateModel=new LoginStateModel(context);
         isLogedIn=new MutableLiveData<>();
         isLogedIn.setValue(false);
@@ -78,6 +91,6 @@ public class UnsplashWebServiceLoginModel
     }
 
     public String getUrl() {
-        return url;
+        return URL;
     }
 }

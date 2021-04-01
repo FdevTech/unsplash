@@ -2,6 +2,8 @@ package com.example.p5i.onlinegallery.photosModule.repository
 
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.p5i.onlinegallery.collectionsModule.datlayer.network.CollectionAPI
 import com.example.p5i.onlinegallery.databse.UnsplashDatabase
@@ -30,6 +32,12 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
     }
     val userLikedPhotos=Transformations.map(unsplashDatabase.photosDao.getAllUserLikedPhotos()){
         it.asUserLikedPhotoDomainModel()
+    }
+
+    private var _eroorCode=MutableLiveData<Int>()
+    val eroorCode:LiveData<Int>
+    get() {
+        return _eroorCode
     }
 
 
@@ -87,6 +95,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             val xtotal= response.headers().get("X-Total")
             Log.d(TAG, "referchPhotosToTest: xtotal: $xtotal")
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
+            _eroorCode.postValue(response.code())
             if(photosList!=null)
             {
                 try {
@@ -115,6 +124,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             val response=Photos.PhotosAPI.photos.getPhotoFromTopic(credentials,topicName = topicName)
             var photosList= response.body()
             val xtotal= Photos.PhotosAPI.photos.getPhotos(credentials).headers().get("X-Total")
+            _eroorCode.postValue(response.code())
             Log.d(TAG, "retrivePhotoFromTopicsToTest: xtotal: $xtotal")
             Log.d(TAG, "retrivePhotoFromTopicsToTest: body ${response.body()?.size}")
             Log.d(TAG, "retrivePhotoFromTopicsToTest: response errorBody ${response.errorBody()}")
@@ -143,6 +153,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             var photosList= response.body()
             val xtotal= response.headers().get("X-Total")
             Log.d(TAG, "retrivePhotoFromCollectionToTest: xtotal: $xtotal")
+            _eroorCode.postValue(response.code())
             val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
             Log.d(TAG, "retrivePhotoFromCollectionToTest: pages $pages")
             Log.d(TAG, "retrivePhotoFromCollectionToTest: code: ${response.code()}")
@@ -217,6 +228,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                Log.d(TAG, "retriveUserPhotosToTest: xtotal: $xtotal")
                val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
                Log.d(TAG, "retriveUserPhotosToTest: pages $pages")
+               _eroorCode.postValue(response.code())
                if(photosList!=null)
                {
                    try {
@@ -258,10 +270,12 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                val response=Photos.PhotosAPI.photos.getUserLikedPhotos(credentials,username = userName!!)
                var photosList= response.body()
                val xtotal= response.headers().get("X-Total")
+               _eroorCode.postValue(response.code())
                Log.d(TAG, "retriveUserLikedPhotosToTest: xtotal: $xtotal")
                val pages:Int?=(xtotal?.toInt()?.div(30))?.toInt()
                Log.d(TAG, "retriveUserLikedPhotosToTest: pages $pages")
                Log.d(TAG, "retriveUserLikedPhotosToTest: code ${response.code()}")
+               _eroorCode.postValue(response.code())
                if(photosList!=null)
                {
                    try {
@@ -301,6 +315,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
                 unsplashDatabase.photosDao.insertLikedByUser(photoid,!photolikedornot)
                 unsplashDatabase.photosDao.addOrRemoveLiked(photoid,numberOflikes)
             }
+            _eroorCode.postValue(responseRequest.code())
         }catch (e:Exception)
         {
             Log.d(TAG, "likeDesLikePhoto: ${e.message}")
