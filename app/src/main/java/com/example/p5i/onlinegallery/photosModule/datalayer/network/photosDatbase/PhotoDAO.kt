@@ -13,6 +13,8 @@ interface PhotosDao
     @Query("update photos_table set likes = :numberOfLikes where phot_id=:photo_id ")
     suspend fun addOrRemoveLiked(photo_id:String,numberOfLikes:Int)
 
+
+
     //this method is just used to test
 
 
@@ -42,6 +44,9 @@ interface PhotosDao
     suspend fun inserOrUpdateUserLikedPhotos(photos:List<UserLikedPhotoEntity>)
     @Query("delete from user_liked_photos_table")
     fun clearUserLikedPhotosC()
+
+    @Query("delete from user_liked_photos_table where phot_id=:photo_id")
+    fun deltePhotofromlikedTable(photo_id:String)
 
     @Query("update photos_collection_table set liked_by_user = :liked_by_user where phot_id=:photo_id ")
     suspend fun insertLikedByUserInCollectionPhoto(photo_id:String,liked_by_user:Boolean)
