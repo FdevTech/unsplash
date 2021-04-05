@@ -9,7 +9,7 @@
 
 ### 1- the sign up :
 since we are going to use the app on user behalf so the app use oauth 2.0 flow in the authentication process with the unpslah API , and more than that the app is 
-backed by user password authentication (the password should be strong the be acceptable .
+backed by user password authentication (the password should be strong the be acceptable.
 ![20210401_133931](https://user-images.githubusercontent.com/38364385/113556190-04cc7880-95f4-11eb-8266-dcd55873bceb.gif)
 
 ### 2- like and unlike images, and dispalying the user likes, collection and photos.
