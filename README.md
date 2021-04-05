@@ -19,8 +19,8 @@ backed by user password authentication (the password should be strong the be acc
 ### 3- displaying the public collections and topics. 
 
 ![20210401_114803](https://user-images.githubusercontent.com/38364385/113557733-68f03c00-95f6-11eb-836d-57280918ad65.gif)
-### 4- the app some offline capablities . 
-### 6- when we reach the limit of 50 request we get notification to try latter.
+### 4- the app has some offline capablities . 
+### 6- when we reach the limit of 50 request we get a notification to try latter.
 ![20210401_122902](https://user-images.githubusercontent.com/38364385/113557120-6b05cb00-95f5-11eb-919c-1baee99ff31a.gif)
 
 ## the missing things :
