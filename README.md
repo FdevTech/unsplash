@@ -1,7 +1,7 @@
 # unsplash
 <dl>
   <dt>Clarification</dt>
-  <dd>this app built with the idea pf sharing it in the play store but since the unsplash API didn't allow me to upgrade to production because as they said I am replicating 
+  <dd>this app was built with the idea pf sharing it in the play store but since the unsplash API didn't allow me to upgrade to production because as they said I am replicating 
   the core of unplsah , so I decided to open source the code on github and stopping developing it.</dd>
 </dl>
 
