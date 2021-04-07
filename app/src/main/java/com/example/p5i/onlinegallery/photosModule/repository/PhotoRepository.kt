@@ -312,7 +312,7 @@ class PhotoRepository(private val unsplashDatabase: UnsplashDatabase,private val
             val responseRequest=if(photolikedornot)
             {
                 numberOflikes-=1
-                unsplashDatabase.photosDao.deltePhotofromlikedTable(photoid)
+                //unsplashDatabase.photosDao.deltePhotofromlikedTable(photoid)
                 Photos.PhotosAPI.photos.unLikePhoto(autorization = credentials,photoid = photoid)
 
 

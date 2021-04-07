@@ -208,18 +208,18 @@ public class LoginViewModel extends BaseObservable
    }
     public void loginOnClick(View view)
     {
-        Log.d(TAG, "loginOnClick: "+userLoggedIncheckobserver);
+        Log.d(TAG, "loginOnClick: "+userLoggedIncheckobserver);//noAccountValue  = 0,signedOutValue=1,signedInValue=2;
 
         if(userLoggedIncheckobserver==noAccountValue)
         {
             mActivtyTransitionModel.startringBrowserToGetAutheticate(mAuthenticationRepository.getUrl());
 
         }
-        else if(userLoggedIncheckobserver==signedOutValue)
+       /* else if(userLoggedIncheckobserver==signedOutValue)
         {
             mAuthenticationRepository.signInInToTheApp(email,passaword);
-        }
-        else if(userLoggedIncheckobserver==signedInValue)
+        }*/
+        else if(userLoggedIncheckobserver==signedInValue||userLoggedIncheckobserver==signedOutValue)
         {
             mActivtyTransitionModel.startActivity(new MainActivity());
             //((Activity)context).overridePendingTransition();

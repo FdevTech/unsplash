@@ -20,10 +20,7 @@ import com.example.p5i.onlinegallery.R
 import com.example.p5i.onlinegallery.authenticationModule.authorizationData.LoginStateModel
 import com.example.p5i.onlinegallery.databinding.FragmentPhotosListBinding
 import com.example.p5i.onlinegallery.databinding.FragmentProfileBinding
-import com.example.p5i.onlinegallery.photosModule.ui.LikeClic
-import com.example.p5i.onlinegallery.photosModule.ui.OnPhotoClickListner
-import com.example.p5i.onlinegallery.photosModule.ui.PhotoViewModelAdapter
-import com.example.p5i.onlinegallery.photosModule.ui.ProfileOnClick
+import com.example.p5i.onlinegallery.photosModule.ui.*
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotViewModelFactory
 import com.example.p5i.onlinegallery.photosModule.viewModel.PhotosViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -157,10 +154,24 @@ class PhotosListFragment : Fragment() {
             Log.d(TAG, "onCreateView: ${it.user_name}")
         }
 
-        photoViewModelAdapter.likeClic= LikeClic {data,position->
 
-            Log.d(TAG, "onCreateView: $data.id")
-            photosViewModel.likeDesLikePhoto(data.id)
+        photoViewModelAdapter.downloadClic= DownloadClic {
+
+
+            //homeFragmentViewModel.donwloadImage(it)
+            Snackbar.make(fragmentPhotosListBinding.root, "the download module is disabled due to some issues with API team !  ",
+                Snackbar.LENGTH_LONG).show()
+            Log.d(TAG, "onCreateView:downloadClic by using properties ${it.id}")
+        }
+
+        photoViewModelAdapter.likeClic= LikeClic {data,position->
+            Log.d(TAG, "onCreateView: by using properties ${data.id}")
+            Snackbar.make(fragmentPhotosListBinding.root, "since we are limited to 50 requests this functionality is disbled here so sorry !!  ",
+                Snackbar.LENGTH_LONG).show()
+           // photosViewModel.likeDesLikePhoto(data.id)
+           // photosViewModel.likeDesLikePhotoFromCollection(data.id)
+            // photoViewModelAdapter.notifyItemChanged(position)
+
         }
 
         fragmentPhotosListBinding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {

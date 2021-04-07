@@ -122,6 +122,37 @@ class PhotosViewModel(application: Application, val credential:String,val topics
     {
         viewModelScope.launch {
             photoRepository.likeDesLikePhoto(photoid)
+
+            /*
+            *
+            *
+             if(topics==null && collectionId==null&&user==null)
+        {
+            refrechFromRepository()
+        }
+        else
+        {
+            if(topics!=null)
+            {
+                Log.d(TAG, "$topics ")
+                retrivePhotoFromTopics(topics)
+            }
+            else if(collectionId!=null)
+            {
+                retrivePhotoFromCollection(collectionId)
+            }
+            else if(user!=null)
+            {
+                if(typeOfPhotos=="liked")
+                {
+                  retriveUserLikedPhotos(user)
+                }else if(typeOfPhotos=="userPhoto")
+                {
+                    retriveUserPhotos(user)
+                }
+            }
+        }
+            * */
         }
     }
     fun donwloadImage(photo: PhotoDomain)

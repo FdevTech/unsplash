@@ -20,9 +20,15 @@ interface PhotosDao
 
     @Query("select liked_by_user from photos_table where phot_id=:photo_id")
     suspend fun chekLike(photo_id:String):Boolean
-
     @Query("select likes from photos_table where phot_id=:photo_id")
     suspend fun cheknumberOflikes(photo_id:String):Int
+
+    @Query("select liked_by_user from photos_collection_table where phot_id=:photo_id")
+    suspend fun chekLikefromCollectiontable(photo_id:String):Boolean
+    @Query("select likes from photos_collection_table where phot_id=:photo_id")
+    suspend fun cheknumberOflikesFromCollection(photo_id:String):Int
+    @Query("update photos_collection_table set likes = :numberOfLikes where phot_id=:photo_id ")
+    suspend fun addOrRemoveLikedFromCollection(photo_id:String,numberOfLikes:Int)
 
     @Query("select * from photos_table")
     fun getAllPhotos():LiveData<List<PhotoEntity>>

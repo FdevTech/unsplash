@@ -84,7 +84,9 @@ class HomeFragment : Fragment() {
         photoViewModelAdapter.downloadClic= DownloadClic {
 
 
-            homeFragmentViewModel.donwloadImage(it)
+            //homeFragmentViewModel.donwloadImage(it)
+            Snackbar.make(fragmentHomeBinding.root, "the download module is disabled due to some issues with API team !  ",
+                Snackbar.LENGTH_LONG).show()
             Log.d(TAG, "onCreateView:downloadClic by using properties ${it.id}")
         }
         
